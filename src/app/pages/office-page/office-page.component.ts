@@ -7,7 +7,6 @@ import { OfficeContent } from '../../models/office.model';
   selector: 'app-office-page',
   templateUrl: './office-page.component.html',
   styleUrls: ['./office-page.component.scss'],
-  standalone: true,
   imports: [CommonModule],
 })
 export class OfficePageComponent {

@@ -4,7 +4,6 @@ import { ScriptLoaderService } from '../../../../services/script-loader.service'
 
 @Component({
   selector: 'app-testimonials',
-  standalone: true,
   imports: [],
   templateUrl: './testimonials.component.html',
   styleUrls: ['./testimonials.component.scss'],

@@ -5,7 +5,6 @@ import { LegalService } from '../../services/legal.service';
 
 @Component({
   selector: 'app-cookies-policy-page',
-  standalone: true,
   imports: [],
   templateUrl: './cookies-policy-page.component.html',
   styleUrl: './cookies-policy-page.component.scss',

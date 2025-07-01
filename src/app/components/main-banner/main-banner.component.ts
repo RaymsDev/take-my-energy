@@ -5,7 +5,6 @@ import { AnalyticsService } from '../../services';
 
 @Component({
   selector: 'app-main-banner',
-  standalone: true,
   imports: [RouterModule],
   templateUrl: './main-banner.component.html',
   styleUrl: './main-banner.component.scss',

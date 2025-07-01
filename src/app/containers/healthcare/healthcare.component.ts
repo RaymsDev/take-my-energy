@@ -4,7 +4,6 @@ import { MassagesHomeComponent } from '../../pages/home-page/components/massages
 
 @Component({
   selector: 'app-healthcare-page',
-  standalone: true,
   imports: [RouterModule, MassagesHomeComponent],
   templateUrl: './healthcare.component.html',
   styleUrl: './healthcare.component.scss',

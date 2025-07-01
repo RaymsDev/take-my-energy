@@ -8,7 +8,6 @@ import { MassageService } from '../../services/massage.service';
   selector: 'app-massage-details-page',
   templateUrl: './massage-details-page.component.html',
   styleUrls: ['./massage-details-page.component.scss'],
-  standalone: true,
   imports: [CommonModule],
   providers: [MassageService],
 })
