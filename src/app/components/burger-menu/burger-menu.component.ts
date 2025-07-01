@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-burger-menu',
-  standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './burger-menu.component.html',
   styleUrl: './burger-menu.component.scss',

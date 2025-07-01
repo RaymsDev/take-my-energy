@@ -5,7 +5,6 @@ import { RecaptchaModule } from 'ng-recaptcha-2';
 
 @Component({
   selector: 'app-footer',
-  standalone: true,
   imports: [RouterModule, RecaptchaModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',

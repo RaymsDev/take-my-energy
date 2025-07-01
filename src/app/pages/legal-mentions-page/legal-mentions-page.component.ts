@@ -5,7 +5,6 @@ import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-legal-mentions-page',
-  standalone: true,
   imports: [],
   templateUrl: './legal-mentions-page.component.html',
   styleUrl: './legal-mentions-page.component.scss',

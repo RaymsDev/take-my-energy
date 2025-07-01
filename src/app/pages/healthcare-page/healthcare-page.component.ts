@@ -14,7 +14,6 @@ import { SelectedOfficeComponent } from './components/selected-office/selected-o
 
 @Component({
   selector: 'app-healthcare-page',
-  standalone: true,
   imports: [
     ListComponent,
     IntroductionComponent,

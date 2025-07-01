@@ -9,7 +9,6 @@ import { HealthcareService, JsonLdService } from './services';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [
     RouterOutlet,
     NgxGoogleAnalyticsModule,

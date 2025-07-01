@@ -6,7 +6,6 @@ import { MainBannerComponent } from '../../components/main-banner/main-banner.co
 
 @Component({
   selector: 'app-home-page',
-  standalone: true,
   imports: [
     AboutComponent,
     TestimonialsComponent,

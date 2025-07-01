@@ -4,7 +4,6 @@ import { Healthcare } from '../../../../models/healthcare.model';
 
 @Component({
   selector: 'app-list',
-  standalone: true,
   imports: [CardComponent],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],

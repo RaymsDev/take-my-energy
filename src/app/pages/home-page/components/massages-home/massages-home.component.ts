@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-massages-home',
-  standalone: true,
   imports: [RouterModule, CommonModule],
   templateUrl: './massages-home.component.html',
   styleUrl: './massages-home.component.scss',
