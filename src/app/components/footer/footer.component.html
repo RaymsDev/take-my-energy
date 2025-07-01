@@ -6,7 +6,7 @@
     </div>
 
     <div class="footer__content__captcha">
-      @if (!captchaVerified) {
+      @if (!captchaVerified && isBrowser) {
         <h4 class="footer__subtitle">Contact</h4>
         <re-captcha
           [siteKey]="siteConfig['RECAPTCHA_SITE_KEY_TEST']"

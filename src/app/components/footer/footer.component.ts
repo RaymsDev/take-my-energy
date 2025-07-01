@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { SITE_CONFIG } from '../../configs';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { RecaptchaModule } from 'ng-recaptcha-2';
+import { SITE_CONFIG } from '../../configs';
 
 @Component({
   selector: 'app-footer',
@@ -28,6 +29,7 @@ export class FooterComponent {
   };
   currentYear: number = new Date().getFullYear();
   captchaVerified = false;
+  isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   onCaptchaResolved(captchaResponse: string | null): void {
     if (captchaResponse) {
