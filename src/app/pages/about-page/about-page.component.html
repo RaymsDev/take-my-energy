@@ -1,99 +1,179 @@
-<section class="about">
-  <h2 class="about__title">Jean-Luc Laffuge - Parcours et Passions</h2>
-  <p class="about__txt">
-    Né en 1962 et résidant à Saint-Léger-Triey en Côte-d’Or, je suis passionné
-    par le sport et le bien-être. Après une carrière de 36 ans dans
-    l’agriculture, j’ai choisi de me réinventer et de me consacrer aux soins
-    énergétiques et aux massages holistiques.
-  </p>
+<div class="about-page">
+  <header class="about-hero">
+    <div class="about-hero__bg" aria-hidden="true"></div>
+    <div class="about-hero__content">
+      <div class="about-hero__profile">
+        <img
+          src="assets/profiles/profile_picture_sweet.webp"
+          alt="Jean-Luc Laffuge, énergéticien et magnétiseur"
+          class="about-hero__profile__img"
+        />
+      </div>
+      <div class="about-hero__intro">
+        <p class="about-hero__intro__eyebrow">Énergéticien &amp; Magnétiseur</p>
+        <h1 class="about-hero__intro__name">Jean-Luc Laffuge</h1>
+        <p class="about-hero__intro__tagline">
+          Du terrain agricole aux soins énergétiques — une vie guidée par le
+          dépassement de soi.
+        </p>
+      </div>
+    </div>
+  </header>
 
-  <h3 class="about__subtitle">Un Parcours Marqué par le Sport</h3>
-  <p class="about__txt">
-    Le sport a toujours occupé une place centrale dans ma vie. Après avoir été
-    joueur, entraîneur et dirigeant de football, j’ai découvert à 45 ans une
-    nouvelle passion : la course à pied et le trail longue distance. En tant que
-    membre du club des CROCO à Fontaine-lès-Dijon, j’ai participé à des épreuves
-    prestigieuses telles que :
-  </p>
-  <ul class="about__list">
-    <li>4 participations à la Diagonale des Fous à La Réunion</li>
-    <li>2 participations aux Templiers en Ardèche</li>
-    <li>1 participation à l’Infernal Trail des Vosges</li>
-  </ul>
-  <p class="about__txt">
-    J’apprécie également la randonnée et j’organise régulièrement des sorties
-    pour partager ma passion pour la nature et la région qui m’entoure.
-  </p>
-
-  <h3 class="about__subtitle">Un Nouveau Chapitre</h3>
-  <p class="about__txt">
-    En 2019, après une carrière dans l’agriculture, j’ai décidé de suivre une
-    formation en soins énergétiques. Ce fut une révélation : j’ai découvert une
-    capacité naturelle à apporter du bien-être aux autres. En janvier 2020, j’ai
-    lancé mon activité sous le nom "5 de Cœur", marquant un tournant décisif
-    dans ma vie.
-  </p>
-
-  <h3 class="about__subtitle">Ma Mission Aujourd’hui</h3>
-  <p class="about__txt">
-    Depuis le lancement de mon cabinet, j’ai enrichi mes compétences en me
-    formant aux massages holistiques et aux techniques de relaxation.
-    Aujourd’hui, j’accompagne de nombreuses personnes chaque semaine, leur
-    offrant un moment de détente et de revitalisation.
-  </p>
-
-  <div class="about__social">
-    <a
-      [href]="facebookUrl"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="about__social__btn"
-      >Suivez-moi sur Facebook</a
-    >
-    <a
-      [href]="googleUrl"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="about__social__btn"
-      >Consultez les avis Google</a
-    >
+  <div class="about-stats">
+    <div class="about-stats__item">
+      <span class="about-stats__item__number">36</span>
+      <span class="about-stats__item__label">ans dans l'agriculture</span>
+    </div>
+    <div class="about-stats__item">
+      <span class="about-stats__item__number">4×</span>
+      <span class="about-stats__item__label">Diagonale des Fous</span>
+    </div>
+    <div class="about-stats__item">
+      <span class="about-stats__item__number">2020</span>
+      <span class="about-stats__item__label">Lancement de 5 de Cœur</span>
+    </div>
+    <div class="about-stats__item">
+      <span class="about-stats__item__number">∞</span>
+      <span class="about-stats__item__label">Séances de bien-être</span>
+    </div>
   </div>
 
-  <h3 class="about__subtitle">Un Engagement pour le Bien-être Collectif</h3>
-  <p class="about__txt">
-    En parallèle de mon activité, j’ai créé un groupe de relaxation et de
-    méditation collective, offrant à chacun un espace pour se recentrer et
-    s’apaiser. Ce projet me permet de partager ma vision du bien-être et de
-    contribuer au mieux-être de ma communauté.
-  </p>
+  <div class="about-page__body">
+    <section class="about-section">
+      <div class="about-section__label" aria-hidden="true">01</div>
+      <div class="about-section__content">
+        <h2 class="about-section__title">Un Parcours Marqué par le Sport</h2>
+        <p class="about-section__txt">
+          Le sport a toujours occupé une place centrale dans ma vie. Après avoir
+          été joueur, entraîneur et dirigeant de football, j'ai découvert à 45
+          ans une nouvelle passion : la course à pied et le trail longue
+          distance.
+        </p>
+        <p class="about-section__txt">
+          En tant que membre du club des CROCO à Fontaine-lès-Dijon, j'ai
+          participé à des épreuves prestigieuses et j'apprécie la randonnée que
+          j'organise régulièrement pour partager ma passion pour la nature et la
+          région.
+        </p>
+        <ul class="about-section__achievements">
+          <li>
+            <i class="fa-solid fa-mountain" aria-hidden="true"></i>
+            <span
+              >4 participations à la <strong>Diagonale des Fous</strong> à La
+              Réunion</span
+            >
+          </li>
+          <li>
+            <i class="fa-solid fa-person-running" aria-hidden="true"></i>
+            <span
+              >2 participations aux <strong>Templiers</strong> en Ardèche</span
+            >
+          </li>
+          <li>
+            <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+            <span
+              >1 participation à l'<strong
+                >Infernal Trail des Vosges</strong
+              ></span
+            >
+          </li>
+        </ul>
+      </div>
+    </section>
 
-  <h3 class="about__subtitle">Mes Remerciements</h3>
-  <ul class="about__list">
-    <li>À ma famille, pour leur soutien indéfectible.</li>
-    <li>
-      À Lorin Lambert, pour m’avoir guidé dans l’apprentissage des soins
-      énergétiques.
-    </li>
-    <li>À mes amis et premiers clients, qui ont cru en moi dès le début.</li>
-    <li>
-      Au club des CROCO, pour leur encouragement dans ma passion pour le sport.
-    </li>
-    <li>
-      À
-      <a
-        class="about__list__link"
-        href="https://www.linkedin.com/in/s%C3%A9bastien-dechand-4653b5265/"
-        target="_blank"
-        rel="noopener noreferrer"
-        >Sébastien Dechand</a
-      >, pour son expertise dans la création de mon site web, qui reflète avec
-      justesse mon activité et mes valeurs.
-    </li>
-  </ul>
+    <section class="about-section about-section--alt">
+      <div class="about-section__label" aria-hidden="true">02</div>
+      <div class="about-section__content">
+        <h2 class="about-section__title">Un Nouveau Chapitre</h2>
+        <p class="about-section__txt">
+          En 2019, après une carrière dans l'agriculture, j'ai décidé de suivre
+          une formation en soins énergétiques. Ce fut une révélation : j'ai
+          découvert une capacité naturelle à apporter du bien-être aux autres.
+        </p>
+        <p class="about-section__txt">
+          En janvier 2020, j'ai lancé mon activité sous le nom
+          <strong>"5 de Cœur"</strong>, marquant un tournant décisif dans ma
+          vie.
+        </p>
+        <blockquote class="about-section__quote">
+          "Chaque soin est une invitation à retrouver l'équilibre entre le corps
+          et l'esprit."
+        </blockquote>
+      </div>
+    </section>
 
-  <p class="about__txt">
-    Merci d’avoir pris le temps de découvrir mon histoire. N’hésitez pas à me
-    contacter pour en savoir plus sur mon parcours ou pour toute demande
-    concernant mes services.
-  </p>
-</section>
+    <section class="about-section">
+      <div class="about-section__label" aria-hidden="true">03</div>
+      <div class="about-section__content">
+        <h2 class="about-section__title">Ma Mission Aujourd'hui</h2>
+        <p class="about-section__txt">
+          Depuis le lancement de mon cabinet, j'ai enrichi mes compétences en me
+          formant aux massages holistiques et aux techniques de relaxation.
+          Aujourd'hui, j'accompagne de nombreuses personnes chaque semaine, leur
+          offrant un moment de détente et de revitalisation.
+        </p>
+        <p class="about-section__txt">
+          En parallèle, j'ai créé un groupe de relaxation et de méditation
+          collective, offrant à chacun un espace pour se recentrer et s'apaiser.
+        </p>
+      </div>
+    </section>
+
+    <section class="about-section about-section--alt">
+      <div class="about-section__label" aria-hidden="true">04</div>
+      <div class="about-section__content">
+        <h2 class="about-section__title">Mes Remerciements</h2>
+        <ul class="about-section__thanks">
+          <li>À ma famille, pour leur soutien indéfectible.</li>
+          <li>
+            À Lorin Lambert, pour m'avoir guidé dans l'apprentissage des soins
+            énergétiques.
+          </li>
+          <li>
+            À mes amis et premiers clients, qui ont cru en moi dès le début.
+          </li>
+          <li>
+            Au club des CROCO, pour leur encouragement dans ma passion pour le
+            sport.
+          </li>
+          <li>
+            À
+            <a
+              href="https://www.linkedin.com/in/s%C3%A9bastien-dechand-4653b5265/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Sébastien Dechand</a
+            >, pour son expertise dans la création de mon site web.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="about-page__social">
+      <p class="about-page__social__cta">
+        Suivez mon actualité &amp; laissez un avis
+      </p>
+      <div class="about-page__social__links">
+        <a
+          [href]="facebookUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="about-page__social__btn about-page__social__btn--fb"
+        >
+          <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          Facebook
+        </a>
+        <a
+          [href]="googleUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="about-page__social__btn about-page__social__btn--google"
+        >
+          <i class="fa-brands fa-google" aria-hidden="true"></i>
+          Avis Google
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,18 +1,52 @@
-<h2>Découvrez tous nos soins</h2>
+<div class="hc-page">
+  <header class="hc-hero">
+    <div class="hc-hero__bg" aria-hidden="true"></div>
+    <div class="hc-hero__content">
+      <p class="hc-hero__eyebrow">
+        <i class="fa-solid fa-spa" aria-hidden="true"></i>
+        Catalogue des soins
+      </p>
+      <h1 class="hc-hero__title">Découvrez nos soins</h1>
+      <p class="hc-hero__sub">
+        Soins énergétiques, massages holistiques et techniques de relaxation —
+        personnalisés selon vos besoins.
+      </p>
+    </div>
+  </header>
+  <app-introduction></app-introduction>
 
-<app-introduction></app-introduction>
+  <div class="hc-filter-bar">
+    <div class="hc-filter-bar__inner">
+      <app-filter
+        [offices]="offices"
+        (filter)="filterByOffice($event)"
+      ></app-filter>
+    </div>
+    <div
+      class="hc-filter-bar__location"
+      [class.hc-filter-bar__location--visible]="selectedOffice"
+    >
+      <div class="hc-filter-bar__location-inner">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+        <span class="hc-filter-bar__location-name">{{
+          selectedOfficeLabel
+        }}</span>
+        @if (selectedOfficeAdress) {
+          <span class="hc-filter-bar__location-sep" aria-hidden="true">·</span>
+          <span class="hc-filter-bar__location-address">{{
+            selectedOfficeAdress
+          }}</span>
+        } @else if (selectedOffice) {
+          <span class="hc-filter-bar__location-note"
+            >Prestation dans vos locaux, sur devis</span
+          >
+        }
+      </div>
+    </div>
+  </div>
 
-<h3>Filtrer par cabinet</h3>
-<app-filter [offices]="offices" (filter)="filterByOffice($event)"></app-filter>
-
-@if (selectedOffice) {
-  <app-selected-office
-    [officeLabel]="selectedOfficeLabel"
-    [officeAddress]="selectedOfficeAdress"
-  ></app-selected-office>
-}
-
-<app-list
-  [healthcareItems]="filteredHealthcareData"
-  [selectedOffice]="selectedOffice"
-></app-list>
+  <app-list
+    [healthcareItems]="filteredHealthcareData"
+    [selectedOffice]="selectedOffice"
+  ></app-list>
+</div>

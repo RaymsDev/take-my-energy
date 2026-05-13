@@ -1,23 +1,64 @@
-<section class="massage">
+<div class="massage-page">
   @if (content) {
-    <div>
-      <h2 class="massage__title">{{ content.title }}</h2>
-      <hr />
-    </div>
-
-    @for (block of content.blocks; track $index) {
-      <div class="massage__block">
-        <div class="massage__image">
-          <img [src]="block.image" [alt]="block.alt" />
-        </div>
-        <div class="massage__content">
-          @for (section of block.sections; track $index) {
-            <p class="massage__txt">
-              <strong>{{ section.subtitle }}</strong> {{ section.text }}
-            </p>
-          }
-        </div>
+    <header class="massage-hero">
+      <div class="massage-hero__bg" aria-hidden="true"></div>
+      <div class="massage-hero__content">
+        <p class="massage-hero__eyebrow">
+          <i class="fa-solid fa-spa" aria-hidden="true"></i>
+          Soin &amp; Bien-être
+        </p>
+        <h1 class="massage-hero__title">{{ content.title }}</h1>
       </div>
-    }
+    </header>
+
+    <div class="massage-page__body">
+      @for (block of content.blocks; track $index; let i = $index) {
+        <div class="massage-block" [class.massage-block--reverse]="i % 2 === 1">
+          <div class="massage-block__media">
+            <img
+              [src]="block.image"
+              [alt]="block.alt"
+              class="massage-block__media__img"
+              [attr.loading]="i === 0 ? 'eager' : 'lazy'"
+            />
+          </div>
+
+          <div class="massage-block__content">
+            @for (
+              section of block.sections;
+              track $index;
+              let isFirst = $first
+            ) {
+              <div
+                class="massage-block__section"
+                [class.massage-block__section--first]="isFirst"
+              >
+                @if (section.subtitle) {
+                  <h2 class="massage-block__section__title">
+                    {{ section.subtitle }}
+                  </h2>
+                }
+                <p class="massage-block__section__text">{{ section.text }}</p>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="massage-cta">
+        <p class="massage-cta__eyebrow">Envie d'essayer ce soin ?</p>
+        <p class="massage-cta__title">Réservez votre séance</p>
+        <a
+          [href]="bookingUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="massage-cta__btn"
+          aria-label="Prendre rendez-vous en ligne (ouvre un nouvel onglet)"
+        >
+          <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
+          Prendre rendez-vous
+        </a>
+      </div>
+    </div>
   }
-</section>
+</div>

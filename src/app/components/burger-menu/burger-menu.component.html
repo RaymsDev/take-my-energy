@@ -1,29 +1,62 @@
-<nav class="navbar">
-  <a routerLink="/" class="navbar__logo">
-    <img src="assets/logo.webp" alt="Logo" class="navbar__logo-image" />
+<nav
+  class="navbar"
+  [class.scrolled]="isScrolled"
+  [class.menu-open]="isMenuOpen"
+>
+  <a
+    routerLink="/"
+    class="navbar__logo"
+    (click)="closeMenu()"
+    aria-label="Cinq de Cœur — Accueil"
+  >
+    <img
+      src="assets/logo.webp"
+      alt="Logo Cinq de Cœur"
+      class="navbar__logo-image"
+    />
   </a>
-  <div class="navbar__menu" [class.active]="isMenuOpen">
+
+  <div
+    class="navbar__menu"
+    [class.active]="isMenuOpen"
+    role="navigation"
+    aria-label="Navigation principale"
+  >
     <ul class="navbar__menu-list">
       <li class="navbar__menu-item">
-        <a routerLink="/" (click)="closeMenu()" class="navbar__menu-link"
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="closeMenu()"
+          class="navbar__menu-link"
           >Accueil</a
         >
       </li>
       <li class="navbar__menu-item">
         <a
           routerLink="/healthcare"
+          routerLinkActive="active"
           (click)="closeMenu()"
           class="navbar__menu-link"
           >Soins</a
         >
       </li>
       <li class="navbar__menu-item">
-        <a routerLink="/office" (click)="closeMenu()" class="navbar__menu-link"
-          >Cabinets
-        </a>
+        <a
+          routerLink="/office"
+          routerLinkActive="active"
+          (click)="closeMenu()"
+          class="navbar__menu-link"
+          >Cabinets</a
+        >
       </li>
       <li class="navbar__menu-item">
-        <a routerLink="/about" (click)="closeMenu()" class="navbar__menu-link"
+        <a
+          routerLink="/about"
+          routerLinkActive="active"
+          (click)="closeMenu()"
+          class="navbar__menu-link"
           >Qui suis-je</a
         >
       </li>
@@ -34,6 +67,7 @@
           rel="noopener noreferrer"
           (click)="onBookingClick()"
           class="navbar__menu-link btn"
+          aria-label="Réserver une séance (ouvre un nouvel onglet)"
         >
           Réservation
         </a>
@@ -41,9 +75,16 @@
     </ul>
   </div>
 
-  <div class="navbar__hamburger" (click)="toggleMenu()">
+  <button
+    class="navbar__hamburger"
+    [class.active]="isMenuOpen"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="isMenuOpen"
+    aria-label="Ouvrir le menu de navigation"
+    aria-controls="main-nav"
+  >
     <span class="navbar__hamburger-bar"></span>
     <span class="navbar__hamburger-bar"></span>
     <span class="navbar__hamburger-bar"></span>
-  </div>
+  </button>
 </nav>

@@ -1,4 +1,15 @@
 <section class="selected-office">
-  <h4>{{ officeLabel }}</h4>
-  <p>{{ officeAddress }}</p>
+  <div class="selected-office__icon" aria-hidden="true">
+    <i class="fa-solid fa-location-dot"></i>
+  </div>
+  <div class="selected-office__info">
+    <h4 class="selected-office__label">{{ officeLabel }}</h4>
+    @if (officeAddress) {
+      <p class="selected-office__address">{{ officeAddress }}</p>
+    } @else {
+      <p class="selected-office__note">
+        Service disponible dans vos locaux, sur devis.
+      </p>
+    }
+  </div>
 </section>

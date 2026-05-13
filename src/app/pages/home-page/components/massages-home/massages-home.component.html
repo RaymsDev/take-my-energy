@@ -1,12 +1,17 @@
 @for (massage of massages; track $index) {
-  <a class="massages" [routerLink]="['/massage', massage.route]">
+  <a
+    class="massages"
+    [routerLink]="['/massage', massage.route]"
+    [attr.aria-label]="'En savoir plus sur ' + massage.title"
+  >
     <div class="massages__content">
-      <h2 class="massages__content__title">{{ massage.title }}</h2>
       <img
         [src]="massage.imageSrc"
         [alt]="massage.imageAlt"
         class="massages__content__img"
+        loading="lazy"
       />
+      <h2 class="massages__content__title">{{ massage.title }}</h2>
     </div>
   </a>
 }

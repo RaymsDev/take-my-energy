@@ -8,9 +8,13 @@
     <div class="footer__content__captcha">
       @if (!captchaVerified && isBrowser) {
         <h4 class="footer__subtitle">Contact</h4>
+        <p class="footer__captcha-hint">
+          Vérification requise pour afficher les coordonnées
+        </p>
         <re-captcha
           [siteKey]="siteConfig['RECAPTCHA_SITE_KEY_TEST']"
           (resolved)="onCaptchaResolved($event)"
+          theme="dark"
         >
         </re-captcha>
       }

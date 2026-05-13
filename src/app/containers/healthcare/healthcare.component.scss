@@ -1,70 +1,113 @@
 .healthcare {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  hr {
-    width: 20%;
-    margin-bottom: 20px;
+  background: var(--c-bg);
+  padding: 96px 32px 80px;
+
+  &__header {
+    max-width: 600px;
+    margin: 0 auto 56px;
+    text-align: center;
+
+    &__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+
+      &__line {
+        display: block;
+        width: 28px;
+        height: 1px;
+        background: var(--c-gold);
+        flex-shrink: 0;
+      }
+
+      &__text {
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--c-brand);
+      }
+    }
+
+    &__title {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 400;
+      font-size: clamp(35px, 4.5vw, 51px);
+      color: var(--c-heading);
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    &__sub {
+      font-size: 16px;
+      color: var(--c-text-secondary);
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto;
+    }
   }
-  &__title {
-    width: fit-content;
-    color: var(--color-secondary);
-    font-size: 2rem;
-    margin: 20px auto;
-    font-weight: 700;
+
+  &__cta-wrap {
+    text-align: center;
+    margin-top: 48px;
   }
-  &__others {
-    font-size: 1.5rem;
-    font-weight: 700;
-    background-color: var(--color-primary);
-    color: var(--color-text);
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin: 50px auto;
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--c-brand);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition:
+      color 0.2s ease,
+      gap 0.2s ease;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--c-brand);
+      transition: width 0.3s ease;
+    }
+
+    i {
+      font-size: 13px;
+      transition: transform 0.25s ease;
+    }
+
     &:hover {
-      background-color: var(--color-secondary);
-      transform: scale(1.02);
-    }
-  }
-}
+      color: var(--c-brand-dark);
+      gap: 14px;
 
-/* Responsive Rules */
-@media (max-width: 1400px) {
-  .healthcare {
-    &__content {
-      gap: 20px;
-    }
-  }
-}
-
-@media (max-width: 1024px) {
-  .healthcare {
-    &__others {
-      font-size: 1.2rem;
+      &::after {
+        width: 100%;
+      }
+      i {
+        transform: translateX(4px);
+      }
     }
   }
 }
 
 @media (max-width: 768px) {
   .healthcare {
-    &__title {
-      margin: 10px auto;
-    }
-  }
-}
+    padding: 64px 20px 56px;
 
-@media (max-width: 480px) {
-  .healthcare {
-    &__title {
-      font-size: 1.5rem;
-    }
-    &__others {
-      font-size: 1rem;
-      margin: 20px auto 50px;
+    &__header {
+      margin-bottom: 40px;
+
+      &__title {
+        font-size: clamp(29px, 7vw, 38px);
+      }
     }
   }
 }

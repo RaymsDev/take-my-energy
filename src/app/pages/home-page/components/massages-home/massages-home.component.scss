@@ -1,90 +1,109 @@
 :host {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
 
-  .massages {
-    flex: 0 1 calc(25% - 20px);
-    box-sizing: border-box;
-    transition: all 0.3s;
+.massages {
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+  box-shadow: 0 2px 14px var(--c-shadow);
 
-    &:hover {
-      transform: scale(1.02);
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(61, 45, 35, 0.22);
+  }
+
+  &__content {
+    position: relative;
+    cursor: pointer;
+
+    &__img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+
+      .massages:hover & {
+        transform: scale(1.06);
+      }
     }
 
-    &__content {
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(22, 12, 6, 0.75) 0%,
+        rgba(22, 12, 6, 0.2) 45%,
+        transparent 70%
+      );
+      transition: opacity 0.4s ease;
+    }
+
+    &__title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      padding: 32px 20px 20px;
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 400;
+      font-size: clamp(16px, 1.5vw, 20px);
+      letter-spacing: 0.02em;
+      color: var(--c-text-on-dark);
       text-align: center;
-      cursor: pointer;
+      transition: transform 0.3s ease;
 
-      &__img {
-        width: 100%;
-        height: 30vh;
-        object-fit: cover;
-        border-radius: 10px;
+      .massages:hover & {
+        transform: translateY(-3px);
       }
+    }
 
-      &__title {
-        color: var(--color-secondary);
-        font-size: 1.5rem;
-        margin: 10px 0;
-        font-weight: 700;
-      }
+    &__title::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 1px;
+      background: var(--c-gold);
+      margin: 6px auto 0;
+      transition: width 0.35s ease;
+    }
+
+    .massages:hover &__title::after {
+      width: 32px;
     }
   }
 }
 
-/* Responsive Rules */
 @media (max-width: 1024px) {
   :host {
-    .massages {
-      flex: 0 1 calc(50% - 20px);
-      &__content {
-        &__img {
-          height: 35vh;
-        }
-
-        &__title {
-          font-size: 1.25rem;
-        }
-      }
-    }
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   :host {
-    .massages {
-      flex: 0 1 calc(100% - 20px);
-      &__content {
-        &__img {
-          height: 30vh;
-          width: 75%;
-        }
-
-        &__title {
-          font-size: 1.5rem;
-        }
-      }
-    }
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 0 16px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 420px) {
   :host {
-    .massages {
-      &__content {
-        &__img {
-          height: 20vh;
-          width: 100%;
-        }
-
-        &__title {
-          font-size: 1.2rem;
-        }
-      }
-    }
+    grid-template-columns: 1fr;
+    max-width: 320px;
   }
 }

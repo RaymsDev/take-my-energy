@@ -1,32 +1,54 @@
-<section class="main-banner">
+<section class="main-banner" aria-label="Bannière principale">
   <img
     src="assets/accessories.webp"
-    alt="Ensemble d'accessoires pour le bien-être"
+    alt="Accessoires de bien-être : pierres, bougies et huiles essentielles"
     class="main-banner__img"
+    fetchpriority="high"
   />
+  <div class="main-banner__overlay" aria-hidden="true"></div>
+
   <div class="main-banner__content">
-    <p class="main-banner__content__name">
-      Jean-Luc Laffuge - Énergéticien & Magnétiseur
-    </p>
+    <div class="main-banner__content__eyebrow">
+      <span
+        class="main-banner__content__eyebrow__line"
+        aria-hidden="true"
+      ></span>
+      <p class="main-banner__content__eyebrow__text">
+        Jean-Luc Laffuge &mdash; Énergéticien &amp; Magnétiseur
+      </p>
+    </div>
+
     <h1 class="main-banner__content__title">
-      Il est temps de prendre soin de vous
+      Il est temps de<br />prendre soin<br />de vous
     </h1>
-    <p class="main-banner__content__txt">
-      Massage holistique, Bien-être & Soin énergétique
+
+    <p class="main-banner__content__tagline">
+      Massage holistique &nbsp;·&nbsp; Bien-être &nbsp;·&nbsp; Soin énergétique
     </p>
-    <div class="main-banner__button">
+
+    <div class="main-banner__content__actions">
       <a
-        class="main-banner__button__meet"
+        class="main-banner__content__actions__primary"
         [href]="bookingUrl"
         target="_blank"
         rel="noopener noreferrer"
         (click)="onBookingClick()"
+        aria-label="Prendre rendez-vous en ligne (ouvre un nouvel onglet)"
       >
+        <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
         Prendre RDV en ligne
       </a>
-      <button class="main-banner__button__more" routerLink="/session">
+      <button
+        class="main-banner__content__actions__secondary"
+        routerLink="/session"
+      >
         Déroulé d'une séance
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
       </button>
     </div>
+  </div>
+
+  <div class="main-banner__scroll" aria-hidden="true">
+    <span class="main-banner__scroll__dot"></span>
   </div>
 </section>

@@ -1,133 +1,167 @@
 .card {
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  border: 1px solid var(--c-border);
+  box-shadow: 0 2px 12px var(--c-shadow);
   overflow: hidden;
   transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-  background-color: var(--color-banner);
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  background: var(--c-bg-card);
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 500px;
-  height: 625px;
-  margin: auto;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(61, 45, 35, 0.18);
+  }
+
+  &__img-wrap {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
   &__img {
     width: 100%;
-    height: 250px;
+    height: 100%;
     object-fit: cover;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease;
+
+    .card:hover & {
+      transform: scale(1.04);
+    }
   }
+
   &__body {
-    padding: 16px;
+    padding: 20px 20px 12px;
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    &__btn {
-      display: none;
-    }
-    &__title {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 8px;
-      color: var(--color-secondary);
-    }
-    &__description,
-    &__txt,
-    &__prices {
-      flex: 1;
-      margin: 4px 0;
-      font-size: 0.95rem;
-      color: var(--color-text);
-      line-height: 1.5;
-      list-style: none;
-      strong {
-        color: var(--color-secondary);
-        font-weight: 500;
-      }
+    gap: 10px;
+  }
+
+  &__title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--c-heading);
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+  }
+
+  &__desc-wrap {
+    overflow: hidden;
+    max-height: 69px;
+    transition: max-height 0.35s ease;
+
+    &--open {
+      max-height: 480px;
     }
   }
-}
 
-/* Responsive Rules */
-@media screen and (max-width: 1024px) {
-  .card {
-    &__body {
-      &__title {
-        font-size: 1.25rem;
-      }
+  &__desc {
+    font-size: 14px;
+    color: var(--c-text-secondary);
+    line-height: 1.65;
+  }
+
+  &__toggle {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 13px;
+    color: var(--c-brand);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--c-brand-dark);
+    }
+
+    i {
+      font-size: 10px;
     }
   }
-}
 
-@media screen and (max-width: 1024px) {
-  .card {
-    height: 670px;
-    &__body {
-      &__description {
-        font-size: 0.9rem;
-      }
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 8px;
+    border-top: 1px solid var(--c-border);
+  }
+
+  &__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--c-text-secondary);
+    background: var(--c-bg-alt);
+    border: 1px solid var(--c-border);
+    padding: 4px 10px;
+    border-radius: 50px;
+
+    i {
+      color: var(--c-brand);
+      font-size: 11px;
     }
   }
-}
 
-@media screen and (max-width: 768px) {
-  .card {
-    height: 100%;
-    width: 80%;
-    &__body {
-      &__title {
-        font-size: 1.5rem;
-      }
-      &__description,
-      &__txt,
-      &__prices {
-        font-size: 1rem;
-        margin: 8px 0;
-      }
-    }
+  &__pricing {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--c-border);
+  }
+
+  &__price--single {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--c-heading);
+    letter-spacing: 0.01em;
+  }
+
+  &__price-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 12px;
+  }
+
+  &__price-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  &__price-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--c-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__price-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--c-heading);
   }
 }
 
 @media screen and (max-width: 480px) {
   .card {
-    width: 100%;
-    &__body {
-      &__btn {
-        display: block;
-        border: none;
-        border-radius: 8px;
-        padding: 0.5rem 1rem;
-        color: var(--color-text);
-        width: fit-content;
-        margin: 10px auto;
-        background-color: var(--color-primary);
-        color: var(--color-text);
-        cursor: pointer;
-        transition: all 0.3s;
-        &:hover {
-          background-color: var(--color-secondary);
-          transform: scale(1.05);
-        }
-      }
-      &__title {
-        font-size: 1.25rem;
-      }
-      &__description,
-      &__txt,
-      &__prices {
-        font-size: 0.85rem;
-      }
-      &__description {
-        max-height: 100px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        transition: all 0.3s;
-        &.expanded {
-          max-height: none;
-        }
-      }
+    border-radius: 10px;
+
+    &__price-grid {
+      grid-template-columns: 1fr;
     }
   }
 }

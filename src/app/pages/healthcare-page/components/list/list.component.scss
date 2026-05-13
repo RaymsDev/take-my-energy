@@ -1,28 +1,20 @@
 .healthcare-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 24px;
   justify-content: center;
-  padding: 1.5rem 3rem;
+  padding: 24px 32px 32px;
 }
 
-/* Responsive Rules */
 @media screen and (max-width: 1024px) {
   .healthcare-container {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    padding: 1.5rem 3rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 }
 
 @media screen and (max-width: 768px) {
   .healthcare-container {
     grid-template-columns: 1fr;
-    padding: 1.5rem 2rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .healthcare-container {
-    padding: 1.25rem;
+    padding: 16px 20px;
   }
 }
