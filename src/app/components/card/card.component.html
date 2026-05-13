@@ -1,45 +1,62 @@
-<div class="card">
-  <img
-    [src]="healthcareItem.img"
-    [alt]="healthcareItem.title"
-    class="card__img"
-  />
+<article class="card">
+  <div class="card__img-wrap">
+    <img
+      [src]="healthcareItem.img"
+      [alt]="healthcareItem.title"
+      class="card__img"
+      loading="lazy"
+    />
+  </div>
+
   <div class="card__body">
-    <h2 class="card__body__title">{{ healthcareItem.title }}</h2>
-    <p class="card__body__description" [ngClass]="{ expanded: isExpanded }">
-      {{ healthcareItem.description }}
-    </p>
-    <button class="card__body__btn" (click)="toggleDescription()">
-      {{ isExpanded ? "Réduire" : "Afficher la suite" }}
+    <h2 class="card__title">{{ healthcareItem.title }}</h2>
+
+    <div class="card__desc-wrap" [class.card__desc-wrap--open]="isExpanded">
+      <p class="card__desc">{{ healthcareItem.description }}</p>
+    </div>
+    <button
+      class="card__toggle"
+      (click)="toggleDescription()"
+      [attr.aria-expanded]="isExpanded"
+    >
+      {{ isExpanded ? "Réduire" : "Lire la suite" }}
+      <i
+        class="fa-solid"
+        [class.fa-chevron-down]="!isExpanded"
+        [class.fa-chevron-up]="isExpanded"
+        aria-hidden="true"
+      ></i>
     </button>
-    <div class="card_body__ctn">
-      <p class="card__body__txt"><strong>Durée :</strong> {{ duration }}</p>
+
+    <div class="card__meta">
+      <span class="card__chip">
+        <i class="fa-regular fa-clock" aria-hidden="true"></i>
+        {{ duration }}
+      </span>
+      <span class="card__chip">
+        <i class="fa-solid fa-users" aria-hidden="true"></i>
+        {{ healthcareItem.audience }}
+      </span>
+    </div>
+
+    <div class="card__pricing">
       @if (selectedOffice) {
-        <p class="card__body__txt">
-          <strong>Prix :</strong>
-          {{ getPrice(selectedOffice) }}
-        </p>
+        <p class="card__price--single">{{ getPrice(selectedOffice) }}</p>
       } @else {
-        <ul class="card__body__prices">
+        <div class="card__price-grid">
           @for (office of getOffices(healthcareItem.products); track $index) {
-            <li>
-              <strong>{{ office }} :</strong>
-              {{ getPrice(office) }}
-            </li>
+            <div class="card__price-item">
+              <span class="card__price-label">{{ office }}</span>
+              <span class="card__price-value">{{ getPrice(office) }}</span>
+            </div>
           }
-        </ul>
+        </div>
       }
-      <p class="card__body__txt">
-        <strong>Audience :</strong> {{ healthcareItem.audience }}
-      </p>
     </div>
   </div>
-  @if (selectedOffice) {
-    <app-button
-      [url]="getBookingUrl(selectedOffice)"
-      label="Réserver"
-    ></app-button>
-  } @else {
-    <app-button [url]="getBookingUrl()" label="Réserver"></app-button>
-  }
-</div>
+
+  <app-button
+    [url]="getBookingUrl(selectedOffice)"
+    label="Réserver"
+  ></app-button>
+</article>

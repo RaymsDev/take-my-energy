@@ -1,28 +1,50 @@
-<section class="offices">
-  @for (office of offices; track $index) {
-    <div class="office">
-      <div>
-        <h2 class="office__title">{{ office.title }}</h2>
-        @if (office.address) {
-          <p class="office__address">
-            {{ office.address }}
-          </p>
-        }
-        <hr />
-      </div>
-
-      @for (block of office.blocks; track $index) {
-        <div class="office__block">
-          <div class="office__image">
-            <img [src]="block.image" [alt]="block.alt" />
-          </div>
-          <div class="office__content">
-            @for (description of block.descriptions; track $index) {
-              <p class="office__txt">{{ description }}</p>
-            }
-          </div>
-        </div>
-      }
+<div class="offices-page">
+  <header class="offices-hero">
+    <div class="offices-hero__bg" aria-hidden="true"></div>
+    <div class="offices-hero__content">
+      <p class="offices-hero__eyebrow">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+        Lieux de consultation
+      </p>
+      <h1 class="offices-hero__title">Nos Cabinets</h1>
+      <p class="offices-hero__sub">
+        Retrouvez-nous dans des espaces dédiés au bien-être, soigneusement
+        choisis pour vous accueillir.
+      </p>
     </div>
-  }
-</section>
+  </header>
+
+  <section class="offices-grid" aria-label="Nos lieux de consultation">
+    @for (office of offices; track $index; let idx = $index) {
+      <article class="office-card">
+        @if (office.blocks && office.blocks[0]) {
+          <div class="office-card__visual">
+            <img
+              [src]="office.blocks[0].image"
+              [alt]="office.blocks[0].alt"
+              class="office-card__img"
+              loading="lazy"
+            />
+            <div class="office-card__overlay" aria-hidden="true"></div>
+            <div class="office-card__caption">
+              <span class="office-card__num">{{ officeIndex(idx) }}</span>
+              <h2 class="office-card__title">{{ office.title }}</h2>
+              @if (office.address) {
+                <p class="office-card__address">
+                  <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                  {{ office.address }}
+                </p>
+              }
+            </div>
+          </div>
+
+          @if (office.blocks[0].descriptions[0]) {
+            <p class="office-card__desc">
+              {{ office.blocks[0].descriptions[0] }}
+            </p>
+          }
+        }
+      </article>
+    }
+  </section>
+</div>

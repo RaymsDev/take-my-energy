@@ -1,12 +1,12 @@
 .banner {
   &__txt {
     width: 100%;
-    font-size: 1rem;
+    font-size: 16px;
     font-weight: 600;
     color: var(--color-text);
     background-color: var(--color-banner);
     text-align: center;
-    padding: 1rem;
+    padding: 16px;
     margin: 0;
   }
 }

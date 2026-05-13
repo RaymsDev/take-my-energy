@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SITE_CONFIG } from '../../configs';
 
 @Component({
   selector: 'app-session-page',
@@ -7,4 +8,6 @@ import { RouterModule } from '@angular/router';
   templateUrl: './session-page.component.html',
   styleUrl: './session-page.component.scss',
 })
-export class SessionPageComponent {}
+export class SessionPageComponent {
+  public bookingUrl: string = SITE_CONFIG['BOOKING'];
+}

@@ -1,16 +1,19 @@
-<div class="filter">
+<div class="filter" role="group" aria-label="Filtrer les soins par cabinet">
+  <button
+    class="filter__btn"
+    [class.selected]="selectedOfficeId === emptyOfficeId"
+    (click)="onFilter(emptyOfficeId)"
+  >
+    <i class="fa-solid fa-list" aria-hidden="true"></i>
+    Tous les cabinets
+  </button>
   @for (office of offices; track $index) {
     <button
+      class="filter__btn"
       [class.selected]="selectedOfficeId === office.id"
       (click)="onFilter(office.id)"
     >
       {{ office.id }}
     </button>
   }
-  <button
-    [class.selected]="selectedOfficeId === emptyOfficeId"
-    (click)="onFilter(emptyOfficeId)"
-  >
-    Tous les cabinets
-  </button>
 </div>

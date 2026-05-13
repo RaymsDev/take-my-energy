@@ -1,8 +1,26 @@
 <section class="healthcare">
-  <h2 class="healthcare__title">Soins</h2>
-  <hr />
+  <div class="healthcare__header">
+    <div class="healthcare__header__eyebrow" aria-hidden="true">
+      <span class="healthcare__header__eyebrow__line"></span>
+      <span class="healthcare__header__eyebrow__text">Nos prestations</span>
+    </div>
+    <h2 class="healthcare__header__title">Soins &amp; Bien-être</h2>
+    <p class="healthcare__header__sub">
+      Des soins adaptés à vos besoins pour retrouver l'équilibre entre le corps
+      et l'esprit.
+    </p>
+  </div>
+
   <app-massages-home></app-massages-home>
-  <a [routerLink]="['/healthcare']" class="healthcare__others"
-    >Découvrir nos autres soins...</a
-  >
+
+  <div class="healthcare__cta-wrap">
+    <a
+      [routerLink]="['/healthcare']"
+      class="healthcare__cta"
+      aria-label="Découvrir tous nos soins"
+    >
+      <span>Découvrir tous nos soins</span>
+      <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </div>
 </section>

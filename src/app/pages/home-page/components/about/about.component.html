@@ -1,44 +1,36 @@
 <section class="about">
-  <div class="about__img">
-    <img
-      src="assets/massage_tattooed_woman.webp"
-      alt="Une femme se fait masser"
-    />
-    <span class="about__img__overlay"></span>
+  <div class="about__bg" aria-hidden="true">
+    <img src="assets/massage_tattooed_woman.webp" alt="" />
+    <div class="about__bg__overlay"></div>
   </div>
-  <div class="about__content">
-    <div class="about__content__round">
-      <div class="about__content__round__overlay"></div>
+
+  <div class="about__body">
+    <div class="about__eyebrow" aria-hidden="true">
+      <span class="about__eyebrow__line"></span>
+      <span class="about__eyebrow__text">À propos</span>
+      <span class="about__eyebrow__line"></span>
+    </div>
+
+    <div class="about__profile">
       <img
         src="assets/profiles/profile_picture_sweet.webp"
-        alt="Jean-Luc LAFFUGE"
-        class="about__content__round__img"
+        alt="Jean-Luc Laffuge, énergéticien et magnétiseur"
+        class="about__profile__img"
       />
     </div>
-    <div class="about__content__flex">
-      <h2 class="about__content__flex__name">Jean-Luc LAFFUGE</h2>
-      <hr />
-      <p class="about__content__flex__txt">
-        Né en 1962, je suis marié à Jocelyne et père de deux enfants, Romain et
-        Rémy. <br />
-        Nous avons également la chance d’avoir trois merveilleux petits-enfants,
-        Leyna, Lorys et Merlin.<br />
-        Nous vivons à Saint-Léger-Triey, un charmant village de la Côte-d’Or.<br />
-      </p>
-      <p class="about__content__flex__txt">
-        Depuis toujours passionné par le sport, j’ai d’abord pratiqué le
-        football, puis suis devenu entraîneur et dirigeant.<br />
-        À l’âge de 45 ans, j’ai découvert une nouvelle passion pour la course à
-        pied, que je pratique au sein du club des CROCO de
-        Fontaine-lès-Dijon.<br />
-        Cette passion m’a mené à participer à des trails de longue distance,
-        tels que les Templiers, le Trail de Bourbon et la célèbre Diagonale des
-        Fous à La Réunion.<br />
-      </p>
-      <p class="about__content__flex__txt">
-        J’apprécie également la randonnée et j’aime organiser des sorties pour
-        faire découvrir la nature et la région autour de chez nous.
-      </p>
-    </div>
+
+    <h2 class="about__name">Jean-Luc Laffuge</h2>
+    <p class="about__role">Énergéticien &amp; Magnétiseur</p>
+
+    <p class="about__txt">
+      Agriculteur, sportif de haut niveau, père de famille. En 2020 j'ai ouvert
+      <strong>5 de Cœur</strong> pour partager ma capacité naturelle à apporter
+      bien-être et équilibre.
+    </p>
+
+    <a routerLink="/about" class="about__cta">
+      <span>Découvrir mon parcours</span>
+      <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+    </a>
   </div>
 </section>

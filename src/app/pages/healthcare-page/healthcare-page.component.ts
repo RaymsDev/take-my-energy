@@ -10,16 +10,10 @@ import { HealthcareService } from '../../services/healthcare.service';
 import { FilterComponent } from './components/filter/filter.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
 import { ListComponent } from './components/list/list.component';
-import { SelectedOfficeComponent } from './components/selected-office/selected-office.component';
 
 @Component({
   selector: 'app-healthcare-page',
-  imports: [
-    ListComponent,
-    IntroductionComponent,
-    SelectedOfficeComponent,
-    FilterComponent,
-  ],
+  imports: [ListComponent, IntroductionComponent, FilterComponent],
   templateUrl: './healthcare-page.component.html',
   styleUrls: ['./healthcare-page.component.scss'],
   providers: [HealthcareService],

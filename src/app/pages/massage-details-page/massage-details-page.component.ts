@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SITE_CONFIG } from '../../configs';
 import { MassageContent } from '../../models/massages.model';
 import { MassageService } from '../../services/massage.service';
 
@@ -12,6 +13,7 @@ import { MassageService } from '../../services/massage.service';
 })
 export class MassageDetailsPageComponent implements OnInit {
   content!: MassageContent;
+  public bookingUrl: string = SITE_CONFIG['BOOKING'];
 
   constructor(
     private massageService: MassageService,

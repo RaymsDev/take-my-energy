@@ -1,19 +1,74 @@
 .testimonials {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin: 25px;
-  &__title {
-    width: fit-content;
-    color: var(--color-secondary);
-    font-size: 2rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-    margin: 20px auto;
+  background: var(--c-bg-alt);
+  padding: 96px 32px 80px;
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+
+  &__header {
+    max-width: 600px;
+    margin: 0 auto 56px;
+    text-align: center;
   }
-  hr {
-    width: 20%;
-    margin-bottom: 20px;
+
+  &__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+
+    &__line {
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--c-gold);
+      flex-shrink: 0;
+    }
+
+    &__text {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-brand);
+    }
+  }
+
+  &__title {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-size: clamp(35px, 4.5vw, 51px);
+    color: var(--c-heading);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  &__sub {
+    font-size: 16px;
+    color: var(--c-text-secondary);
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .elfsight-app-dc4932e2-830e-4a71-8aa1-8de99336ce15 {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonials {
+    padding: 64px 20px 56px;
+
+    &__header {
+      margin-bottom: 40px;
+    }
+
+    &__title {
+      font-size: clamp(29px, 7vw, 38px);
+    }
   }
 }

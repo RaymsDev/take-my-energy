@@ -18,4 +18,8 @@ export class OfficePageComponent {
       this.offices = data;
     });
   }
+
+  officeIndex(i: number): string {
+    return i < 9 ? '0' + (i + 1) : String(i + 1);
+  }
 }
