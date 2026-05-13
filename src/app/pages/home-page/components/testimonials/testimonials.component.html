@@ -1,19 +1,128 @@
 <section class="testimonials">
-  <div class="testimonials__header">
+  <div class="testimonials__head">
     <div class="testimonials__eyebrow" aria-hidden="true">
       <span class="testimonials__eyebrow__line"></span>
       <span class="testimonials__eyebrow__text">Ce qu'ils disent</span>
+      <span class="testimonials__eyebrow__line"></span>
     </div>
+
+    <div class="testimonials__stat">
+      <span class="testimonials__stat__stars" aria-hidden="true">★★★★★</span>
+      <span class="testimonials__stat__label"
+        >+{{ totalReviews }} avis 5 étoiles Google</span
+      >
+    </div>
+
     <h2 class="testimonials__title">Témoignages</h2>
     <p class="testimonials__sub">
-      Des centaines de personnes accompagnées — voici quelques retours
+      Des centaines de personnes accompagnées - voici quelques retours
       d'expérience.
     </p>
   </div>
 
-  <script src="https://static.elfsight.com/platform/platform.js" async></script>
-  <div
-    class="elfsight-app-dc4932e2-830e-4a71-8aa1-8de99336ce15"
-    data-elfsight-app-lazy
-  ></div>
+  @if (reviews.length > 0) {
+    <div class="testimonials__carousel">
+      <button
+        class="testimonials__arrow"
+        (click)="scroll('prev')"
+        [disabled]="currentIndex === 0"
+        aria-label="Avis précédents"
+      >
+        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+      </button>
+
+      <div class="testimonials__track" #track>
+        @for (review of reviews; track review.id; let idx = $index) {
+          <article
+            class="testimonials__card"
+            [class.testimonials__card--expanded]="isExpanded(review.id)"
+          >
+            <div class="testimonials__card__header">
+              <div
+                class="testimonials__card__avatar"
+                [style.background]="getAvatarColor(idx)"
+                aria-hidden="true"
+              >
+                {{ getInitials(review.name) }}
+              </div>
+              <div class="testimonials__card__meta">
+                <span class="testimonials__card__name">{{ review.name }}</span>
+                <span class="testimonials__card__date">{{ review.date }}</span>
+              </div>
+              <i
+                class="fa-brands fa-google testimonials__card__google"
+                aria-hidden="true"
+              ></i>
+            </div>
+
+            <div
+              class="testimonials__card__stars"
+              [attr.aria-label]="review.rating + ' étoiles sur 5'"
+            >
+              @for (star of starsArray; track star) {
+                <span
+                  class="testimonials__card__star"
+                  [class.testimonials__card__star--filled]="
+                    star <= review.rating
+                  "
+                  >★</span
+                >
+              }
+            </div>
+
+            <div
+              class="testimonials__card__text-wrap"
+              [class.testimonials__card__text-wrap--open]="
+                isExpanded(review.id)
+              "
+            >
+              <p class="testimonials__card__text">{{ review.text }}</p>
+            </div>
+
+            @if (truncatedIds.has(review.id)) {
+              <button
+                class="testimonials__card__toggle"
+                (click)="toggleExpanded(review.id, $event)"
+                [attr.aria-expanded]="isExpanded(review.id)"
+              >
+                {{ isExpanded(review.id) ? "Réduire" : "Lire la suite" }}
+                <i
+                  class="fa-solid"
+                  [class.fa-chevron-down]="!isExpanded(review.id)"
+                  [class.fa-chevron-up]="isExpanded(review.id)"
+                  aria-hidden="true"
+                ></i>
+              </button>
+            }
+          </article>
+        }
+      </div>
+
+      <button
+        class="testimonials__arrow"
+        (click)="scroll('next')"
+        [disabled]="currentIndex >= maxIndex"
+        aria-label="Avis suivants"
+      >
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div
+      class="testimonials__dots"
+      role="tablist"
+      aria-label="Navigation des avis"
+    >
+      @for (dot of dotsArray; track $index) {
+        <button
+          class="testimonials__dot"
+          [class.testimonials__dot--active]="$index === currentIndex"
+          (click)="goToDot($index)"
+          [attr.aria-label]="'Page ' + ($index + 1)"
+          role="tab"
+          [attr.aria-selected]="$index === currentIndex"
+        ></button>
+      }
+    </div>
+  }
 </section>
