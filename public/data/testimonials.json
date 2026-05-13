@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Marie B.",
+    "rating": 5,
+    "text": "J'ai réalisé un soin énergétique. Jean-Luc est une personne agréable qui sait mettre à l'aise. Ne connaissant pas le déroulement, il m'a tout expliqué avant le soin. Le soin s'est très bien passé, je le recommande.",
+    "date": "il y a 6 mois"
+  },
+  {
+    "id": 2,
+    "name": "Pascal C.",
+    "rating": 5,
+    "text": "Première séance qui m’a fait beaucoup de bien au niveaux de mes cervicales. Très professionnelle je recommande vivement. Petit clin d’œil aux vétérans de Lamarche 😏😏",
+    "date": "il y a 8 jours"
+  },
+  {
+    "id": 3,
+    "name": "Maria H.",
+    "rating": 5,
+    "text": "Super moment de détente !!! Je ne connaissais pas, je le recommande, de plus Jean Luc explique comment se passe la séance. A refaire.",
+    "date": "il y a 1 mois"
+  },
+  {
+    "id": 4,
+    "name": "Delphine F.",
+    "rating": 5,
+    "text": "Bonjour, nous avons consulté pour une brûlure. La prise en charge est très professionnelle mais surtout très efficace. La douleur a disparu dans le quart d'heure et la brûlure était deja sèche le lendemain. Avec tous nos remerciements",
+    "date": "il y a 1 mois"
+  },
+  {
+    "id": 5,
+    "name": "Gerome F.",
+    "rating": 5,
+    "text": "Merci Jean-Luc. Intervention par téléphone sur photo suite à une belle brûlure sur le dessus de la main de ma fille. Rendez vous en présentiel dès le lendemain. La douleur a cessé de suite et la brûlure est devenue sèche très rapidement. (Tulle gras en complément je précise tout de même). Donc je le redis, MERCI !",
+    "date": "il y a 2 mois"
+  },
+  {
+    "id": 6,
+    "name": "P. P.",
+    "rating": 5,
+    "text": "Des explications claires et préalables sur la pratique du massage énergétique et une réelle écoute sur ce qui nous amène. Post seance, j’ai un réveil très différent de tous ceux qui se sont succédés jusque là… et aussi et surtout une grande atténuation de douleurs chroniques… Merci Jean Luc 🙏",
+    "date": "il y a 2 mois"
+  },
+  {
+    "id": 7,
+    "name": "Catherine C.",
+    "rating": 5,
+    "text": "3ème séance soin énergétique : toujours très bien , soins vraiment bien ciblés, beaucoup de chaleur. J'espère que j'irai de mieux en mieux après chaque nouvelle séance.",
+    "date": "il y a 4 mois"
+  },
+  {
+    "id": 8,
+    "name": "Raphaël M.",
+    "rating": 5,
+    "text": "Super expérience. Soulagement de mes maux de dos . Effets immédiats. Accueil très chaleureux. Un bon moment de détente. Je recommande vivement Jean-Luc pour toutes les personnes qui ont des soucis physiques au quotidien.",
+    "date": "il y a 6 mois"
+  },
+  {
+    "id": 9,
+    "name": "Cédric M.",
+    "rating": 5,
+    "text": "(Massage holistique) Super séance, super accueil comme à chaque venue. Merci Jean-Luc. Je conseille vivement",
+    "date": "il y a 8 mois"
+  },
+  {
+    "id": 10,
+    "name": "Mélissa Q.",
+    "rating": 5,
+    "text": "Acceuil au top! Jean-luc est très sympa et à l'écoute de notre problématique! Je suis sorti du rdv apaisée et ça va beaucoup mieux. Il fait des miracles ça faisait plusieurs années que j'avais des boutons types psoriasis je n'en ai presque plus depuis mon passage chez lui. Je suis ravie et je recommande à 100%",
+    "date": "il y a 10 mois"
+  }
+]
