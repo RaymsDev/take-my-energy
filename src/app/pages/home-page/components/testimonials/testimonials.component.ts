@@ -29,7 +29,7 @@ export class TestimonialsComponent implements OnInit {
   private expandedIds = new Set<number>();
   truncatedIds = new Set<number>();
 
-  readonly totalReviews = 120;
+  readonly totalReviews = 140;
   readonly starsArray = [1, 2, 3, 4, 5];
 
   private readonly avatarColors = [
@@ -98,6 +98,15 @@ export class TestimonialsComponent implements OnInit {
         ? Math.min(this.maxIndex, this.currentIndex + 1)
         : Math.max(0, this.currentIndex - 1);
     track.scrollTo({ left: this.currentIndex * step, behavior: 'smooth' });
+  }
+
+  onTrackScroll(): void {
+    if (!isPlatformBrowser(this.platformId) || !this.trackRef) return;
+    const track = this.trackRef.nativeElement;
+    const card = track.querySelector('.testimonials__card') as HTMLElement;
+    if (!card) return;
+    const step = card.offsetWidth + 24;
+    this.currentIndex = Math.round(track.scrollLeft / step);
   }
 
   goToDot(index: number): void {

@@ -31,7 +31,7 @@
         <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
       </button>
 
-      <div class="testimonials__track" #track>
+      <div class="testimonials__track" #track (scroll)="onTrackScroll()">
         @for (review of reviews; track review.id; let idx = $index) {
           <article
             class="testimonials__card"
