@@ -23,24 +23,16 @@
     ]
   },
   {
-    "id": "quetigny",
-    "title": "Centre TherrAzur Quetigny",
-    "address": "14 Rue du Golf, 21800 Quetigny",
+    "id": "chenove",
+    "title": "GKowork - Chenôve",
+    "address": "39 Av. du 14 Juillet, 21300 Chenôve",
     "blocks": [
       {
-        "image": "assets/therazur1.webp",
-        "alt": "Centre TherrAzur Quetigny, entrée",
+        "image": "assets/chenove.webp",
+        "alt": "GKowork Chenôve, espace de coworking",
         "descriptions": [
-          "Le Centre TherrAzur est un véritable havre de paix dédié au bien-être, situé dans un cadre moderne et accessible.",
-          "Avec ses horaires flexibles (7 jours sur 7, de 8h à 22h), ce lieu est parfaitement adapté à votre emploi du temps, que ce soit pour une pause bien-être ou un soin complet."
-        ]
-      },
-      {
-        "image": "assets/therazur2.webp",
-        "alt": "Centre TherrAzur Quetigny, salle de soins",
-        "descriptions": [
-          "Les salles lumineuses et soigneusement aménagées garantissent une expérience de soin inoubliable. Chaque espace est conçu pour vous offrir confort et sérénité.",
-          "Idéal pour des soins énergétiques, des massages ou des séances de relaxation, le Centre TherrAzur vous accueille dans un environnement à la fois professionnel et convivial."
+          "Situé au cœur de Chenôve, l'espace GKowork offre un cadre moderne et accueillant pour vos séances de bien-être, facilement accessible depuis Dijon.",
+          "Un environnement professionnel et apaisant, idéal pour profiter de vos soins dans un lieu calme et bien équipé."
         ]
       }
     ]

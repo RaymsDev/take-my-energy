@@ -30,9 +30,9 @@ export class HealthcarePageComponent implements OnInit {
       address: '7 rue haute, 21556 Saint-Léger-Triey',
     },
     {
-      id: 'Quetigny',
-      label: 'Centre TherrAzur Quetigny',
-      address: '14 Rue du Golf, 21800 Quetigny',
+      id: 'Chenôve',
+      label: 'GKowork - Chenôve',
+      address: '39 Av. du 14 Juillet, 21300 Chenôve',
     },
     {
       id: 'Chez Socha',
