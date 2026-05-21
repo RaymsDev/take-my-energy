@@ -15,7 +15,7 @@
     },
     "prices": {
       "Saint Léger Triey": "45 €",
-      "Quetigny": "55 €"
+      "Chenôve": "55 €"
     },
     "products": {
       "Saint Léger Triey": {
@@ -25,12 +25,12 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132410"
       },
-      "Quetigny": {
+      "Chenôve": {
         "price": {
           "value": 55,
           "currency": "EUR"
         },
-        "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3621260&people=13548&reason=87940"
+        "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=87940"
       }
     }
   },
@@ -56,12 +56,12 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132411"
       },
-      "Quetigny": {
+      "Chenôve": {
         "price": {
           "value": 70,
           "currency": "EUR"
         },
-        "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3621260&people=13548&reason=87941"
+        "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=87941"
       }
     }
   },
@@ -87,12 +87,12 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132416"
       },
-      "Quetigny": {
+      "Chenôve": {
         "price": {
           "value": 70,
           "currency": "EUR"
         },
-        "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3621260&people=13548&reason=130897"
+        "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=130897"
       }
     }
   },
@@ -118,12 +118,12 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132414"
       },
-      "Quetigny": {
+      "Chenôve": {
         "price": {
           "value": 35,
           "currency": "EUR"
         },
-        "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3621260&people=13548&reason=87946"
+        "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=87946"
       }
     }
   },
@@ -149,12 +149,12 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132415"
       },
-      "Quetigny": {
+      "Chenôve": {
         "price": {
           "value": 55,
           "currency": "EUR"
         },
-        "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3621260&people=13548&reason=87947"
+        "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=87947"
       }
     }
   },
@@ -180,12 +180,12 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132413"
       },
-      "Quetigny": {
+      "Chenôve": {
         "price": {
           "value": 45,
           "currency": "EUR"
         },
-        "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3621260&people=13548&reason=87944"
+        "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=87944"
       }
     }
   },
@@ -211,12 +211,12 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132412"
       },
-      "Quetigny": {
+      "Chenôve": {
         "price": {
           "value": 55,
           "currency": "EUR"
         },
-        "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3621260&people=13548&reason=87942"
+        "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=87942"
       }
     }
   },
