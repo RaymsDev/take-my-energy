@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { MassageHomeService } from '../../../../services/massages-home.service';
 import { MassageHomeContent } from '../../../../models/massages.model';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-massages-home',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule],
   templateUrl: './massages-home.component.html',
   styleUrl: './massages-home.component.scss',
   providers: [MassageHomeService],

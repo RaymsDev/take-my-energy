@@ -18,8 +18,7 @@ export function app(): express.Express {
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser
-  server.get(
-    '**',
+  server.use(
     express.static(browserDistFolder, {
       maxAge: '1y',
       index: 'index.html',
@@ -27,7 +26,7 @@ export function app(): express.Express {
   );
 
   // All regular routes use the Angular engine
-  server.get('**', async (req, res, next) => {
+  server.get('(.*)', async (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
     try {
       const html = await renderApplication(bootstrap, {

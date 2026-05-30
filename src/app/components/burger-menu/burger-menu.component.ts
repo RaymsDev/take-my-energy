@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { SITE_CONFIG } from '../../configs';
 import { AnalyticsService } from '../../services';
@@ -6,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-burger-menu',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   templateUrl: './burger-menu.component.html',
   styleUrl: './burger-menu.component.scss',
   providers: [AnalyticsService],
