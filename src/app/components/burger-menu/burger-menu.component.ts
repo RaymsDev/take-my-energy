@@ -1,12 +1,14 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
+  DestroyRef,
   HostListener,
   Inject,
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs/operators';
 import { SITE_CONFIG } from '../../configs';
 import { AnalyticsService } from '../../services';
@@ -27,6 +29,7 @@ export class BurgerMenuComponent implements OnInit {
   constructor(
     private analyticsService: AnalyticsService,
     private router: Router,
+    private destroyRef: DestroyRef,
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {}
 
@@ -35,7 +38,10 @@ export class BurgerMenuComponent implements OnInit {
 
     if (this.router.events) {
       this.router.events
-        .pipe(filter((e) => e instanceof NavigationEnd))
+        .pipe(
+          filter((e) => e instanceof NavigationEnd),
+          takeUntilDestroyed(this.destroyRef),
+        )
         .subscribe((e: NavigationEnd) => {
           this.checkRoute(e.urlAfterRedirects);
           this.isMenuOpen = false;
