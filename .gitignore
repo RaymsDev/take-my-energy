@@ -53,3 +53,5 @@ Thumbs.db
 .nx/self-healing
 # Compound Engineering local config
 .compound-engineering/*.local.yaml
+
+secrets/
