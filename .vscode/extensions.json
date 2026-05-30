@@ -3,6 +3,8 @@
     "angular.ng-template",
     "esbenp.prettier-vscode",
     "nrwl.angular-console",
-    "mongodb.mongodb-vscode"
+    "mongodb.mongodb-vscode",
+    "dbaeumer.vscode-eslint",
+    "firsttris.vscode-jest-runner"
   ]
 }

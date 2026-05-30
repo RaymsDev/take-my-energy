@@ -20,5 +20,34 @@
   },
   "peacock.color": "#61dafb",
   "nxConsole.generateAiAgentRules": true,
-  "cSpell.language": "en,fr"
+  "cSpell.language": "en,fr",
+  "cSpell.words": ["cinqdecoeur", "LAFFUGE"],
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Format: <type>(<scope>): <subject> <emoji>\n\nAllowed types: feat, fix, docs, refactor, test, chore, perf, ci, build, style, revert.\nAllowed scopes: asset, attachment, checkup, configuration, contribution, document, feature-resolver, fom, gmaor-report, metrics, operation, release, script, shared, task, time-entry, work-order, migrator, deps.\nOmit scope only for cross-cutting changes that don't fit a single scope."
+    },
+    {
+      "text": "Header: max 100 chars total. Use imperative mood (e.g. 'add', 'fix', 'remove', not 'added', 'fixes', 'removed'). Be specific: prefer 'add search endpoint for attachments' over 'update attachment code'."
+    },
+    {
+      "text": "Body: wrap at 72 chars per line. Explain WHAT changed and WHY, not HOW (the diff shows how). Skip the body for trivial changes (typos, dependency bumps, simple renames)."
+    },
+    {
+      "text": "End the header with a single relevant emoji: ✨ feat, 🐛 fix, 📚 docs, 🔧 refactor, ✅ test, 🔨 chore, ⚡ perf, 🔒 security, 🗑️ deprecation/removal."
+    },
+    {
+      "text": "Footer: add 'Refs: <branch-name>' using the current Git branch name. For breaking changes, add a 'BREAKING CHANGE: <description>' line."
+    }
+  ],
+  "github.copilot.chat.reviewSelection.instructions": [
+    {
+      "text": "Provide a clear and concise summary of the changes made in the code. This can help other developers understand the context and purpose of the changes"
+    },
+    {
+      "text": "Highlight any potential issues or areas of concern in the code. This can help other developers identify and address any problems before they become bigger issues"
+    },
+    {
+      "text": "Offer suggestions for improvement or alternative approaches to the code. This can help other developers learn and grow their skills while also improving the overall quality of the codebase"
+    }
+  ]
 }

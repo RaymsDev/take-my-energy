@@ -1,7 +1,9 @@
 {
-  "$schema": "node_modules/nx/schemas/project-schema.json",
   "name": "fiveOfHeart",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
+  "sourceRoot": "apps/fiveOfHeart/src",
+  "prefix": "app",
   "generators": {
     "@schematics/angular:component": {
       "style": "scss",
@@ -11,30 +13,32 @@
       "skipTests": true
     }
   },
-  "sourceRoot": "src",
-  "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "options": {
         "outputPath": "dist/five-of-heart",
-        "index": "src/index.html",
-        "browser": "src/main.ts",
-        "polyfills": ["zone.js"],
-        "tsConfig": "tsconfig.app.json",
+        "index": "apps/fiveOfHeart/src/index.html",
+        "browser": "apps/fiveOfHeart/src/main.ts",
+        "polyfills": [
+          "zone.js"
+        ],
+        "tsConfig": "apps/fiveOfHeart/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "public"
+            "input": "apps/fiveOfHeart/public"
           }
         ],
-        "styles": ["src/styles.scss"],
+        "styles": [
+          "apps/fiveOfHeart/src/styles.scss"
+        ],
         "scripts": [],
-        "server": "src/main.server.ts",
+        "server": "apps/fiveOfHeart/src/main.server.ts",
         "prerender": true,
         "ssr": {
-          "entry": "server.ts"
+          "entry": "apps/fiveOfHeart/server.ts"
         }
       },
       "configurations": {
@@ -60,7 +64,9 @@
         }
       },
       "defaultConfiguration": "production",
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
@@ -80,16 +86,21 @@
     "test": {
       "executor": "@angular-devkit/build-angular:karma",
       "options": {
-        "polyfills": ["zone.js", "zone.js/testing"],
-        "tsConfig": "tsconfig.spec.json",
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ],
+        "tsConfig": "apps/fiveOfHeart/tsconfig.spec.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "public"
+            "input": "apps/fiveOfHeart/public"
           }
         ],
-        "styles": ["src/styles.scss"],
+        "styles": [
+          "apps/fiveOfHeart/src/styles.scss"
+        ],
         "scripts": []
       }
     }
