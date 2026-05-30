@@ -2,6 +2,7 @@
   "recommendations": [
     "angular.ng-template",
     "esbenp.prettier-vscode",
-    "nrwl.angular-console"
+    "nrwl.angular-console",
+    "mongodb.mongodb-vscode"
   ]
 }
