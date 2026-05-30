@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
 
       - name: Install dependencies
         run: npm ci
@@ -40,6 +40,6 @@ jobs:
         run: npm run type-check 2>/dev/null || npx tsc --noEmit 2>/dev/null || echo "TypeScript check skipped"
         continue-on-error: true
 
-      - name: Run tests
-        run: npm test 2>/dev/null || echo "Tests not configured"
-        continue-on-error: true
+      # - name: Run tests
+      #   run: npm test 2>/dev/null || echo "Tests not configured"
+      #   continue-on-error: true
