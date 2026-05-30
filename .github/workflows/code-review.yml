@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   code-quality:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     name: Code Quality Checks
     steps:
       - name: Checkout code
