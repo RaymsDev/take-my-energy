@@ -1,6 +1,12 @@
 // src/app/services/json-ld.service.ts
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+
+import {
+  Inject,
+  Injectable,
+  Renderer2,
+  RendererFactory2,
+  DOCUMENT,
+} from '@angular/core';
 
 @Injectable({
   providedIn: 'root',

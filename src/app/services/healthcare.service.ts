@@ -1,6 +1,5 @@
-import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, DOCUMENT } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { HealthAndBeautyBusiness, WithContext } from 'schema-dts';
 import { createService } from '../data/services.data';

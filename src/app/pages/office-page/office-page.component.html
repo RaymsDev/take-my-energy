@@ -3,9 +3,11 @@
     <div class="office">
       <div>
         <h2 class="office__title">{{ office.title }}</h2>
-        <p class="office__address" *ngIf="office.address">
-          {{ office.address }}
-        </p>
+        @if (office.address) {
+          <p class="office__address">
+            {{ office.address }}
+          </p>
+        }
         <hr />
       </div>
 
