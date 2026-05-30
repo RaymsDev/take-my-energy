@@ -51,3 +51,5 @@ Thumbs.db
 .claude/worktrees
 .claude/settings.local.json
 .nx/self-healing
+# Compound Engineering local config
+.compound-engineering/*.local.yaml

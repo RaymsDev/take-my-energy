@@ -1,29 +1,75 @@
 ![Banner Image](docs/images/genkidama.png)
 
-# TakeMyEnergy
+# ⚡ TakeMyEnergy
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
+## 🔧 Compound Engineering Workflow
 
-## Development server
+This repository utilizes the **Compound Engineering Plugin** for Claude Code to maintain high-quality, continuous development in our Angular application.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 📦 Installation
 
-## Code scaffolding
+If you haven't installed the plugin yet, you can find the installation instructions in the official repository:
+[everyinc/compound-engineering-plugin](https://github.com/everyinc/compound-engineering-plugin)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To initialize the plugin in this project, run:
 
-## Build
+```bash
+/ce-setup
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🧠 Philosophy
 
-## Running unit tests
+We shift from standard ad-hoc prompting to a structured, agent-driven workflow. We treat coding as a continuous loop where:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **80% of the effort** 📋 is spent on planning, exploring edge cases, and reviewing.
+- **20% of the effort** ⌨️ is spent on execution.
 
-## Running end-to-end tests
+The ultimate goal is that every completed task makes the next one easier by compounding our learnings directly into `.claude/CLAUDE.md`.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## 🔄 The Core Development Loop
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+For every new feature, bug fix, or refactor in this Angular project, strictly follow this sequential workflow instead of asking for direct code generation:
+
+### 1. 🧠 Brainstorming (`/ce-brainstorm`)
+
+Before writing any code, explore the requirements and edge cases. This agent researches the codebase, explores potential pitfalls, and helps align the approach.
+
+```bash
+/ce-brainstorm "I want to add a new holistic massage booking component"
+```
+
+### 2. 📝 Planning (`/ce-plan`)
+
+Convert the brainstormed ideas into a concrete, step-by-step technical implementation plan.
+
+```bash
+/ce-plan "Create an implementation plan based on the recent brainstorm"
+```
+
+### 3. ⚙️ Execution (`/ce-work`)
+
+Delegate the actual coding based _strictly_ on the plan generated in the previous step.
+
+```bash
+/ce-work "Execute the current plan"
+```
+
+### 4. 👀 Code Review (`/ce-code-review`)
+
+Act as an automated reviewer to catch bugs, ensure architectural consistency, and validate that the implementation meets our standards before finalizing.
+
+```bash
+/ce-code-review
+```
+
+### 5. 📚 Compounding (`/ce-compound`) - ⚠️ CRITICAL STEP
+
+After a task is complete, reflect on the process to capture what worked and what didn't. This command automatically updates our project context so the AI learns our patterns and never makes the same mistake twice.
+
+```bash
+/ce-compound
+```
+
+> **Note:** ⭐ Never skip the Compounding step! The core value of this workflow relies on the continuous improvement of the agent's context and understanding of this specific repository.
