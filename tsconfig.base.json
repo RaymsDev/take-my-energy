@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "paths": {
+      "@five-of-heart/shared/interfaces": [
+        "./libs/shared/interfaces/src/index.ts"
+      ],
+      "@five-of-heart/shared/dto": ["./libs/shared/dto/src/index.ts"]
+    }
+  }
+}
