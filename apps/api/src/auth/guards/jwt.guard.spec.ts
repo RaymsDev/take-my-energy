@@ -25,8 +25,8 @@ describe('JwtGuard', () => {
     guard = module.get(JwtGuard);
   });
 
-  it('returns true and populates request.user with a valid token', async () => {
-    const payload = { sub: 'google-123', email: 'admin@example.com' };
+  it('returns true and populates request.user with a valid admin token', async () => {
+    const payload = { sub: 'google-123', email: 'admin@example.com', role: 'admin' };
     jwtService.verifyAsync.mockResolvedValue(payload);
     const ctx = makeContext('Bearer valid-token');
     const result = await guard.canActivate(ctx);
@@ -45,6 +45,13 @@ describe('JwtGuard', () => {
     jwtService.verifyAsync.mockRejectedValue(new Error('expired'));
     await expect(
       guard.canActivate(makeContext('Bearer bad-token')),
+    ).rejects.toBeInstanceOf(UnauthorizedException);
+  });
+
+  it('throws UnauthorizedException when token has no admin role', async () => {
+    jwtService.verifyAsync.mockResolvedValue({ sub: 'google-123', email: 'user@example.com' });
+    await expect(
+      guard.canActivate(makeContext('Bearer valid-token')),
     ).rejects.toBeInstanceOf(UnauthorizedException);
   });
 });

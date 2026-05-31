@@ -2,9 +2,12 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { CreateGiftCardDto, CreateGiftCardInput } from '@five-of-heart/shared/dto';
@@ -17,13 +20,20 @@ export class GiftCardsController {
   constructor(private readonly giftCardsService: GiftCardsService) {}
 
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   create(@Body() dto: CreateGiftCardDto) {
     return this.giftCardsService.create(dto as unknown as CreateGiftCardInput);
   }
 
   @Get()
-  findAll() {
-    return this.giftCardsService.findAll();
+  findAll(
+    @Query('limit') limit?: string,
+    @Query('page') page?: string,
+  ) {
+    return this.giftCardsService.findAll(
+      Math.min(Number(limit) || 100, 100),
+      Number(page) || 1,
+    );
   }
 
   @Get(':id')
