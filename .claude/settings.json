@@ -1,4 +1,24 @@
 {
+  "permissions": {
+    "allow": ["Exec(git add *)", "Exec(git commit *)"],
+    "deny": ["Exec(git push *)", "Exec(kubectl *)", "Exec(helm *)"]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git commit *)",
+            "command": "npm run format && git add -u",
+            "timeout": 60,
+            "statusMessage": "Running prettier before commit..."
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "nx@nx-claude-plugins": true,
     "compound-engineering@compound-engineering-plugin": true
@@ -10,9 +30,5 @@
         "repo": "nrwl/nx-ai-agents-config"
       }
     }
-  },
-  "permissions": {
-    "allow": ["Exec(git add *)", "Exec(git commit *)"],
-    "deny": ["Exec(git push *)", "Exec(kubectl *)", "Exec(helm *)"]
   }
 }
