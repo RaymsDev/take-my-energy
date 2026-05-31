@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "nx serve",
+    "start": "npm run dev",
+    "dev": "nx run-many --target=serve --projects=fiveOfHeart,api",
+    "dev:front": "nx serve fiveOfHeart",
+    "dev:api": "nx serve api",
     "build": "nx build",
     "format": "prettier --write .",
     "watch": "nx build --watch --configuration development",
