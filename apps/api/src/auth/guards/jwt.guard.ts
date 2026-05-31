@@ -21,7 +21,9 @@ export class JwtGuard implements CanActivate {
 
     const token = authHeader.slice(7);
     try {
-      const payload = await this.jwt.verifyAsync(token, { algorithms: ['HS256'] });
+      const payload = await this.jwt.verifyAsync(token, {
+        algorithms: ['HS256'],
+      });
       if (payload?.role !== 'admin') {
         throw new UnauthorizedException('Insufficient permissions');
       }

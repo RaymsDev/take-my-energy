@@ -17,16 +17,17 @@ describe('JwtGuard', () => {
   beforeEach(async () => {
     jwtService = { verifyAsync: jest.fn() };
     const module = await Test.createTestingModule({
-      providers: [
-        JwtGuard,
-        { provide: JwtService, useValue: jwtService },
-      ],
+      providers: [JwtGuard, { provide: JwtService, useValue: jwtService }],
     }).compile();
     guard = module.get(JwtGuard);
   });
 
   it('returns true and populates request.user with a valid admin token', async () => {
-    const payload = { sub: 'google-123', email: 'admin@example.com', role: 'admin' };
+    const payload = {
+      sub: 'google-123',
+      email: 'admin@example.com',
+      role: 'admin',
+    };
     jwtService.verifyAsync.mockResolvedValue(payload);
     const ctx = makeContext('Bearer valid-token');
     const result = await guard.canActivate(ctx);
@@ -49,7 +50,10 @@ describe('JwtGuard', () => {
   });
 
   it('throws UnauthorizedException when token has no admin role', async () => {
-    jwtService.verifyAsync.mockResolvedValue({ sub: 'google-123', email: 'user@example.com' });
+    jwtService.verifyAsync.mockResolvedValue({
+      sub: 'google-123',
+      email: 'user@example.com',
+    });
     await expect(
       guard.canActivate(makeContext('Bearer valid-token')),
     ).rejects.toBeInstanceOf(UnauthorizedException);

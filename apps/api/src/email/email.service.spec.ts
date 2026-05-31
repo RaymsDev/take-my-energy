@@ -56,8 +56,13 @@ describe('EmailService', () => {
 
   it('includes the personal message in HTML when message is provided', async () => {
     mockEmailsSend.mockResolvedValueOnce({ data: { id: '2' }, error: null });
-    await service.sendGiftCard({ ...baseParams, message: 'Enjoy your session!' });
-    expect(mockEmailsSend.mock.calls[0][0].html).toContain('Enjoy your session!');
+    await service.sendGiftCard({
+      ...baseParams,
+      message: 'Enjoy your session!',
+    });
+    expect(mockEmailsSend.mock.calls[0][0].html).toContain(
+      'Enjoy your session!',
+    );
   });
 
   it('renders cleanly without undefined or empty paragraph when message is absent', async () => {

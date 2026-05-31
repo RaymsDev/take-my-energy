@@ -46,13 +46,12 @@ export class EmailService {
     const safeSenderName = escHtml(senderName);
     const safeServiceName = escHtml(serviceName);
 
-    const messageBlock =
-      message
-        ? `<div style="margin: 24px 0; padding: 16px; background: #f9f9f9; border-left: 4px solid #4f46e5; border-radius: 4px;">
+    const messageBlock = message
+      ? `<div style="margin: 24px 0; padding: 16px; background: #f9f9f9; border-left: 4px solid #4f46e5; border-radius: 4px;">
         <p style="margin: 0; font-style: italic; color: #374151;">"${escHtml(message)}"</p>
         <p style="margin: 8px 0 0; font-size: 14px; color: #6b7280;">— ${safeSenderName}</p>
       </div>`
-        : '';
+      : '';
 
     const html = `<!DOCTYPE html>
 <html lang="en">
@@ -96,7 +95,10 @@ export class EmailService {
 </html>`;
 
     const timeout = new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error('Resend API timeout')), EMAIL_TIMEOUT_MS),
+      setTimeout(
+        () => reject(new Error('Resend API timeout')),
+        EMAIL_TIMEOUT_MS,
+      ),
     );
 
     const { error } = await Promise.race([

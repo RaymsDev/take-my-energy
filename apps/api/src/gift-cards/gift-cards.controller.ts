@@ -10,7 +10,10 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { CreateGiftCardDto, CreateGiftCardInput } from '@five-of-heart/shared/dto';
+import {
+  CreateGiftCardDto,
+  CreateGiftCardInput,
+} from '@five-of-heart/shared/dto';
 import { JwtGuard } from '../auth/guards/jwt.guard';
 import { GiftCardsService } from './gift-cards.service';
 
@@ -26,10 +29,7 @@ export class GiftCardsController {
   }
 
   @Get()
-  findAll(
-    @Query('limit') limit?: string,
-    @Query('page') page?: string,
-  ) {
+  findAll(@Query('limit') limit?: string, @Query('page') page?: string) {
     return this.giftCardsService.findAll(
       Math.min(Number(limit) || 100, 100),
       Number(page) || 1,

@@ -50,7 +50,11 @@ describe('AuthService', () => {
     it('throws ForbiddenException for a non-allowlisted email', async () => {
       await rebuild('admin@example.com');
       await expect(
-        service.handleGoogleCallback('other@example.com', 'google-999', 'Other'),
+        service.handleGoogleCallback(
+          'other@example.com',
+          'google-999',
+          'Other',
+        ),
       ).rejects.toBeInstanceOf(ForbiddenException);
     });
 
@@ -64,14 +68,22 @@ describe('AuthService', () => {
     it('trims whitespace from allowlist entries', async () => {
       await rebuild('  admin@example.com  , other@example.com  ');
       await expect(
-        service.handleGoogleCallback('admin@example.com', 'google-123', 'Admin'),
+        service.handleGoogleCallback(
+          'admin@example.com',
+          'google-123',
+          'Admin',
+        ),
       ).resolves.toHaveProperty('access_token');
     });
 
     it('performs case-insensitive comparison', async () => {
       await rebuild('Admin@Example.COM');
       await expect(
-        service.handleGoogleCallback('admin@example.com', 'google-123', 'Admin'),
+        service.handleGoogleCallback(
+          'admin@example.com',
+          'google-123',
+          'Admin',
+        ),
       ).resolves.toHaveProperty('access_token');
     });
   });

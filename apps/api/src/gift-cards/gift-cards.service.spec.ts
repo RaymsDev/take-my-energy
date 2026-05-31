@@ -33,7 +33,9 @@ const buildModel = (overrides: object = {}) => {
       limit: jest.fn().mockReturnThis(),
       exec: jest.fn().mockResolvedValue([card]),
     }),
-    findById: jest.fn().mockReturnValue({ exec: jest.fn().mockResolvedValue(card) }),
+    findById: jest
+      .fn()
+      .mockReturnValue({ exec: jest.fn().mockResolvedValue(card) }),
     findOneAndUpdate: jest.fn().mockReturnValue({
       exec: jest.fn().mockResolvedValue(redeemedCard),
     }),
@@ -88,8 +90,9 @@ describe('GiftCardsService', () => {
 
     it('throws NotFoundException when serviceId is not in catalog', async () => {
       catalogRegistry.findById.mockReturnValue(undefined);
-      await expect(service.create({ ...validDto, serviceId: 'bad-id' }))
-        .rejects.toBeInstanceOf(NotFoundException);
+      await expect(
+        service.create({ ...validDto, serviceId: 'bad-id' }),
+      ).rejects.toBeInstanceOf(NotFoundException);
     });
 
     it('returns the card even when email delivery fails (best-effort)', async () => {
@@ -115,12 +118,18 @@ describe('GiftCardsService', () => {
     });
 
     it('throws NotFoundException when id does not exist', async () => {
-      model.findById.mockReturnValue({ exec: jest.fn().mockResolvedValue(null) });
-      await expect(service.findOne('507f1f77bcf86cd799439011')).rejects.toBeInstanceOf(NotFoundException);
+      model.findById.mockReturnValue({
+        exec: jest.fn().mockResolvedValue(null),
+      });
+      await expect(
+        service.findOne('507f1f77bcf86cd799439011'),
+      ).rejects.toBeInstanceOf(NotFoundException);
     });
 
     it('throws NotFoundException for an invalid ObjectId', async () => {
-      await expect(service.findOne('not-a-valid-id')).rejects.toBeInstanceOf(NotFoundException);
+      await expect(service.findOne('not-a-valid-id')).rejects.toBeInstanceOf(
+        NotFoundException,
+      );
     });
   });
 
@@ -132,22 +141,39 @@ describe('GiftCardsService', () => {
     });
 
     it('is idempotent — returns card unchanged if already redeemed', async () => {
-      const redeemedCard = buildMockCard({ status: 'redeemed', redeemedAt: new Date('2024-01-01') });
+      const redeemedCard = buildMockCard({
+        status: 'redeemed',
+        redeemedAt: new Date('2024-01-01'),
+      });
       // findOneAndUpdate returns null (status filter did not match — already redeemed)
-      model.findOneAndUpdate.mockReturnValue({ exec: jest.fn().mockResolvedValue(null) });
-      model.findById.mockReturnValue({ exec: jest.fn().mockResolvedValue(redeemedCard) });
+      model.findOneAndUpdate.mockReturnValue({
+        exec: jest.fn().mockResolvedValue(null),
+      });
+      model.findById.mockReturnValue({
+        exec: jest.fn().mockResolvedValue(redeemedCard),
+      });
       const result = await service.redeem('507f1f77bcf86cd799439011');
-      expect((result as typeof redeemedCard).redeemedAt).toEqual(new Date('2024-01-01'));
+      expect((result as typeof redeemedCard).redeemedAt).toEqual(
+        new Date('2024-01-01'),
+      );
     });
 
     it('throws NotFoundException when card does not exist', async () => {
-      model.findOneAndUpdate.mockReturnValue({ exec: jest.fn().mockResolvedValue(null) });
-      model.findById.mockReturnValue({ exec: jest.fn().mockResolvedValue(null) });
-      await expect(service.redeem('507f1f77bcf86cd799439011')).rejects.toBeInstanceOf(NotFoundException);
+      model.findOneAndUpdate.mockReturnValue({
+        exec: jest.fn().mockResolvedValue(null),
+      });
+      model.findById.mockReturnValue({
+        exec: jest.fn().mockResolvedValue(null),
+      });
+      await expect(
+        service.redeem('507f1f77bcf86cd799439011'),
+      ).rejects.toBeInstanceOf(NotFoundException);
     });
 
     it('throws NotFoundException for an invalid ObjectId', async () => {
-      await expect(service.redeem('not-a-valid-id')).rejects.toBeInstanceOf(NotFoundException);
+      await expect(service.redeem('not-a-valid-id')).rejects.toBeInstanceOf(
+        NotFoundException,
+      );
     });
   });
 });

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Roboto:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Roboto:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap');
 
 :root {
   --c-bg: #fdf9f6;
@@ -46,7 +46,7 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: var(--c-bg);
   color: var(--c-text);
   line-height: 1.65;
@@ -58,7 +58,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Roboto Slab", serif;
+  font-family: 'Roboto Slab', serif;
   color: var(--c-heading);
   letter-spacing: 0.02em;
 }
