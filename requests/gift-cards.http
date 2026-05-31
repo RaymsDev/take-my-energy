@@ -1,0 +1,76 @@
+# Gift Cards — full CRUD + pagination + idempotent redeem
+# Requires: ACCESS_TOKEN set in requests/.env
+
+###
+
+# @name createCard
+# Create a gift card (service IDs: 1–9, see GET /api/catalog)
+POST {{BASE_URL}}/api/gift-cards
+Authorization: Bearer {{$env ACCESS_TOKEN}}
+Content-Type: application/json
+
+{
+  "recipientName": "Alice Martin",
+  "recipientEmail": "alice@example.com",
+  "senderName": "Bob Dupont",
+  "serviceId": "2",
+  "message": "Profite bien de ta séance !"
+}
+
+?? status 201
+?? body $.status == active
+?? body $.code != null
+
+@cardId = {{createCard.body._id}}
+
+###
+
+# List all gift cards (default limit: 100, page: 1)
+# @name listCards
+GET {{BASE_URL}}/api/gift-cards
+Authorization: Bearer {{$env ACCESS_TOKEN}}
+
+?? status 200
+?? body $ length >= 0
+
+###
+
+# List with explicit pagination
+GET {{BASE_URL}}/api/gift-cards?limit=5&page=1
+Authorization: Bearer {{$env ACCESS_TOKEN}}
+
+?? status 200
+
+###
+
+# Get the card created above
+# @name getCard
+GET {{BASE_URL}}/api/gift-cards/{{cardId}}
+Authorization: Bearer {{$env ACCESS_TOKEN}}
+
+?? status 200
+?? body $.status == active
+
+###
+
+# Redeem the card (first call — transitions active → redeemed)
+# @name redeemCard
+PATCH {{BASE_URL}}/api/gift-cards/{{cardId}}/redeem
+Authorization: Bearer {{$env ACCESS_TOKEN}}
+
+?? status 200
+?? body $.status == redeemed
+?? body $.redeemedAt != null
+
+@redeemedAt = {{redeemCard.body.redeemedAt}}
+
+###
+
+# Redeem again — idempotent, redeemedAt must be unchanged
+# @name redeemCardAgain
+PATCH {{BASE_URL}}/api/gift-cards/{{cardId}}/redeem
+Authorization: Bearer {{$env ACCESS_TOKEN}}
+
+?? status 200
+?? body $.status == redeemed
+?? body $.redeemedAt == {{redeemedAt}}
