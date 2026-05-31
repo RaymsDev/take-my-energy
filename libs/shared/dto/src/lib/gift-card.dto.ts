@@ -1,4 +1,4 @@
-import { createZodDto } from 'nestjs-zod/dto';
+import { createZodDto } from 'nestjs-zod';
 import { z } from 'zod';
 
 export const CreateGiftCardSchema = z.object({

@@ -10,5 +10,89 @@
         "repo": "nrwl/nx-ai-agents-config"
       }
     }
+  },
+  "permissions": {
+    "deny": [
+      "Read(**/.env)",
+      "Read(*/.env.)",
+      "Write(**/.env)",
+      "Write(*/.env.)",
+
+      "Read(**/env-source.sh)",
+      "Write(**/env-source.sh)",
+
+      "Read(**/.sentryclirc)",
+      "Write(**/.sentryclirc)",
+
+      "Read(*/.pem)",
+      "Read(*/.crt)",
+      "Read(*/.key)",
+      "Write(*/.pem)",
+      "Write(*/.crt)",
+      "Write(*/.key)",
+
+      "Read(*/local2dev/docker-compose.yml)",
+      "Write(*/local2dev/docker-compose.yml)",
+      "Write(**/local2dev/traefik.yml)",
+      "Write(**/local2dev/services.yml)",
+      "Write(**/local2dev/middlewares.yml)",
+
+      "Read(*/deployments/helm/*)",
+      "Write(*/deployments/helm/*)",
+      "Read(*/deployments/values/*)",
+      "Write(*/deployments/values/*)",
+
+      "Write(*/ci-templates/*)",
+
+      "Write(*/.github/*)",
+      "Write(**/.gitlab-ci.yml)",
+
+      "Write(**/Dockerfile)",
+      "Write(*/docker-compose.yml)",
+
+      "Read(**/proxy.config.json)",
+      "Write(**/proxy.config.json)",
+
+      "Write(*/nginx/*)",
+
+      "Write(**/package.json)",
+      "Write(**/yarn.lock)",
+      "Write(**/package-lock.json)",
+
+      "Write(**/nx.json)",
+      "Write(**/tsconfig.base.json)",
+      "Write(**/jest.config.ts)",
+      "Write(**/jest.preset.js)",
+      "Write(**/.eslintrc.json)",
+      "Write(**/commitlint.config.ts)",
+
+      "Write(**/.gitignore)",
+      "Write(**/.nvmrc)",
+      "Write(**/.editorconfig)",
+
+      "Write(**/environments/environment.prod.ts)",
+
+      "Write(*/scripts/*)",
+
+      "Exec(rm -rf *)",
+      "Exec(git push *)",
+      "Exec(git commit *)",
+      "Exec(git add *)",
+      "Exec(git checkout main*)",
+      "Exec(git checkout master*)",
+      "Exec(git merge *)",
+      "Exec(git rebase *)",
+      "Exec(git reset *)",
+      "Exec(git stash *)",
+      "Exec(git tag *)",
+      "Exec(yarn install*)",
+      "Exec(npm install*)",
+      "Exec(npx *)",
+      "Exec(docker *)",
+      "Exec(kubectl *)",
+      "Exec(helm *)",
+      "Exec(curl *)",
+      "Exec(wget *)"
+    ]
   }
 }

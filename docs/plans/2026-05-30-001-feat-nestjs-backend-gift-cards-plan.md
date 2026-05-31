@@ -1,7 +1,7 @@
 ---
 title: "feat: Integrate NestJS backend and migrate Angular to apps/fiveOfHeart structure"
 type: feat
-status: active
+status: completed
 date: 2026-05-30
 origin: docs/brainstorms/2026-05-30-backend-gift-cards-requirements.md
 deepened: 2026-05-30
