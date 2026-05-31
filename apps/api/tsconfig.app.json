@@ -8,6 +8,7 @@
     "emitDecoratorMetadata": true,
     "target": "es2021",
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
     "strictBindCallApply": true,

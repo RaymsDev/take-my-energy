@@ -21,7 +21,7 @@ export class JwtGuard implements CanActivate {
 
     const token = authHeader.slice(7);
     try {
-      const payload = await this.jwt.verifyAsync(token);
+      const payload = await this.jwt.verifyAsync(token, { algorithms: ['HS256'] });
       (request as Request & { user: unknown }).user = payload;
       return true;
     } catch {
