@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { isValidObjectId, Model } from 'mongoose';
 import { CreateGiftCardInput } from '@five-of-heart/shared/dto';
@@ -52,7 +48,10 @@ export class GiftCardsService {
         message: dto.message,
       });
     } catch (err) {
-      this.logger.error('Gift card email delivery failed', { code, error: err });
+      this.logger.error('Gift card email delivery failed', {
+        code,
+        error: err,
+      });
     }
 
     return card;

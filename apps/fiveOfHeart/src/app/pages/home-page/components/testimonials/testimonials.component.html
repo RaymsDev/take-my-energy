@@ -85,7 +85,7 @@
                 (click)="toggleExpanded(review.id, $event)"
                 [attr.aria-expanded]="isExpanded(review.id)"
               >
-                {{ isExpanded(review.id) ? "Réduire" : "Lire la suite" }}
+                {{ isExpanded(review.id) ? 'Réduire' : 'Lire la suite' }}
                 <i
                   class="fa-solid"
                   [class.fa-chevron-down]="!isExpanded(review.id)"

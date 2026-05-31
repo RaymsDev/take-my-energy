@@ -46,7 +46,7 @@
   }
 
   &__title {
-    font-family: "Cormorant Garamond", serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 300;
     font-size: clamp(32px, 5vw, 56px);
     line-height: 1.1;
@@ -102,7 +102,7 @@
 
   &__section {
     &--first &__title::before {
-      content: "";
+      content: '';
       display: block;
       width: 32px;
       height: 2px;
@@ -111,7 +111,7 @@
     }
 
     &__title {
-      font-family: "Cormorant Garamond", serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
       font-size: clamp(21px, 2.5vw, 27px);
       color: var(--c-heading);
@@ -145,7 +145,7 @@
   }
 
   &__title {
-    font-family: "Cormorant Garamond", serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(26px, 3vw, 35px);
     font-weight: 400;
     color: var(--c-text-on-dark);

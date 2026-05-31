@@ -4,7 +4,7 @@
   padding: 112px 24px 80px;
 
   &__title {
-    font-family: "Cormorant Garamond", serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: clamp(32px, 5vw, 48px);
     color: var(--c-heading);
@@ -13,7 +13,7 @@
     margin-bottom: 12px;
 
     &::after {
-      content: "";
+      content: '';
       display: block;
       width: 48px;
       height: 2px;
@@ -37,7 +37,7 @@
     }
 
     &__subtitle {
-      font-family: "Cormorant Garamond", serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
       font-size: clamp(21px, 2.5vw, 26px);
       color: var(--c-heading);
@@ -48,7 +48,7 @@
       gap: 12px;
 
       &::before {
-        content: "";
+        content: '';
         display: inline-block;
         width: 4px;
         height: 1.1em;

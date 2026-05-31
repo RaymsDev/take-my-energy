@@ -1,5 +1,5 @@
 ---
-title: "feat: Integrate NestJS backend and migrate Angular to apps/fiveOfHeart structure"
+title: 'feat: Integrate NestJS backend and migrate Angular to apps/fiveOfHeart structure'
 type: feat
 status: completed
 date: 2026-05-30

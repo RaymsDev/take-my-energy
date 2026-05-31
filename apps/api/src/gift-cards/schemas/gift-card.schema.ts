@@ -26,7 +26,12 @@ export class GiftCardModel {
   @Prop({ required: true, unique: true })
   code!: string;
 
-  @Prop({ required: true, enum: ['active', 'redeemed'], default: 'active', index: true })
+  @Prop({
+    required: true,
+    enum: ['active', 'redeemed'],
+    default: 'active',
+    index: true,
+  })
   status!: 'active' | 'redeemed';
 
   @Prop()
