@@ -22,9 +22,13 @@ export class JwtGuard implements CanActivate {
     const token = authHeader.slice(7);
     try {
       const payload = await this.jwt.verifyAsync(token, { algorithms: ['HS256'] });
+      if (payload?.role !== 'admin') {
+        throw new UnauthorizedException('Insufficient permissions');
+      }
       (request as Request & { user: unknown }).user = payload;
       return true;
-    } catch {
+    } catch (err) {
+      if (err instanceof UnauthorizedException) throw err;
       throw new UnauthorizedException('Invalid or expired token');
     }
   }

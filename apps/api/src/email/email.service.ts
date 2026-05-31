@@ -2,12 +2,23 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Resend } from 'resend';
 
+function escHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+const EMAIL_TIMEOUT_MS = 10_000;
+
 @Injectable()
 export class EmailService {
-  constructor(private readonly config: ConfigService) {}
+  private readonly resendClient: Resend;
 
-  private get resendClient(): Resend {
-    return new Resend(this.config.get('RESEND_API_KEY'));
+  constructor(private readonly config: ConfigService) {
+    this.resendClient = new Resend(this.config.get('RESEND_API_KEY'));
   }
 
   async sendGiftCard(params: {
@@ -31,11 +42,15 @@ export class EmailService {
       message,
     } = params;
 
+    const safeRecipientName = escHtml(recipientName);
+    const safeSenderName = escHtml(senderName);
+    const safeServiceName = escHtml(serviceName);
+
     const messageBlock =
       message
         ? `<div style="margin: 24px 0; padding: 16px; background: #f9f9f9; border-left: 4px solid #4f46e5; border-radius: 4px;">
-        <p style="margin: 0; font-style: italic; color: #374151;">"${message}"</p>
-        <p style="margin: 8px 0 0; font-size: 14px; color: #6b7280;">— ${senderName}</p>
+        <p style="margin: 0; font-style: italic; color: #374151;">"${escHtml(message)}"</p>
+        <p style="margin: 8px 0 0; font-size: 14px; color: #6b7280;">— ${safeSenderName}</p>
       </div>`
         : '';
 
@@ -52,14 +67,14 @@ export class EmailService {
       <h1 style="margin: 0; color: #ffffff; font-size: 24px;">You received a gift card!</h1>
     </div>
     <div style="padding: 40px;">
-      <p style="color: #374151; font-size: 16px;">Hi <strong>${recipientName}</strong>,</p>
+      <p style="color: #374151; font-size: 16px;">Hi <strong>${safeRecipientName}</strong>,</p>
       <p style="color: #374151; font-size: 16px;">
-        <strong>${senderName}</strong> has sent you a gift card for <strong>${serviceName}</strong>.
+        <strong>${safeSenderName}</strong> has sent you a gift card for <strong>${safeServiceName}</strong>.
       </p>
 
       <div style="margin: 24px 0; padding: 20px; background: #eef2ff; border-radius: 8px; text-align: center;">
         <p style="margin: 0 0 8px; font-size: 14px; color: #6366f1; text-transform: uppercase; letter-spacing: 0.05em;">Service</p>
-        <p style="margin: 0 0 4px; font-size: 20px; font-weight: bold; color: #1e1b4b;">${serviceName}</p>
+        <p style="margin: 0 0 4px; font-size: 20px; font-weight: bold; color: #1e1b4b;">${safeServiceName}</p>
         <p style="margin: 0; font-size: 28px; font-weight: bold; color: #4f46e5;">${price} ${currency}</p>
       </div>
 
@@ -80,12 +95,19 @@ export class EmailService {
 </body>
 </html>`;
 
-    const { error } = await this.resendClient.emails.send({
-      from: this.config.get<string>('EMAIL_FROM') as string,
-      to,
-      subject: 'Your gift card from Take My Energy',
-      html,
-    });
+    const timeout = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error('Resend API timeout')), EMAIL_TIMEOUT_MS),
+    );
+
+    const { error } = await Promise.race([
+      this.resendClient.emails.send({
+        from: this.config.get<string>('EMAIL_FROM') as string,
+        to,
+        subject: 'Your gift card from Take My Energy',
+        html,
+      }),
+      timeout,
+    ]);
 
     if (error) {
       throw error;

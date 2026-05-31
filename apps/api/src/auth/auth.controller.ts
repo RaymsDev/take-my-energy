@@ -2,12 +2,7 @@ import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { AuthService } from './auth.service';
-
-interface GoogleUser {
-  googleId: string;
-  email?: string;
-  name: string;
-}
+import { GoogleUser } from './auth.types';
 
 @Controller('auth')
 export class AuthController {

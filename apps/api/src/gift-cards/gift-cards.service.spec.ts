@@ -25,12 +25,17 @@ const buildMockCard = (overrides: object = {}) => ({
 
 const buildModel = (overrides: object = {}) => {
   const card = buildMockCard(overrides);
+  const redeemedCard = { ...card, status: 'redeemed', redeemedAt: new Date() };
   return {
     create: jest.fn().mockResolvedValue(card),
-    find: jest.fn().mockReturnValue({ exec: jest.fn().mockResolvedValue([card]) }),
+    find: jest.fn().mockReturnValue({
+      skip: jest.fn().mockReturnThis(),
+      limit: jest.fn().mockReturnThis(),
+      exec: jest.fn().mockResolvedValue([card]),
+    }),
     findById: jest.fn().mockReturnValue({ exec: jest.fn().mockResolvedValue(card) }),
-    findByIdAndUpdate: jest.fn().mockReturnValue({
-      exec: jest.fn().mockResolvedValue({ ...card, status: 'redeemed', redeemedAt: new Date() }),
+    findOneAndUpdate: jest.fn().mockReturnValue({
+      exec: jest.fn().mockResolvedValue(redeemedCard),
     }),
   };
 };
@@ -87,11 +92,12 @@ describe('GiftCardsService', () => {
         .rejects.toBeInstanceOf(NotFoundException);
     });
 
-    it('persists the card even when email dispatch throws (best-effort email)', async () => {
+    it('returns the card even when email delivery fails (best-effort)', async () => {
       emailService.sendGiftCard.mockRejectedValue(new Error('Resend down'));
-      await expect(service.create(validDto)).rejects.toThrow('Resend down');
-      // Card was saved before email call
+      const result = await service.create(validDto);
+      // Card was saved and returned despite email failure
       expect(model.create).toHaveBeenCalledTimes(1);
+      expect(result).toHaveProperty('code');
     });
   });
 
@@ -104,34 +110,44 @@ describe('GiftCardsService', () => {
 
   describe('findOne', () => {
     it('returns the card when found', async () => {
-      const result = await service.findOne('card-id');
+      const result = await service.findOne('507f1f77bcf86cd799439011');
       expect(result).toHaveProperty('_id', 'card-id');
     });
 
     it('throws NotFoundException when id does not exist', async () => {
       model.findById.mockReturnValue({ exec: jest.fn().mockResolvedValue(null) });
-      await expect(service.findOne('nonexistent')).rejects.toBeInstanceOf(NotFoundException);
+      await expect(service.findOne('507f1f77bcf86cd799439011')).rejects.toBeInstanceOf(NotFoundException);
+    });
+
+    it('throws NotFoundException for an invalid ObjectId', async () => {
+      await expect(service.findOne('not-a-valid-id')).rejects.toBeInstanceOf(NotFoundException);
     });
   });
 
   describe('redeem', () => {
     it('sets status to redeemed and sets redeemedAt', async () => {
-      const result = await service.redeem('card-id');
+      const result = await service.redeem('507f1f77bcf86cd799439011');
       expect(result.status).toBe('redeemed');
       expect(result.redeemedAt).toBeDefined();
     });
 
     it('is idempotent — returns card unchanged if already redeemed', async () => {
       const redeemedCard = buildMockCard({ status: 'redeemed', redeemedAt: new Date('2024-01-01') });
+      // findOneAndUpdate returns null (status filter did not match — already redeemed)
+      model.findOneAndUpdate.mockReturnValue({ exec: jest.fn().mockResolvedValue(null) });
       model.findById.mockReturnValue({ exec: jest.fn().mockResolvedValue(redeemedCard) });
-      const result = await service.redeem('card-id');
-      expect(model.findByIdAndUpdate).not.toHaveBeenCalled();
+      const result = await service.redeem('507f1f77bcf86cd799439011');
       expect((result as typeof redeemedCard).redeemedAt).toEqual(new Date('2024-01-01'));
     });
 
     it('throws NotFoundException when card does not exist', async () => {
+      model.findOneAndUpdate.mockReturnValue({ exec: jest.fn().mockResolvedValue(null) });
       model.findById.mockReturnValue({ exec: jest.fn().mockResolvedValue(null) });
-      await expect(service.redeem('nonexistent')).rejects.toBeInstanceOf(NotFoundException);
+      await expect(service.redeem('507f1f77bcf86cd799439011')).rejects.toBeInstanceOf(NotFoundException);
+    });
+
+    it('throws NotFoundException for an invalid ObjectId', async () => {
+      await expect(service.redeem('not-a-valid-id')).rejects.toBeInstanceOf(NotFoundException);
     });
   });
 });
