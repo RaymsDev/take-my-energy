@@ -12,6 +12,7 @@
     }
   },
   "permissions": {
-    "deny": ["Exec(kubectl *)", "Exec(helm *)"]
+    "allow": ["Exec(git add *)", "Exec(git commit *)"],
+    "deny": ["Exec(git push *)", "Exec(kubectl *)", "Exec(helm *)"]
   }
 }
