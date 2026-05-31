@@ -12,9 +12,9 @@ export const routes: Routes = [
   {
     path: 'massage/:type',
     loadComponent: () =>
-      import(
-        './pages/massage-details-page/massage-details-page.component'
-      ).then((m) => m.MassageDetailsPageComponent),
+      import('./pages/massage-details-page/massage-details-page.component').then(
+        (m) => m.MassageDetailsPageComponent,
+      ),
   },
   {
     path: 'office',
