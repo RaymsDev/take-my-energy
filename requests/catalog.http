@@ -1,0 +1,5 @@
+### List all catalog services (public — no auth required)
+GET {{BASE_URL}}/api/catalog
+
+?? status 200
+?? body $ length > 0
