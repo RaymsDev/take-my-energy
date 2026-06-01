@@ -56,4 +56,4 @@ Thumbs.db
 
 secrets/
 .env
-requests/.env
+requests/.env.*
