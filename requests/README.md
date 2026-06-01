@@ -38,3 +38,10 @@ httpyac run requests/*.http --env dev
 | -------------- | -------------------------------------------------- |
 | `BASE_URL`     | API base URL (default: `http://localhost:3000`)    |
 | `ACCESS_TOKEN` | JWT admin token — auto-populated after OAuth login |
+
+## Gotchas
+
+See [`docs/solutions/integration-issues/httpyac-status-assertion-and-response-capture-quirks.md`](../docs/solutions/integration-issues/httpyac-status-assertion-and-response-capture-quirks.md) for documented quirks:
+
+- **`?? status X` on POST requests with a body** — the assertion line is sent as body bytes, not processed as a response assertion. Use `?? body statusCode == X` for error cases instead.
+- **Variable capture in script blocks** — use `response.parsedBody` (not `requestName.response.parsedBody`). `@var = {{requestName.body.field}}` does not work for property access.
