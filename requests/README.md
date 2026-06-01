@@ -1,16 +1,40 @@
-requests/
-.env.example ← copy to .env, fill ACCESS_TOKEN
-health.http ← GET /api/health
-catalog.http ← GET /api/catalog
-auth.http ← OAuth instructions + token verification
-gift-cards.http ← full CRUD flow, chained (creates card → gets it → redeems twice)
-gift-cards-errors.http ← 7 error scenarios (401, 404, 400/422)
+# HTTP Request Files
 
-To use:
+Manual API tests for the NestJS backend, runnable in VS Code via the [HTTPyac extension](https://marketplace.visualstudio.com/items?itemName=anweber.vscode-httpyac) or from the CLI with `httpyac`.
 
-1. Copy requests/.env.example → requests/.env
-2. Get a token: open http://localhost:3000/api/auth/google in the browser, copy access_token
-3. Paste it as ACCESS_TOKEN=<token> in requests/.env
-4. Run: httpyac run requests/\*.http --env requests/.env or click individual requests in VS Code with the HTTPyac extension
+## Files
 
-Push when ready: ! git push
+| File                     | Description                                                                  |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| `health.http`            | GET /api/health                                                              |
+| `catalog.http`           | GET /api/catalog                                                             |
+| `auth.http`              | OAuth flow instructions + token verification                                 |
+| `gift-cards.http`        | Full CRUD flow — creates a card, lists, gets, redeems (×2 idempotency check) |
+| `gift-cards-errors.http` | 7 error scenarios: 401, 404, 400/422                                         |
+
+## Setup
+
+1. Copy `.env.example` → `.env.dev`
+2. Start the API: `npm run dev:api`
+3. Open [http://localhost:3000/api/auth/google](http://localhost:3000/api/auth/google) in your browser and complete the Google login
+
+That's it — the API automatically writes your token to `requests/.env.dev` after a successful login. No copy-paste needed.
+
+> Tokens expire after 15 minutes. Repeat step 3 to refresh.
+
+## Running requests
+
+**VS Code** — click the `Send Request` button above any `###` block (HTTPyac extension required).
+
+**CLI:**
+
+```bash
+httpyac run requests/*.http --env dev
+```
+
+## Environment variables
+
+| Variable       | Description                                        |
+| -------------- | -------------------------------------------------- |
+| `BASE_URL`     | API base URL (default: `http://localhost:3000`)    |
+| `ACCESS_TOKEN` | JWT admin token — auto-populated after OAuth login |

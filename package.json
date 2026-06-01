@@ -16,6 +16,7 @@
     "test:front": "nx test fiveOfHeart",
     "test:api": "nx test api",
     "test:dto": "nx test shared-dto",
+    "test:http": "httpyac run requests/*.http --env dev --all",
     "serve:ssr:fiveOfHeart": "node dist/five-of-heart/server/server.mjs",
     "lint:prettier": "prettier --check .",
     "lint:ts": "tsc --noEmit",
@@ -114,6 +115,7 @@
     "ts-node": "10.9.1",
     "typescript": "~5.9.0",
     "typescript-eslint": "^8.40.0",
+    "httpyac": "^6.16.0",
     "webpack-cli": "^5.1.4"
   }
 }

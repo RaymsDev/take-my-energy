@@ -2,4 +2,4 @@
 GET {{BASE_URL}}/api/health
 
 ?? status 200
-?? body $.status == ok
+?? body status == ok
