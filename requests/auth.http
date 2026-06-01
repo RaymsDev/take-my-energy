@@ -1,27 +1,25 @@
+/*
 # Auth — Google OAuth 2.0
-#
-# The token is obtained via an interactive browser flow:
-#
-#   1. Start the API:  npm run dev:api
-#   2. Open in browser: {{BASE_URL}}/api/auth/google
-#   3. Complete the Google login
-#   4. Copy the `access_token` from the JSON response
-#   5. Set ACCESS_TOKEN=<token> in requests/.env
-#
-# Tokens expire after 15 minutes — repeat when expired.
 
-###
+The token is obtained via an interactive browser flow:
+
+1. Start the API: npm run dev:api
+2. Open in browser: {{BASE_URL}}/api/auth/google
+3. Complete the Google login
+4. The API auto-saves the token to requests/.env.dev — no copy-paste needed
+
+Tokens expire after 15 minutes — repeat when expired.
+
+*/
 
 # Trigger the OAuth redirect (browser only — will follow the redirect chain)
 # @name googleOAuth
 # @no-redirect
 GET {{BASE_URL}}/api/auth/google
-
 ###
 
 # Verify the obtained token works by calling a protected endpoint
 # @name verifyToken
 GET {{BASE_URL}}/api/catalog
-Authorization: Bearer {{$env ACCESS_TOKEN}}
-
+Authorization: Bearer {{ACCESS_TOKEN}}
 ?? status 200

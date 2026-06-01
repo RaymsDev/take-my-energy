@@ -1,8 +1,10 @@
+/*
 # Gift Cards — error paths
-# These requests are expected to fail — assertions verify correct error codes.
 
+These requests are expected to fail — assertions verify correct error codes.
+
+*/
 ###
-
 # 401 — missing Authorization header
 POST {{BASE_URL}}/api/gift-cards
 Content-Type: application/json
@@ -14,21 +16,17 @@ Content-Type: application/json
   "serviceId": "1"
 }
 
-?? status 401
-
+?? body statusCode == 401
 ###
-
 # 401 — malformed token (not a valid JWT)
 GET {{BASE_URL}}/api/gift-cards
 Authorization: Bearer not-a-real-token
 
 ?? status 401
-
 ###
-
 # 400/422 — missing required field (recipientEmail)
 POST {{BASE_URL}}/api/gift-cards
-Authorization: Bearer {{$env ACCESS_TOKEN}}
+Authorization: Bearer {{ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -37,13 +35,11 @@ Content-Type: application/json
   "serviceId": "1"
 }
 
-?? status 400, 422
-
+?? body statusCode == 400
 ###
-
 # 404 — serviceId does not exist in catalog
 POST {{BASE_URL}}/api/gift-cards
-Authorization: Bearer {{$env ACCESS_TOKEN}}
+Authorization: Bearer {{ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -53,29 +49,23 @@ Content-Type: application/json
   "serviceId": "nonexistent"
 }
 
-?? status 404
-
+?? body statusCode == 404
 ###
-
 # 404 — invalid ObjectId format (not a 24-hex string)
 GET {{BASE_URL}}/api/gift-cards/not-a-valid-id
-Authorization: Bearer {{$env ACCESS_TOKEN}}
+Authorization: Bearer {{ACCESS_TOKEN}}
 
 ?? status 404
-
 ###
-
 # 404 — valid ObjectId format but card does not exist
 GET {{BASE_URL}}/api/gift-cards/507f1f77bcf86cd799439000
-Authorization: Bearer {{$env ACCESS_TOKEN}}
+Authorization: Bearer {{ACCESS_TOKEN}}
 
 ?? status 404
-
 ###
-
 # 400/422 — recipientEmail is not a valid email address
 POST {{BASE_URL}}/api/gift-cards
-Authorization: Bearer {{$env ACCESS_TOKEN}}
+Authorization: Bearer {{ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -85,4 +75,4 @@ Content-Type: application/json
   "serviceId": "1"
 }
 
-?? status 400, 422
+?? body statusCode == 400

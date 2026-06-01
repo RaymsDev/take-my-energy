@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Resend } from 'resend';
 
@@ -15,10 +15,25 @@ const EMAIL_TIMEOUT_MS = 10_000;
 
 @Injectable()
 export class EmailService {
-  private readonly resendClient: Resend;
+  private readonly logger = new Logger(EmailService.name);
+  private resendClient: Resend | null = null;
 
   constructor(private readonly config: ConfigService) {
-    this.resendClient = new Resend(this.config.get('RESEND_API_KEY'));
+    if (!this.config.get<string>('RESEND_API_KEY')) {
+      this.logger.warn('RESEND_API_KEY is not set — emails will not be sent');
+    }
+  }
+
+  private getClient(): Resend {
+    if (!this.resendClient) {
+      const key = this.config.get<string>('RESEND_API_KEY');
+      if (!key) {
+        this.logger.error('RESEND_API_KEY is not configured');
+        throw new Error('RESEND_API_KEY is not configured');
+      }
+      this.resendClient = new Resend(key);
+    }
+    return this.resendClient;
   }
 
   async sendGiftCard(params: {
@@ -94,25 +109,32 @@ export class EmailService {
 </body>
 </html>`;
 
-    const timeout = new Promise<never>((_, reject) =>
-      setTimeout(
+    const client = this.getClient();
+
+    let timeoutId: ReturnType<typeof setTimeout>;
+    const timeout = new Promise<never>((_, reject) => {
+      timeoutId = setTimeout(
         () => reject(new Error('Resend API timeout')),
         EMAIL_TIMEOUT_MS,
-      ),
-    );
+      );
+    });
 
-    const { error } = await Promise.race([
-      this.resendClient.emails.send({
-        from: this.config.get<string>('EMAIL_FROM') as string,
-        to,
-        subject: 'Your gift card from Take My Energy',
-        html,
-      }),
-      timeout,
-    ]);
+    try {
+      const { error } = await Promise.race([
+        client.emails.send({
+          from: this.config.get<string>('EMAIL_FROM') as string,
+          to,
+          subject: 'Your gift card from Take My Energy',
+          html,
+        }),
+        timeout,
+      ]);
 
-    if (error) {
-      throw error;
+      if (error) {
+        throw error;
+      }
+    } finally {
+      clearTimeout(timeoutId!);
     }
   }
 }
