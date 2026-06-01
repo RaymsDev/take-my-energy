@@ -19,7 +19,7 @@
     "test:http": "httpyac run requests/*.http --env dev --all",
     "serve:ssr:fiveOfHeart": "node dist/five-of-heart/server/server.mjs",
     "lint:prettier": "prettier --check .",
-    "lint:ts": "tsc --noEmit",
+    "lint:ts": "tsc -p apps/api/tsconfig.app.json --noEmit && tsc -p apps/fiveOfHeart/tsconfig.app.json --noEmit",
     "prepare": "husky"
   },
   "private": false,
