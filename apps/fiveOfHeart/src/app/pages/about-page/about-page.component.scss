@@ -320,7 +320,6 @@
 
     &__content {
       flex-direction: column;
-      align-items: flex-start;
       gap: 20px;
       padding: 88px 20px 32px;
     }
@@ -328,6 +327,10 @@
     &__profile__img {
       width: 100px;
       height: 100px;
+    }
+
+    &__intro {
+      text-align: center;
     }
   }
 

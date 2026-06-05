@@ -45,6 +45,7 @@ export class BurgerMenuComponent implements OnInit {
         .subscribe((e: NavigationEnd) => {
           this.checkRoute(e.urlAfterRedirects);
           this.isMenuOpen = false;
+          this.setBodyScroll(true);
         });
     }
   }
@@ -58,15 +59,24 @@ export class BurgerMenuComponent implements OnInit {
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
+    this.setBodyScroll(!this.isMenuOpen);
   }
 
   closeMenu(): void {
     this.isMenuOpen = false;
+    this.setBodyScroll(true);
   }
 
   onBookingClick(): void {
     this.analyticsService.trackEvent('booking', 'navbar');
     this.isMenuOpen = false;
+    this.setBodyScroll(true);
+  }
+
+  private setBodyScroll(enabled: boolean): void {
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = enabled ? '' : 'hidden';
+    }
   }
 
   private checkRoute(url: string): void {
