@@ -6,5 +6,26 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  api:
+    image: node:24.14.1-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+      # Named volume keeps node_modules inside the container so host binaries
+      # (compiled for a different OS) don't shadow the container's installs
+      - api_node_modules:/app/node_modules
+    command: sh -c "npm ci --no-audit --no-fund && npx nx serve api"
+    env_file:
+      - .env
+    environment:
+      # Override the .env value so the API reaches mongo via the compose network
+      - MONGODB_URI=mongodb://mongo:27017/take-my-energy
+      - NX_DAEMON=false
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
+
 volumes:
   mongo_data:
+  api_node_modules:
