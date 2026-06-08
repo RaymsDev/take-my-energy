@@ -2,8 +2,8 @@ services:
   - name: take-my-energy-api
     type: web
     runtime: docker
-    region: oregon
-    plan: starter
+    region: frankfurt
+    plan: free # sleeps after 15 min of inactivity; upgrade to starter to disable auto-sleep
     dockerfilePath: ./Dockerfile
     dockerContext: .
     # Only trigger a new build when API-relevant files change
@@ -15,6 +15,7 @@ services:
         - package-lock.json
         - Dockerfile
         - .dockerignore
+        - render.yaml
     envVars:
       - key: NODE_ENV
         value: production
