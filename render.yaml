@@ -1,0 +1,40 @@
+services:
+  - name: take-my-energy-api
+    type: web
+    runtime: docker
+    region: oregon
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    # Only trigger a new build when API-relevant files change
+    buildFilter:
+      paths:
+        - apps/api/**
+        - libs/**
+        - package.json
+        - package-lock.json
+        - Dockerfile
+        - .dockerignore
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Secrets — set values in the Render dashboard, never committed here
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_CALLBACK_URL
+        sync: false
+      - key: ADMIN_ALLOWLIST_EMAILS
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      # PORT is intentionally omitted — Render injects it automatically (default: 10000)
