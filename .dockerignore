@@ -1,0 +1,31 @@
+# Dependencies (rebuilt inside Docker)
+node_modules
+dist
+
+# Nx and Angular caches
+.nx
+.angular
+
+# Git and CI
+.git
+.github
+.husky
+
+# Editor and tooling
+.vscode
+.idea
+*.log
+
+# Docs and dev tooling
+docs
+requests/
+
+# Secrets and local env — never bake into the image
+secrets/
+.env
+.env.*
+
+# Misc
+*.md
+coverage
+tmp
