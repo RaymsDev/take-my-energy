@@ -19,6 +19,38 @@ To initialize the plugin in this project, run:
 
 ## 🐳 Running the API with Docker
 
+### Dev mode with Docker Compose (hot-reload)
+
+Make sure you have a `.env` file (copy from `.env.example` and fill in your values):
+
+```bash
+cp .env.example .env
+```
+
+Then start everything:
+
+```bash
+docker compose up
+```
+
+This starts MongoDB and the API together. The workspace is mounted into the container so file changes trigger a hot-reload automatically. The API is available at `http://localhost:3000/api`.
+
+> First run installs all `node_modules` inside the container — this takes a few minutes. Subsequent starts reuse the cached volume and are fast.
+
+To stop:
+
+```bash
+docker compose down
+```
+
+To also wipe the `node_modules` volume (e.g. after adding new dependencies):
+
+```bash
+docker compose down -v
+```
+
+---
+
 ### Build the image
 
 ```bash
