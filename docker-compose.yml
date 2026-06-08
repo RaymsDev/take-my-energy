@@ -6,26 +6,54 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  # Installs node_modules once into a shared volume, then exits.
+  # api and frontend wait for this to complete before starting.
+  deps:
+    image: node:24.14.1-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+      - workspace_node_modules:/app/node_modules
+    command: npm ci --no-audit --no-fund
+
   api:
     image: node:24.14.1-alpine
     working_dir: /app
     volumes:
       - .:/app
-      # Named volume keeps node_modules inside the container so host binaries
-      # (compiled for a different OS) don't shadow the container's installs
-      - api_node_modules:/app/node_modules
-    command: sh -c "npm ci --no-audit --no-fund && npx nx serve api"
+      - workspace_node_modules:/app/node_modules
+    command: npx nx serve api
     env_file:
       - .env
     environment:
-      # Override the .env value so the API reaches mongo via the compose network
       - MONGODB_URI=mongodb://mongo:27017/take-my-energy
       - NX_DAEMON=false
     ports:
       - '3000:3000'
     depends_on:
-      - mongo
+      mongo:
+        condition: service_started
+      deps:
+        condition: service_completed_successfully
+
+  frontend:
+    image: node:24.14.1-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+      - workspace_node_modules:/app/node_modules
+    # --host 0.0.0.0 makes the Angular dev server reachable from outside the container
+    command: npx nx serve fiveOfHeart --host 0.0.0.0
+    env_file:
+      - .env
+    environment:
+      - NX_DAEMON=false
+    ports:
+      - '4200:4200'
+    depends_on:
+      deps:
+        condition: service_completed_successfully
 
 volumes:
   mongo_data:
-  api_node_modules:
+  workspace_node_modules:

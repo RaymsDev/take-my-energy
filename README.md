@@ -33,9 +33,14 @@ Then start everything:
 docker compose up
 ```
 
-This starts MongoDB and the API together. The workspace is mounted into the container so file changes trigger a hot-reload automatically. The API is available at `http://localhost:3000/api`.
+This starts MongoDB, installs dependencies, and runs both the API and the Angular frontend with hot-reload.
 
-> First run installs all `node_modules` inside the container — this takes a few minutes. Subsequent starts reuse the cached volume and are fast.
+| Service  | URL                       |
+| -------- | ------------------------- |
+| Frontend | http://localhost:4200     |
+| API      | http://localhost:3000/api |
+
+> A `deps` service runs `npm ci` once into a shared volume, then exits. `api` and `frontend` wait for it to complete before starting. First run takes a few minutes; subsequent starts are fast.
 
 To stop:
 
@@ -43,11 +48,13 @@ To stop:
 docker compose down
 ```
 
-To also wipe the `node_modules` volume (e.g. after adding new dependencies):
+To also wipe the `node_modules` volume (e.g. after adding or removing npm packages):
 
 ```bash
-docker compose down -v
+docker compose down -v && docker compose up
 ```
+
+> **On Mac/Windows:** if Angular hot-reload doesn't pick up file changes, add `--poll 1000` to the frontend command in `docker-compose.yml` — inotify events can be unreliable over volume mounts on non-Linux hosts.
 
 ---
 
