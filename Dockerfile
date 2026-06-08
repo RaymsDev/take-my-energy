@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM node:24-alpine AS builder
+FROM node:24.14.1-alpine AS builder
 
 ENV NX_DAEMON=false
 
@@ -7,7 +7,7 @@ WORKDIR /app
 
 # Install deps first — layer cache: only reinstalls when lockfile changes
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --no-audit --no-fund
 
 # Copy the full workspace (Nx needs the monorepo root to resolve packages)
 COPY . .
@@ -19,7 +19,7 @@ RUN npx nx build api
 RUN npx nx run api:prune
 
 # Stage 2: Runtime
-FROM node:24-alpine AS runner
+FROM node:24.14.1-alpine AS runner
 
 ENV NODE_ENV=production
 
@@ -29,7 +29,7 @@ WORKDIR /app
 COPY --from=builder /app/dist/apps/api .
 
 # Install only production dependencies using the pruned lockfile
-RUN npm ci --omit=dev
+RUN npm ci --omit=dev --no-audit --no-fund
 
 EXPOSE 10000
 
