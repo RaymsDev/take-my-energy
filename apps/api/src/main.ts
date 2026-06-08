@@ -16,7 +16,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new LoggingInterceptor());
 
   const port = process.env['PORT'] || 3000;
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
   Logger.log(`Application running on http://localhost:${port}/api`);
 }
 
