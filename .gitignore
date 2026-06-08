@@ -56,4 +56,5 @@ Thumbs.db
 
 secrets/
 .env
+.env.docker
 requests/.env.*

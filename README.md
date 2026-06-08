@@ -33,23 +33,22 @@ First start MongoDB (already defined in `docker-compose.yml`):
 docker compose up -d mongo
 ```
 
-Then run the API, passing your environment variables. On **Mac/Windows** use `host.docker.internal` to reach services running on the host:
+Then create a `.env.docker` file from the example (it's gitignored):
 
 ```bash
-docker run --rm -p 10000:10000 \
-  -e MONGODB_URI="mongodb://host.docker.internal:27018/take-my-energy" \
-  -e JWT_SECRET="change-me" \
-  -e GOOGLE_CLIENT_ID="your-client-id" \
-  -e GOOGLE_CLIENT_SECRET="your-client-secret" \
-  -e GOOGLE_CALLBACK_URL="http://localhost:10000/api/auth/google/callback" \
-  -e FRONTEND_URL="http://localhost:4200" \
-  -e ADMIN_ALLOWLIST_EMAILS="you@example.com" \
-  -e RESEND_API_KEY="your-key" \
-  -e EMAIL_FROM="noreply@example.com" \
-  take-my-energy-api
+cp .env.example .env.docker
 ```
 
-On **Linux**, replace `host.docker.internal` with `172.17.0.1` (the default Docker bridge gateway) or use `--network host` instead of `-p 10000:10000`.
+Edit `.env.docker` and change `MONGODB_URI` so it points to your host machine instead of `localhost` (which inside a container refers to the container itself):
+
+- **Mac / Windows:** `MONGODB_URI=mongodb://host.docker.internal:27018/take-my-energy`
+- **Linux:** `MONGODB_URI=mongodb://172.17.0.1:27018/take-my-energy`
+
+Fill in the remaining values, then run:
+
+```bash
+docker run --rm -p 10000:10000 --env-file .env.docker take-my-energy-api
+```
 
 The API will be available at `http://localhost:10000/api`.
 
