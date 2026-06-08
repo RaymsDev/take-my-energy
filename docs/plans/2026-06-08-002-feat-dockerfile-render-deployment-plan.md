@@ -1,7 +1,7 @@
 ---
 title: 'feat: Add Dockerfile and render.yaml for API deployment on Render'
 type: feat
-status: active
+status: completed
 date: 2026-06-08
 ---
 
