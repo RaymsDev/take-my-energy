@@ -1,0 +1,10 @@
+{
+  "framework": "angular",
+  "buildCommand": "npm run build:front",
+  "outputDirectory": "dist/five-of-heart/browser",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev:front",
+  "rewrites": [
+    { "source": "/((?!assets|.*\\..*).*)", "destination": "/index.html" }
+  ]
+}
