@@ -17,6 +17,44 @@ To initialize the plugin in this project, run:
 /ce-setup
 ```
 
+## 🐳 Running the API with Docker
+
+### Build the image
+
+```bash
+docker build -t take-my-energy-api .
+```
+
+### Run the container
+
+First start MongoDB (already defined in `docker-compose.yml`):
+
+```bash
+docker compose up -d mongo
+```
+
+Then run the API, passing your environment variables. On **Mac/Windows** use `host.docker.internal` to reach services running on the host:
+
+```bash
+docker run --rm -p 10000:10000 \
+  -e MONGODB_URI="mongodb://host.docker.internal:27018/take-my-energy" \
+  -e JWT_SECRET="change-me" \
+  -e GOOGLE_CLIENT_ID="your-client-id" \
+  -e GOOGLE_CLIENT_SECRET="your-client-secret" \
+  -e GOOGLE_CALLBACK_URL="http://localhost:10000/api/auth/google/callback" \
+  -e FRONTEND_URL="http://localhost:4200" \
+  -e ADMIN_ALLOWLIST_EMAILS="you@example.com" \
+  -e RESEND_API_KEY="your-key" \
+  -e EMAIL_FROM="noreply@example.com" \
+  take-my-energy-api
+```
+
+On **Linux**, replace `host.docker.internal` with `172.17.0.1` (the default Docker bridge gateway) or use `--network host` instead of `-p 10000:10000`.
+
+The API will be available at `http://localhost:10000/api`.
+
+---
+
 ## 🧠 Philosophy
 
 We shift from standard ad-hoc prompting to a structured, agent-driven workflow. We treat coding as a continuous loop where:
