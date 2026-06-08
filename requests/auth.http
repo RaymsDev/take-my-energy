@@ -20,6 +20,7 @@ GET {{BASE_URL}}/api/auth/google
 
 # Verify the obtained token works by calling a protected endpoint
 # @name verifyToken
-GET {{BASE_URL}}/api/catalog
+GET {{BASE_URL}}/api/gift-cards
 Authorization: Bearer {{ACCESS_TOKEN}}
+
 ?? status 200
