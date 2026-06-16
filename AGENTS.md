@@ -41,6 +41,10 @@
 - Just like the subject, use the imperative, present tense.
 - Include the motivation for the change and contrast it with previous behavior.
 
+## Language Convention
+
+All text displayed to users in the frontend must be written in **French**. This applies to labels, buttons, error messages, placeholders, banners, and any other user-facing string. Code identifiers (variable names, function names, class names, CSS classes, etc.) stay in English.
+
 ## Documented Solutions
 
 `docs/solutions/` — documented solutions to past problems (bugs, best practices, workflow patterns), organized by category with YAML frontmatter (`module`, `tags`, `problem_type`). Relevant when implementing or debugging in documented areas.
