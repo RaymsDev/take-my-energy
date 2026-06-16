@@ -49,7 +49,7 @@ describe('EmailService', () => {
     const call = mockEmailsSend.mock.calls[0][0];
     expect(call.to).toBe('alice@example.com');
     expect(call.from).toBe('noreply@takemyenergy.fr');
-    expect(call.subject).toBe('Your gift card from Take My Energy');
+    expect(call.subject).toBe('Votre carte cadeau Take My Energy');
     expect(call.html).toContain('Swedish Massage 60min');
     expect(call.html).toContain('GIFT-ABC123');
   });
