@@ -2,7 +2,10 @@ import { ForbiddenException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
+import * as fs from 'fs';
 import { AuthService } from './auth.service';
+
+jest.mock('fs');
 
 const mockConfig = (allowlist: string) => ({
   get: jest.fn((key: string) => {
@@ -84,6 +87,54 @@ describe('AuthService', () => {
           'google-123',
           'Admin',
         ),
+      ).resolves.toHaveProperty('access_token');
+    });
+  });
+
+  describe('dev token sync', () => {
+    const originalEnv = process.env['NODE_ENV'];
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    afterEach(() => {
+      process.env['NODE_ENV'] = originalEnv;
+    });
+
+    it('writes the token to requests/.env.dev in development', async () => {
+      process.env['NODE_ENV'] = 'development';
+      (fs.readFileSync as jest.Mock).mockReturnValue(
+        'BASE_URL=http://localhost:3000\nACCESS_TOKEN=\n',
+      );
+      await rebuild('admin@example.com');
+
+      await service.handleGoogleCallback('admin@example.com', 'g1', 'Admin');
+
+      expect(fs.writeFileSync).toHaveBeenCalledWith(
+        expect.stringContaining('requests/.env.dev'),
+        'BASE_URL=http://localhost:3000\nACCESS_TOKEN=signed-token\n',
+      );
+    });
+
+    it('does not write the token outside development', async () => {
+      process.env['NODE_ENV'] = 'production';
+      await rebuild('admin@example.com');
+
+      await service.handleGoogleCallback('admin@example.com', 'g1', 'Admin');
+
+      expect(fs.writeFileSync).not.toHaveBeenCalled();
+    });
+
+    it('does not throw when the env file is missing', async () => {
+      process.env['NODE_ENV'] = 'development';
+      (fs.readFileSync as jest.Mock).mockImplementation(() => {
+        throw new Error('ENOENT');
+      });
+      await rebuild('admin@example.com');
+
+      await expect(
+        service.handleGoogleCallback('admin@example.com', 'g1', 'Admin'),
       ).resolves.toHaveProperty('access_token');
     });
   });

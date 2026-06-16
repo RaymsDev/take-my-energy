@@ -1,5 +1,5 @@
 ### Health check
-GET {{BASE_URL}}/api/health
+GET {{BASE_URL}}/api/healthz
 
 ?? status 200
 ?? body status == ok

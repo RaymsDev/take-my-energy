@@ -10,10 +10,10 @@ describe('AppController', () => {
     }).compile();
   });
 
-  describe('health', () => {
+  describe('healthz', () => {
     it('returns status ok', () => {
       const controller = app.get<AppController>(AppController);
-      expect(controller.health()).toEqual({ status: 'ok' });
+      expect(controller.healthz()).toEqual({ status: 'ok' });
     });
   });
 });
