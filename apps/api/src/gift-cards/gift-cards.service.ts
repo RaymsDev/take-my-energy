@@ -83,7 +83,7 @@ export class GiftCardsService {
       .findOneAndUpdate(
         { _id: id, status: 'active' },
         { status: 'redeemed', redeemedAt: new Date() },
-        { new: true },
+        { returnDocument: 'after' },
       )
       .exec();
 
