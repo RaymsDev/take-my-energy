@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run dev",
+    "start:docker": "docker compose -f 'docker-compose.yml' up -d --build",
     "dev": "nx run-many --target=serve --projects=fiveOfHeart,api",
     "dev:front": "nx serve fiveOfHeart",
     "dev:api": "nx serve api",
