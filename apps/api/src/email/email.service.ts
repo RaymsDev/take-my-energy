@@ -102,7 +102,7 @@ export class EmailService {
       </div>
 
       <p style="color: #9ca3af; font-size: 14px; margin-top: 32px;">
-        Cette carte cadeau vous a été envoyée via <strong>Take My Energy</strong>. Pour toute question, n'hésitez pas à nous contacter.
+        Cette carte cadeau vous a été envoyée via <a href="https://cinqdecoeur.fr/" style="color: #4f46e5; text-decoration: none;"><strong>Cinq de Cœur</strong></a>. Pour toute question, n'hésitez pas à nous contacter.
       </p>
     </div>
   </div>
