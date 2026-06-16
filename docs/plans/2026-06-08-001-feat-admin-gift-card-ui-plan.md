@@ -1,7 +1,7 @@
 ---
 title: 'feat: Admin gift card UI — Angular protected route with Google SSO'
 type: feat
-status: active
+status: completed
 date: 2026-06-08
 origin: docs/plans/2026-05-30-001-feat-nestjs-backend-gift-cards-plan.md
 ---
