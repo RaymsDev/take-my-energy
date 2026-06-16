@@ -111,6 +111,10 @@ export class EmailService {
 
     const client = this.getClient();
 
+    this.logger.log(
+      `Sending gift card email to ${to} (service: ${serviceName})`,
+    );
+
     let timeoutId: ReturnType<typeof setTimeout>;
     const timeout = new Promise<never>((_, reject) => {
       timeoutId = setTimeout(
@@ -120,7 +124,7 @@ export class EmailService {
     });
 
     try {
-      const { error } = await Promise.race([
+      const { data, error } = await Promise.race([
         client.emails.send({
           from: this.config.get<string>('EMAIL_FROM') as string,
           to,
@@ -131,8 +135,13 @@ export class EmailService {
       ]);
 
       if (error) {
+        this.logger.error(
+          `Failed to send gift card email to ${to}: ${error.message}`,
+        );
         throw error;
       }
+
+      this.logger.log(`Gift card email sent to ${to} (id: ${data?.id})`);
     } finally {
       clearTimeout(timeoutId!);
     }
