@@ -1,0 +1,83 @@
+<div class="list-page">
+  <header class="page-header">
+    <h1>Gift Cards</h1>
+    <a routerLink="/admin/gift-cards/new" class="create-btn">+ Create New</a>
+  </header>
+
+  @if (showBanner()) {
+    <div class="success-banner">
+      <span>Gift card created — email sent to recipient.</span>
+      <button class="dismiss-btn" (click)="dismissBanner()">×</button>
+    </div>
+  }
+
+  @if (listError()) {
+    <div class="error-banner">{{ listError() }}</div>
+  }
+
+  @if (cards().length === 0 && !listError()) {
+    <div class="empty-state">
+      <p>No gift cards yet.</p>
+      <a routerLink="/admin/gift-cards/new">Create one</a>
+    </div>
+  }
+
+  @if (cards().length > 0) {
+    <div class="table-wrapper">
+      <table class="cards-table">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Recipient</th>
+            <th>Service</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Redeemed</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (card of cards(); track card._id) {
+            <tr>
+              <td class="code-cell" [title]="card.code">
+                {{ truncateCode(card.code) }}
+              </td>
+              <td>
+                <div>{{ card.recipientName }}</div>
+                <div class="email">{{ card.recipientEmail }}</div>
+              </td>
+              <td>{{ card.serviceName }}</td>
+              <td>{{ card.servicePrice }}€</td>
+              <td>
+                <span class="status-badge" [class]="'status-' + card.status">
+                  {{ card.status }}
+                </span>
+              </td>
+              <td>{{ card.createdAt | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                {{
+                  card.redeemedAt ? (card.redeemedAt | date: 'dd/MM/yyyy') : '—'
+                }}
+              </td>
+              <td class="action-cell">
+                @if (card.status === 'active') {
+                  <button
+                    class="redeem-btn"
+                    [disabled]="isRedeeming(card._id)"
+                    (click)="redeem(card)"
+                  >
+                    {{ isRedeeming(card._id) ? '…' : 'Redeem' }}
+                  </button>
+                }
+                @if (rowError(card._id)) {
+                  <div class="row-error">{{ rowError(card._id) }}</div>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
