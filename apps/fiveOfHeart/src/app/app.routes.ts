@@ -3,6 +3,8 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { HealthcarePageComponent } from './pages/healthcare-page/healthcare-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SessionPageComponent } from './pages/session-page/session-page.component';
+import { AdminLoginPageComponent } from './pages/admin-page/admin-login-page.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -43,6 +45,33 @@ export const routes: Routes = [
       import('./pages/cookies-policy-page/cookies-policy-page.component').then(
         (m) => m.CookiesPolicyPageComponent,
       ),
+  },
+  {
+    path: 'admin',
+    children: [
+      { path: 'login', component: AdminLoginPageComponent },
+      {
+        path: '',
+        canActivate: [authGuard],
+        children: [
+          {
+            path: 'gift-cards/new',
+            loadComponent: () =>
+              import('./pages/admin-page/gift-cards/create/create-gift-card-page.component').then(
+                (m) => m.CreateGiftCardPageComponent,
+              ),
+          },
+          {
+            path: 'gift-cards',
+            loadComponent: () =>
+              import('./pages/admin-page/gift-cards/list/gift-cards-list-page.component').then(
+                (m) => m.GiftCardsListPageComponent,
+              ),
+          },
+          { path: '', redirectTo: 'gift-cards', pathMatch: 'full' },
+        ],
+      },
+    ],
   },
   { path: '**', redirectTo: '' },
 ];
