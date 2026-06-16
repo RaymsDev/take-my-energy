@@ -1,0 +1,91 @@
+<div class="create-page">
+  <header class="page-header">
+    <h1>Create Gift Card</h1>
+    <a routerLink="/admin/gift-cards" class="back-link">← Back to list</a>
+  </header>
+
+  @if (catalogError()) {
+    <div class="error-banner">{{ catalogError() }}</div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="create-form">
+    <div class="field">
+      <label for="serviceId">Service</label>
+      <select id="serviceId" formControlName="serviceId">
+        <option value="">Select a service…</option>
+        @for (svc of catalog(); track svc.id) {
+          <option [value]="svc.id">
+            {{ svc.title }} — {{ svc.price }} {{ svc.currency }}
+          </option>
+        }
+      </select>
+      @if (form.get('serviceId')?.invalid && form.get('serviceId')?.touched) {
+        <span class="field-error">Please select a service.</span>
+      }
+    </div>
+
+    <div class="field">
+      <label for="recipientName">Recipient name</label>
+      <input id="recipientName" formControlName="recipientName" type="text" />
+      @if (
+        form.get('recipientName')?.invalid && form.get('recipientName')?.touched
+      ) {
+        <span class="field-error">Recipient name is required.</span>
+      }
+    </div>
+
+    <div class="field">
+      <label for="recipientEmail">Recipient email</label>
+      <input
+        id="recipientEmail"
+        formControlName="recipientEmail"
+        type="email"
+      />
+      @if (
+        form.get('recipientEmail')?.errors?.['required'] &&
+        form.get('recipientEmail')?.touched
+      ) {
+        <span class="field-error">Recipient email is required.</span>
+      }
+      @if (
+        form.get('recipientEmail')?.errors?.['email'] &&
+        form.get('recipientEmail')?.touched
+      ) {
+        <span class="field-error">Please enter a valid email address.</span>
+      }
+    </div>
+
+    <div class="field">
+      <label for="senderName">Sender name</label>
+      <input id="senderName" formControlName="senderName" type="text" />
+      @if (form.get('senderName')?.invalid && form.get('senderName')?.touched) {
+        <span class="field-error">Sender name is required.</span>
+      }
+    </div>
+
+    <div class="field">
+      <label for="message"
+        >Message <span class="optional">(optional)</span></label
+      >
+      <textarea id="message" formControlName="message" rows="4"></textarea>
+      <span class="char-counter">{{ messageLength }} / 500</span>
+      @if (form.get('message')?.errors?.['maxlength']) {
+        <span class="field-error"
+          >Message must be 500 characters or fewer.</span
+        >
+      }
+    </div>
+
+    @if (errorMessage()) {
+      <div class="error-banner">{{ errorMessage() }}</div>
+    }
+
+    <button
+      type="submit"
+      class="submit-btn"
+      [disabled]="form.invalid || submitting()"
+    >
+      {{ submitting() ? 'Creating…' : 'Create Gift Card' }}
+    </button>
+  </form>
+</div>
