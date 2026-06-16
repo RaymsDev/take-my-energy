@@ -78,7 +78,7 @@ describe('GiftCardsListPageComponent', () => {
     setup({ cards: [makeCard({ status: 'active' })] });
     const btn = fixture.nativeElement.querySelector('.redeem-btn');
     expect(btn).toBeTruthy();
-    expect(btn.textContent.trim()).toBe('Redeem');
+    expect(btn.textContent.trim()).toBe('Utiliser');
   });
 
   it('redeemed card shows no Redeem button', () => {
@@ -121,17 +121,21 @@ describe('GiftCardsListPageComponent', () => {
 
   it('empty array shows empty state with create link', () => {
     setup({ cards: [] });
-    expect(fixture.nativeElement.textContent).toContain('No gift cards yet');
+    expect(fixture.nativeElement.textContent).toContain(
+      "Aucune carte cadeau pour l'instant",
+    );
   });
 
   it('list API error shows error banner', () => {
     setup({ listError: true });
-    expect(fixture.nativeElement.textContent).toContain('Failed to load');
+    expect(fixture.nativeElement.textContent).toContain(
+      'Impossible de charger les cartes cadeaux',
+    );
   });
 
   it('shows success banner when ?created=true', () => {
     setup({ queryParams: { created: 'true' } });
-    expect(fixture.nativeElement.textContent).toContain('Gift card created');
+    expect(fixture.nativeElement.textContent).toContain('Carte cadeau créée');
   });
 
   it('does not show success banner without ?created=true', () => {

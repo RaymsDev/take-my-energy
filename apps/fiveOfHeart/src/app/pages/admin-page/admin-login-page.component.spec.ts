@@ -36,7 +36,7 @@ describe('AdminLoginPageComponent', () => {
     fixture.detectChanges();
     const btn: HTMLButtonElement =
       fixture.nativeElement.querySelector('button');
-    expect(btn?.textContent?.trim()).toBe('Sign in with Google');
+    expect(btn?.textContent?.trim()).toBe('Se connecter avec Google');
   });
 
   it('calls authService.login() when button is clicked', () => {
