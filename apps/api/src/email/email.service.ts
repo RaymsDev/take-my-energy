@@ -41,21 +41,11 @@ export class EmailService {
     recipientName: string;
     senderName: string;
     serviceName: string;
-    price: number;
-    currency: string;
     code: string;
     message?: string;
   }): Promise<void> {
-    const {
-      to,
-      recipientName,
-      senderName,
-      serviceName,
-      price,
-      currency,
-      code,
-      message,
-    } = params;
+    const { to, recipientName, senderName, serviceName, code, message } =
+      params;
 
     const safeRecipientName = escHtml(recipientName);
     const safeSenderName = escHtml(senderName);
@@ -88,8 +78,7 @@ export class EmailService {
 
       <div style="margin: 24px 0; padding: 20px; background: #eef2ff; border-radius: 8px; text-align: center;">
         <p style="margin: 0 0 8px; font-size: 14px; color: #6366f1; text-transform: uppercase; letter-spacing: 0.05em;">Prestation</p>
-        <p style="margin: 0 0 4px; font-size: 20px; font-weight: bold; color: #1e1b4b;">${safeServiceName}</p>
-        <p style="margin: 0; font-size: 28px; font-weight: bold; color: #4f46e5;">${price} ${currency}</p>
+        <p style="margin: 0; font-size: 20px; font-weight: bold; color: #1e1b4b;">${safeServiceName}</p>
       </div>
 
       ${messageBlock}
@@ -128,7 +117,7 @@ export class EmailService {
         client.emails.send({
           from: this.config.get<string>('EMAIL_FROM') as string,
           to,
-          subject: 'Votre carte cadeau Take My Energy',
+          subject: 'Votre carte cadeau Cinq de Cœur',
           html,
         }),
         timeout,

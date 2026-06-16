@@ -42,8 +42,6 @@ export class GiftCardsService {
         recipientName: dto.recipientName,
         senderName: dto.senderName,
         serviceName: service.title,
-        price: service.price,
-        currency: service.currency,
         code,
         message: dto.message,
       });
