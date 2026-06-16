@@ -1,9 +1,13 @@
 import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
-import { provideServerRendering } from '@angular/platform-server';
+import { provideServerRendering, withRoutes, RenderMode } from '@angular/ssr';
 import { appConfig } from './app.config';
 
 const serverConfig: ApplicationConfig = {
-  providers: [provideServerRendering()],
+  providers: [
+    provideServerRendering(
+      withRoutes([{ path: 'admin/**', renderMode: RenderMode.Client }]),
+    ),
+  ],
 };
 
 export const config = mergeApplicationConfig(appConfig, serverConfig);
