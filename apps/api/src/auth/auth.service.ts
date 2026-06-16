@@ -1,9 +1,13 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
 
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name);
+
   constructor(
     private readonly config: ConfigService,
     private readonly jwt: JwtService,
@@ -34,6 +38,24 @@ export class AuthService {
       role: 'admin',
     });
 
+    if (process.env['NODE_ENV'] === 'development') {
+      this.syncTokenToDevEnv(access_token);
+    }
+
     return { access_token };
+  }
+
+  private syncTokenToDevEnv(token: string): void {
+    try {
+      const envPath = join(process.cwd(), 'requests', '.env.dev');
+      const current = readFileSync(envPath, 'utf8');
+      const updated = current.replace(
+        /^ACCESS_TOKEN=.*$/m,
+        `ACCESS_TOKEN=${token}`,
+      );
+      writeFileSync(envPath, updated);
+    } catch (err) {
+      this.logger.warn(`Could not sync token to requests/.env.dev: ${err}`);
+    }
   }
 }

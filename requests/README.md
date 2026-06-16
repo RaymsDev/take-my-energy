@@ -6,7 +6,7 @@ Manual API tests for the NestJS backend, runnable in VS Code via the [HTTPyac ex
 
 | File                     | Description                                                                  |
 | ------------------------ | ---------------------------------------------------------------------------- |
-| `health.http`            | GET /api/health                                                              |
+| `healthz.http`           | GET /api/healthz                                                             |
 | `catalog.http`           | GET /api/catalog                                                             |
 | `auth.http`              | OAuth flow instructions + token verification                                 |
 | `gift-cards.http`        | Full CRUD flow — creates a card, lists, gets, redeems (×2 idempotency check) |
