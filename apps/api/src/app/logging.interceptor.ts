@@ -14,7 +14,8 @@ export class LoggingInterceptor implements NestInterceptor {
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     const req = context.switchToHttp().getRequest<Request>();
-    const { method, url } = req;
+    const { method } = req;
+    const url = req.path.startsWith('/api/auth/') ? req.path : req.url;
     const start = Date.now();
 
     return next.handle().pipe(
