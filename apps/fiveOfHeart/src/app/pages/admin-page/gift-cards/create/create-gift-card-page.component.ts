@@ -37,7 +37,9 @@ export class CreateGiftCardPageComponent implements OnInit {
     this.api.getCatalog().subscribe({
       next: (items) => this.catalog.set(items),
       error: () =>
-        this.catalogError.set('Failed to load services. Please refresh.'),
+        this.catalogError.set(
+          'Impossible de charger les prestations. Veuillez rafraîchir la page.',
+        ),
     });
   }
 
@@ -62,9 +64,7 @@ export class CreateGiftCardPageComponent implements OnInit {
             queryParams: { created: 'true' },
           }),
         error: () => {
-          this.errorMessage.set(
-            'Failed to create gift card. Please try again.',
-          );
+          this.errorMessage.set('Échec de la création. Veuillez réessayer.');
           this.submitting.set(false);
         },
       });

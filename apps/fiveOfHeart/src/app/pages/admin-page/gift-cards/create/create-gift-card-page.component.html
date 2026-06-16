@@ -1,7 +1,7 @@
 <div class="create-page">
   <header class="page-header">
-    <h1>Create Gift Card</h1>
-    <a routerLink="/admin/gift-cards" class="back-link">← Back to list</a>
+    <h1>Créer une carte cadeau</h1>
+    <a routerLink="/admin/gift-cards" class="back-link">← Retour à la liste</a>
   </header>
 
   @if (catalogError()) {
@@ -10,9 +10,9 @@
 
   <form [formGroup]="form" (ngSubmit)="submit()" class="create-form">
     <div class="field">
-      <label for="serviceId">Service</label>
+      <label for="serviceId">Prestation</label>
       <select id="serviceId" formControlName="serviceId">
-        <option value="">Select a service…</option>
+        <option value="">Sélectionner une prestation…</option>
         @for (svc of catalog(); track svc.id) {
           <option [value]="svc.id">
             {{ svc.title }} — {{ svc.price }} {{ svc.currency }}
@@ -20,22 +20,22 @@
         }
       </select>
       @if (form.get('serviceId')?.invalid && form.get('serviceId')?.touched) {
-        <span class="field-error">Please select a service.</span>
+        <span class="field-error">Veuillez sélectionner une prestation.</span>
       }
     </div>
 
     <div class="field">
-      <label for="recipientName">Recipient name</label>
+      <label for="recipientName">Nom du destinataire</label>
       <input id="recipientName" formControlName="recipientName" type="text" />
       @if (
         form.get('recipientName')?.invalid && form.get('recipientName')?.touched
       ) {
-        <span class="field-error">Recipient name is required.</span>
+        <span class="field-error">Le nom du destinataire est requis.</span>
       }
     </div>
 
     <div class="field">
-      <label for="recipientEmail">Recipient email</label>
+      <label for="recipientEmail">E-mail du destinataire</label>
       <input
         id="recipientEmail"
         formControlName="recipientEmail"
@@ -45,33 +45,35 @@
         form.get('recipientEmail')?.errors?.['required'] &&
         form.get('recipientEmail')?.touched
       ) {
-        <span class="field-error">Recipient email is required.</span>
+        <span class="field-error">L'e-mail du destinataire est requis.</span>
       }
       @if (
         form.get('recipientEmail')?.errors?.['email'] &&
         form.get('recipientEmail')?.touched
       ) {
-        <span class="field-error">Please enter a valid email address.</span>
+        <span class="field-error"
+          >Veuillez entrer une adresse e-mail valide.</span
+        >
       }
     </div>
 
     <div class="field">
-      <label for="senderName">Sender name</label>
+      <label for="senderName">Nom de l'expéditeur</label>
       <input id="senderName" formControlName="senderName" type="text" />
       @if (form.get('senderName')?.invalid && form.get('senderName')?.touched) {
-        <span class="field-error">Sender name is required.</span>
+        <span class="field-error">Le nom de l'expéditeur est requis.</span>
       }
     </div>
 
     <div class="field">
       <label for="message"
-        >Message <span class="optional">(optional)</span></label
+        >Message <span class="optional">(optionnel)</span></label
       >
       <textarea id="message" formControlName="message" rows="4"></textarea>
       <span class="char-counter">{{ messageLength }} / 500</span>
       @if (form.get('message')?.errors?.['maxlength']) {
         <span class="field-error"
-          >Message must be 500 characters or fewer.</span
+          >Le message ne peut pas dépasser 500 caractères.</span
         >
       }
     </div>
@@ -85,7 +87,7 @@
       class="submit-btn"
       [disabled]="form.invalid || submitting()"
     >
-      {{ submitting() ? 'Creating…' : 'Create Gift Card' }}
+      {{ submitting() ? 'Création…' : 'Créer la carte cadeau' }}
     </button>
   </form>
 </div>
