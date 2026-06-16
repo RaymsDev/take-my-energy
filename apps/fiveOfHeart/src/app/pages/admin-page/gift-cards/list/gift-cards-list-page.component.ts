@@ -31,7 +31,9 @@ export class GiftCardsListPageComponent implements OnInit {
     this.api.listGiftCards().subscribe({
       next: (cards) => this.cards.set(cards),
       error: () =>
-        this.listError.set('Failed to load gift cards. Please refresh.'),
+        this.listError.set(
+          'Impossible de charger les cartes cadeaux. Veuillez rafraîchir la page.',
+        ),
     });
   }
 
@@ -72,7 +74,7 @@ export class GiftCardsListPageComponent implements OnInit {
         this.redeeming.set(s);
 
         const errs = new Map(this.rowErrors());
-        errs.set(card._id, 'Redemption failed. Please try again.');
+        errs.set(card._id, "Échec de l'utilisation. Veuillez réessayer.");
         this.rowErrors.set(errs);
       },
     });

@@ -1,12 +1,12 @@
 <div class="list-page">
   <header class="page-header">
-    <h1>Gift Cards</h1>
-    <a routerLink="/admin/gift-cards/new" class="create-btn">+ Create New</a>
+    <h1>Cartes cadeaux</h1>
+    <a routerLink="/admin/gift-cards/new" class="create-btn">+ Créer</a>
   </header>
 
   @if (showBanner()) {
     <div class="success-banner">
-      <span>Gift card created — email sent to recipient.</span>
+      <span>Carte cadeau créée — e-mail envoyé au destinataire.</span>
       <button class="dismiss-btn" (click)="dismissBanner()">×</button>
     </div>
   }
@@ -17,8 +17,8 @@
 
   @if (cards().length === 0 && !listError()) {
     <div class="empty-state">
-      <p>No gift cards yet.</p>
-      <a routerLink="/admin/gift-cards/new">Create one</a>
+      <p>Aucune carte cadeau pour l'instant.</p>
+      <a routerLink="/admin/gift-cards/new">En créer une</a>
     </div>
   }
 
@@ -28,12 +28,12 @@
         <thead>
           <tr>
             <th>Code</th>
-            <th>Recipient</th>
-            <th>Service</th>
-            <th>Price</th>
-            <th>Status</th>
-            <th>Created</th>
-            <th>Redeemed</th>
+            <th>Destinataire</th>
+            <th>Prestation</th>
+            <th>Prix</th>
+            <th>Statut</th>
+            <th>Créé le</th>
+            <th>Utilisé le</th>
             <th></th>
           </tr>
         </thead>
@@ -51,7 +51,7 @@
               <td>{{ card.servicePrice }}€</td>
               <td>
                 <span class="status-badge" [class]="'status-' + card.status">
-                  {{ card.status }}
+                  {{ card.status === 'active' ? 'Active' : 'Utilisée' }}
                 </span>
               </td>
               <td>{{ card.createdAt | date: 'dd/MM/yyyy' }}</td>
@@ -67,7 +67,7 @@
                     [disabled]="isRedeeming(card._id)"
                     (click)="redeem(card)"
                   >
-                    {{ isRedeeming(card._id) ? '…' : 'Redeem' }}
+                    {{ isRedeeming(card._id) ? '…' : 'Utiliser' }}
                   </button>
                 }
                 @if (rowError(card._id)) {
