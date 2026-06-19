@@ -16,14 +16,15 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
-  // Proxy /api requests to the backend
-  server.use(
-    '/api',
-    createProxyMiddleware({
-      target: 'https://take-my-energy.onrender.com',
-      changeOrigin: true,
-    }),
-  );
+  if (process.env['NODE_ENV'] === 'production') {
+    server.use(
+      '/api',
+      createProxyMiddleware({
+        target: 'https://take-my-energy.onrender.com',
+        changeOrigin: true,
+      }),
+    );
+  }
 
   // Serve static files from /browser
   server.use(
