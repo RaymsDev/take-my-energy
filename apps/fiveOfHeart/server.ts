@@ -16,11 +16,12 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
-  if (process.env['NODE_ENV'] === 'production') {
+  const apiUrl = process.env['API_URL'];
+  if (apiUrl) {
     server.use(
       '/api',
       createProxyMiddleware({
-        target: 'https://take-my-energy.onrender.com',
+        target: apiUrl,
         changeOrigin: true,
       }),
     );
