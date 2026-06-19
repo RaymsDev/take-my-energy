@@ -1,0 +1,33 @@
+# Stage 1: Build
+FROM node:24.14.1-alpine AS builder
+
+ENV NX_DAEMON=false
+
+WORKDIR /app
+
+# Install deps first — layer cache: only reinstalls when lockfile changes
+COPY package.json package-lock.json ./
+RUN npm ci --no-audit --no-fund
+
+# Copy the full workspace (Nx needs the monorepo root to resolve packages)
+COPY . .
+
+# Build the frontend with SSR enabled (production mode by default)
+RUN npx nx build fiveOfHeart
+
+# Stage 2: Runtime
+FROM node:24.14.1-alpine AS runner
+
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+# Copy built output — browser assets + SSR server bundle
+COPY --from=builder /app/dist/five-of-heart .
+
+# Copy node_modules from builder; the SSR server bundle externalizes express
+COPY --from=builder /app/node_modules ./node_modules
+
+EXPOSE 4000
+
+CMD ["node", "server/server.mjs"]
