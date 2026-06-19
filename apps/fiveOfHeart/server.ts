@@ -1,6 +1,7 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { renderApplication } from '@angular/platform-server';
 import express from 'express';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import bootstrap from './src/main.server';
@@ -14,6 +15,15 @@ export function app(): express.Express {
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
+
+  // Proxy /api requests to the backend
+  server.use(
+    '/api',
+    createProxyMiddleware({
+      target: 'https://take-my-energy.onrender.com',
+      changeOrigin: true,
+    }),
+  );
 
   // Serve static files from /browser
   server.use(
