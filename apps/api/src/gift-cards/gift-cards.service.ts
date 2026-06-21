@@ -18,7 +18,7 @@ export class GiftCardsService {
   ) {}
 
   async create(dto: CreateGiftCardInput): Promise<GiftCardDocument> {
-    const service = this.catalogRegistry.findById(dto.serviceId);
+    const service = await this.catalogRegistry.findById(dto.serviceId);
     if (!service) {
       throw new NotFoundException('Service not found');
     }

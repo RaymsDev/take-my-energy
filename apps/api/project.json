@@ -65,6 +65,13 @@
       "options": {
         "passWithNoTests": true
       }
+    },
+    "seed": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node -r tsconfig-paths/register src/catalog/catalog.seed.ts",
+        "cwd": "apps/api"
+      }
     }
   }
 }

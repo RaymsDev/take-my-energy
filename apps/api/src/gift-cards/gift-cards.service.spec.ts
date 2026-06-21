@@ -50,7 +50,7 @@ describe('GiftCardsService', () => {
 
   const rebuild = async (modelOverrides: object = {}) => {
     model = buildModel(modelOverrides);
-    catalogRegistry = { findById: jest.fn().mockReturnValue(mockService) };
+    catalogRegistry = { findById: jest.fn().mockResolvedValue(mockService) };
     emailService = { sendGiftCard: jest.fn().mockResolvedValue(undefined) };
 
     const module = await Test.createTestingModule({
@@ -89,7 +89,7 @@ describe('GiftCardsService', () => {
     });
 
     it('throws NotFoundException when serviceId is not in catalog', async () => {
-      catalogRegistry.findById.mockReturnValue(undefined);
+      catalogRegistry.findById.mockResolvedValue(null);
       await expect(
         service.create({ ...validDto, serviceId: 'bad-id' }),
       ).rejects.toBeInstanceOf(NotFoundException);

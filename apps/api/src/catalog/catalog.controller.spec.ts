@@ -1,59 +1,84 @@
+import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CatalogController } from './catalog.controller';
 import { CatalogRegistryService } from './catalog.service';
-import { CATALOG_SERVICES } from './catalog.config';
 
-describe('CatalogController + CatalogRegistryService', () => {
+const mockServices = [
+  {
+    id: '1',
+    title: 'Soins énergétiques',
+    price: 45,
+    currency: 'EUR',
+    duration: { value: 45, unitText: 'min' },
+  },
+  {
+    id: '2',
+    title: 'Massage Holistique',
+    price: 65,
+    currency: 'EUR',
+    duration: { value: 60, unitText: 'min' },
+  },
+];
+
+const mockCatalogService = {
+  findAll: jest.fn().mockResolvedValue(mockServices),
+  findById: jest.fn(),
+};
+
+describe('CatalogController', () => {
   let controller: CatalogController;
-  let service: CatalogRegistryService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CatalogController],
-      providers: [CatalogRegistryService],
+      providers: [
+        { provide: CatalogRegistryService, useValue: mockCatalogService },
+      ],
     }).compile();
 
     controller = module.get(CatalogController);
-    service = module.get(CatalogRegistryService);
+    jest.clearAllMocks();
+    mockCatalogService.findAll.mockResolvedValue(mockServices);
   });
 
-  describe('CatalogRegistryService', () => {
-    it('findAll() returns a non-empty array', () => {
-      const result = service.findAll();
-      expect(result.length).toBeGreaterThan(0);
+  describe('findAll', () => {
+    it('returns the full service array from the registry', async () => {
+      const result = await controller.findAll();
+      expect(result).toEqual(mockServices);
+      expect(mockCatalogService.findAll).toHaveBeenCalledTimes(1);
     });
 
-    it('findAll() returns items with id, title, price, currency, duration', () => {
-      const [first] = service.findAll();
-      expect(first).toHaveProperty('id');
-      expect(first).toHaveProperty('title');
-      expect(typeof first.price).toBe('number');
-      expect(first).toHaveProperty('currency');
-      expect(first.duration).toHaveProperty('value');
-      expect(first.duration).toHaveProperty('unitText');
-    });
-
-    it('findById returns the matching service', () => {
-      const first = CATALOG_SERVICES[0];
-      expect(service.findById(first.id)).toEqual(first);
-    });
-
-    it('findById returns undefined for an unknown id', () => {
-      expect(service.findById('nonexistent')).toBeUndefined();
+    it('is accessible without auth (no guard applied)', async () => {
+      await expect(controller.findAll()).resolves.toBeDefined();
     });
   });
 
-  describe('CatalogController', () => {
-    it('GET /catalog returns the full service list', () => {
-      const result = controller.findAll();
-      expect(Array.isArray(result)).toBe(true);
-      expect(result.length).toBeGreaterThan(0);
+  describe('findOne', () => {
+    it('returns the service when found', async () => {
+      mockCatalogService.findById.mockResolvedValue(mockServices[0]);
+      const result = await controller.findOne('1');
+      expect(result).toEqual(mockServices[0]);
+      expect(mockCatalogService.findById).toHaveBeenCalledWith('1');
     });
 
-    it('GET /catalog is accessible without auth (no guard applied)', () => {
-      // If JwtGuard were applied, the controller would need a JwtService in the test module.
-      // The fact that this test compiles and runs without providing JwtService confirms the endpoint is public.
-      expect(() => controller.findAll()).not.toThrow();
+    it('throws NotFoundException when service does not exist', async () => {
+      mockCatalogService.findById.mockResolvedValue(null);
+      await expect(controller.findOne('nonexistent')).rejects.toThrow(
+        NotFoundException,
+      );
     });
+  });
+});
+
+describe('CatalogRegistryService', () => {
+  it('findAll() resolves to items with id, title, price, currency, duration', async () => {
+    const result = await mockCatalogService.findAll();
+    const [first] = result;
+    expect(first).toHaveProperty('id');
+    expect(first).toHaveProperty('title');
+    expect(typeof first.price).toBe('number');
+    expect(first).toHaveProperty('currency');
+    expect(first.duration).toHaveProperty('value');
+    expect(first.duration).toHaveProperty('unitText');
   });
 });

@@ -7,6 +7,7 @@ import { CatalogModule } from '../catalog/catalog.module';
 import { EmailModule } from '../email/email.module';
 import { GiftCardsModule } from '../gift-cards/gift-cards.module';
 import { PaymentsModule } from '../payments/payments.module';
+import { PdfModule } from '../pdf/pdf.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { PaymentsModule } from '../payments/payments.module';
     EmailModule,
     GiftCardsModule,
     PaymentsModule,
+    PdfModule,
   ],
   controllers: [AppController],
 })
