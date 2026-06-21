@@ -58,3 +58,5 @@ secrets/
 .env
 .env.docker
 requests/.env.*
+.vercel
+.env*
