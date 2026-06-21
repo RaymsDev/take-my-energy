@@ -48,6 +48,7 @@ services:
       - .env
     environment:
       - NX_DAEMON=false
+      - API_URL=http://api:3000
     ports:
       - '4200:4200'
     depends_on:
