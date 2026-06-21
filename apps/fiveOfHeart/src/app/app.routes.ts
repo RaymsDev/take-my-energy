@@ -47,6 +47,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'cadeau/service/:id',
+    loadComponent: () =>
+      import('./pages/gift-card-service-page/gift-card-service-page.component').then(
+        (m) => m.GiftCardServicePageComponent,
+      ),
+  },
+  {
     path: 'admin',
     children: [
       { path: 'login', component: AdminLoginPageComponent },

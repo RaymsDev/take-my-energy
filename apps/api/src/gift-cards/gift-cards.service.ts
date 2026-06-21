@@ -1,9 +1,11 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { isValidObjectId, Model } from 'mongoose';
 import { CreateGiftCardInput } from '@five-of-heart/shared/dto';
 import { CatalogRegistryService } from '../catalog/catalog.service';
 import { EmailService } from '../email/email.service';
+import { PdfService } from '../pdf/pdf.service';
 import { GiftCardDocument, GiftCardModel } from './schemas/gift-card.schema';
 
 @Injectable()
@@ -15,6 +17,8 @@ export class GiftCardsService {
     private readonly giftCardModel: Model<GiftCardDocument>,
     private readonly catalogRegistry: CatalogRegistryService,
     private readonly emailService: EmailService,
+    private readonly pdfService: PdfService,
+    private readonly config: ConfigService,
   ) {}
 
   async create(dto: CreateGiftCardInput): Promise<GiftCardDocument> {
@@ -35,8 +39,18 @@ export class GiftCardsService {
       code,
     });
 
-    // Best-effort: card is already persisted; email failures are logged but not propagated
+    // Best-effort: card is already persisted; PDF/email failures are logged but not propagated
     try {
+      const frontendUrl = this.config.get<string>('FRONTEND_URL') ?? '';
+      const qrUrl = `${frontendUrl}/cadeau/service/${service.id}`;
+      const pdfBuffer = await this.pdfService.generateGiftCardPdf({
+        serviceName: service.title,
+        recipientName: dto.recipientName,
+        senderName: dto.senderName,
+        code,
+        qrUrl,
+      });
+
       await this.emailService.sendGiftCard({
         to: dto.recipientEmail,
         recipientName: dto.recipientName,
@@ -44,9 +58,10 @@ export class GiftCardsService {
         serviceName: service.title,
         code,
         message: dto.message,
+        pdfBuffer,
       });
     } catch (err) {
-      this.logger.error('Gift card email delivery failed', {
+      this.logger.error('Gift card PDF/email delivery failed', {
         code,
         error: err,
       });

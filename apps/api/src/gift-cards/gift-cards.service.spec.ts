@@ -1,12 +1,17 @@
 import { NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test } from '@nestjs/testing';
 import { CatalogRegistryService } from '../catalog/catalog.service';
 import { EmailService } from '../email/email.service';
+
+// Prevent transitive pdfkit/qrcode resolution before packages are installed
+jest.mock('../pdf/pdf.service', () => ({ PdfService: class PdfService {} }));
+import { PdfService } from '../pdf/pdf.service';
 import { GiftCardsService } from './gift-cards.service';
 import { GiftCardModel } from './schemas/gift-card.schema';
 
-const mockService = {
+const mockCatalogEntry = {
   id: '1',
   title: 'Massage Holistique',
   price: 65,
@@ -14,12 +19,14 @@ const mockService = {
   duration: { value: 60, unitText: 'min' },
 };
 
+const mockPdfBuffer = Buffer.from('%PDF-mock');
+
 const buildMockCard = (overrides: object = {}) => ({
   _id: 'card-id',
   status: 'active',
   code: 'some-uuid',
-  serviceName: mockService.title,
-  servicePrice: mockService.price,
+  serviceName: mockCatalogEntry.title,
+  servicePrice: mockCatalogEntry.price,
   ...overrides,
 });
 
@@ -47,11 +54,21 @@ describe('GiftCardsService', () => {
   let model: ReturnType<typeof buildModel>;
   let catalogRegistry: { findById: jest.Mock };
   let emailService: { sendGiftCard: jest.Mock };
+  let pdfService: { generateGiftCardPdf: jest.Mock };
+  let configService: { get: jest.Mock };
 
   const rebuild = async (modelOverrides: object = {}) => {
     model = buildModel(modelOverrides);
-    catalogRegistry = { findById: jest.fn().mockResolvedValue(mockService) };
+    catalogRegistry = {
+      findById: jest.fn().mockResolvedValue(mockCatalogEntry),
+    };
     emailService = { sendGiftCard: jest.fn().mockResolvedValue(undefined) };
+    pdfService = {
+      generateGiftCardPdf: jest.fn().mockResolvedValue(mockPdfBuffer),
+    };
+    configService = {
+      get: jest.fn().mockReturnValue('https://cinqdecoeur.fr'),
+    };
 
     const module = await Test.createTestingModule({
       providers: [
@@ -59,6 +76,8 @@ describe('GiftCardsService', () => {
         { provide: getModelToken(GiftCardModel.name), useValue: model },
         { provide: CatalogRegistryService, useValue: catalogRegistry },
         { provide: EmailService, useValue: emailService },
+        { provide: PdfService, useValue: pdfService },
+        { provide: ConfigService, useValue: configService },
       ],
     }).compile();
     service = module.get(GiftCardsService);
@@ -79,13 +98,26 @@ describe('GiftCardsService', () => {
       const result = await service.create(validDto);
       expect(result).toHaveProperty('code');
       expect(result.status).toBe('active');
-      expect(result.serviceName).toBe(mockService.title);
-      expect(result.servicePrice).toBe(mockService.price);
+      expect(result.serviceName).toBe(mockCatalogEntry.title);
+      expect(result.servicePrice).toBe(mockCatalogEntry.price);
     });
 
-    it('calls emailService.sendGiftCard after saving', async () => {
+    it('calls pdfService.generateGiftCardPdf with a QR URL containing the service id', async () => {
       await service.create(validDto);
-      expect(emailService.sendGiftCard).toHaveBeenCalledTimes(1);
+      expect(pdfService.generateGiftCardPdf).toHaveBeenCalledWith(
+        expect.objectContaining({
+          qrUrl: expect.stringContaining(
+            `/cadeau/service/${mockCatalogEntry.id}`,
+          ),
+        }),
+      );
+    });
+
+    it('calls emailService.sendGiftCard with the pdfBuffer', async () => {
+      await service.create(validDto);
+      expect(emailService.sendGiftCard).toHaveBeenCalledWith(
+        expect.objectContaining({ pdfBuffer: mockPdfBuffer }),
+      );
     });
 
     it('throws NotFoundException when serviceId is not in catalog', async () => {
@@ -95,10 +127,16 @@ describe('GiftCardsService', () => {
       ).rejects.toBeInstanceOf(NotFoundException);
     });
 
+    it('returns the card even when PDF generation fails (best-effort)', async () => {
+      pdfService.generateGiftCardPdf.mockRejectedValue(new Error('pdf error'));
+      const result = await service.create(validDto);
+      expect(model.create).toHaveBeenCalledTimes(1);
+      expect(result).toHaveProperty('code');
+    });
+
     it('returns the card even when email delivery fails (best-effort)', async () => {
       emailService.sendGiftCard.mockRejectedValue(new Error('Resend down'));
       const result = await service.create(validDto);
-      // Card was saved and returned despite email failure
       expect(model.create).toHaveBeenCalledTimes(1);
       expect(result).toHaveProperty('code');
     });
@@ -145,7 +183,6 @@ describe('GiftCardsService', () => {
         status: 'redeemed',
         redeemedAt: new Date('2024-01-01'),
       });
-      // findOneAndUpdate returns null (status filter did not match — already redeemed)
       model.findOneAndUpdate.mockReturnValue({
         exec: jest.fn().mockResolvedValue(null),
       });

@@ -13,6 +13,10 @@ export class GiftCardsApiService {
     return this.http.get<CatalogService[]>('/api/catalog');
   }
 
+  getServiceById(id: string): Observable<CatalogService> {
+    return this.http.get<CatalogService>(`/api/catalog/${id}`);
+  }
+
   createGiftCard(dto: CreateGiftCardInput): Observable<GiftCard> {
     return this.http.post<GiftCard>('/api/gift-cards', dto);
   }

@@ -76,4 +76,21 @@ describe('EmailService', () => {
     mockEmailsSend.mockResolvedValueOnce({ data: null, error: resendError });
     await expect(service.sendGiftCard(baseParams)).rejects.toEqual(resendError);
   });
+
+  it('includes attachments when pdfBuffer is provided', async () => {
+    mockEmailsSend.mockResolvedValueOnce({ data: { id: '4' }, error: null });
+    const pdfBuffer = Buffer.from('%PDF-test');
+    await service.sendGiftCard({ ...baseParams, pdfBuffer });
+    const call = mockEmailsSend.mock.calls[0][0];
+    expect(call.attachments).toEqual([
+      { filename: 'carte-cadeau.pdf', content: pdfBuffer },
+    ]);
+  });
+
+  it('does not include attachments when pdfBuffer is absent', async () => {
+    mockEmailsSend.mockResolvedValueOnce({ data: { id: '5' }, error: null });
+    await service.sendGiftCard(baseParams);
+    const call = mockEmailsSend.mock.calls[0][0];
+    expect(call.attachments).toBeUndefined();
+  });
 });

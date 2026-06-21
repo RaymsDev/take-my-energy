@@ -1,0 +1,59 @@
+<div class="gift-service-page">
+  @if (loading()) {
+    <div
+      class="gift-service-page__loading"
+      aria-busy="true"
+      aria-label="Chargement en cours"
+    >
+      <div class="gift-service-page__spinner"></div>
+      <p>Chargement…</p>
+    </div>
+  } @else if (error()) {
+    <div class="gift-service-page__error">
+      <p>Ce soin n'a pas pu être trouvé. Vérifiez le lien ou contactez-nous.</p>
+    </div>
+  } @else if (service(); as s) {
+    <div class="gift-service-page__hero">
+      <p class="gift-service-page__eyebrow">
+        <i class="fa-solid fa-gift" aria-hidden="true"></i>
+        Carte cadeau
+      </p>
+      <h1 class="gift-service-page__title">Un cadeau vous a été offert !</h1>
+      <p class="gift-service-page__subtitle">
+        Ce soin vous est offert. Prenez rendez-vous pour en profiter.
+      </p>
+    </div>
+
+    <div class="gift-service-page__card">
+      <p class="gift-service-page__card__label">Prestation offerte</p>
+      <h2 class="gift-service-page__card__title">{{ s.title }}</h2>
+
+      <div class="gift-service-page__card__meta">
+        <span class="gift-service-page__card__meta__item">
+          <i class="fa-regular fa-clock" aria-hidden="true"></i>
+          {{ s.duration.value }}&nbsp;{{ s.duration.unitText }}
+        </span>
+        <span class="gift-service-page__card__meta__item">
+          <i class="fa-solid fa-tag" aria-hidden="true"></i>
+          {{ s.price }}&nbsp;{{ s.currency }}
+        </span>
+      </div>
+    </div>
+
+    <div class="gift-service-page__cta">
+      <p class="gift-service-page__cta__text">
+        Réservez votre séance en ligne en quelques clics.
+      </p>
+      <a
+        [href]="bookingUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="gift-service-page__cta__btn"
+        aria-label="Prendre rendez-vous en ligne (ouvre un nouvel onglet)"
+      >
+        <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
+        Prendre rendez-vous
+      </a>
+    </div>
+  }
+</div>

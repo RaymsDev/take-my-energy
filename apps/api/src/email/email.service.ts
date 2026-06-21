@@ -43,9 +43,17 @@ export class EmailService {
     serviceName: string;
     code: string;
     message?: string;
+    pdfBuffer?: Buffer;
   }): Promise<void> {
-    const { to, recipientName, senderName, serviceName, code, message } =
-      params;
+    const {
+      to,
+      recipientName,
+      senderName,
+      serviceName,
+      code,
+      message,
+      pdfBuffer,
+    } = params;
 
     const safeRecipientName = escHtml(recipientName);
     const safeSenderName = escHtml(senderName);
@@ -119,6 +127,13 @@ export class EmailService {
           to,
           subject: 'Votre carte cadeau Cinq de Cœur',
           html,
+          ...(pdfBuffer
+            ? {
+                attachments: [
+                  { filename: 'carte-cadeau.pdf', content: pdfBuffer },
+                ],
+              }
+            : {}),
         }),
         timeout,
       ]);

@@ -1,6 +1,9 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { JwtGuard } from '../auth/guards/jwt.guard';
+
+// Prevent transitive pdfkit/qrcode resolution before packages are installed
+jest.mock('../pdf/pdf.service', () => ({ PdfService: class PdfService {} }));
 import { GiftCardsController } from './gift-cards.controller';
 import { GiftCardsService } from './gift-cards.service';
 
