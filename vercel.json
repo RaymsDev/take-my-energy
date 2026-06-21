@@ -1,4 +1,7 @@
 {
+  "git": {
+    "deploymentEnabled": false
+  },
   "framework": "angular",
   "buildCommand": "npm run build:front",
   "outputDirectory": "dist/five-of-heart/browser",
