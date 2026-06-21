@@ -8,6 +8,10 @@
   "installCommand": "npm install",
   "devCommand": "npm run dev:front",
   "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://take-my-energy.onrender.com/api/:path*"
+    },
     { "source": "/((?!assets|.*\\..*).*)", "destination": "/index.html" }
   ]
 }
