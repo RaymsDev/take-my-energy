@@ -1,6 +1,7 @@
 import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 const TOKEN_KEY = 'admin_token';
 
@@ -31,7 +32,7 @@ export class AuthService {
 
   login(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-    window.location.href = '/api/auth/google';
+    window.location.href = `${environment.apiUrl}/api/auth/google`;
   }
 
   logout(): void {
