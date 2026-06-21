@@ -25,6 +25,11 @@ export function app(): express.Express {
         changeOrigin: true,
       }),
     );
+  } else {
+    console.warn('[server] API_URL is not set — /api requests will return 502');
+    server.use('/api', (_req, res) => {
+      res.status(502).json({ error: 'API_URL not configured' });
+    });
   }
 
   // Serve static files from /browser
