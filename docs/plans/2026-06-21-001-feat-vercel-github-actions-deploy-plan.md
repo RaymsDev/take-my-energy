@@ -1,7 +1,7 @@
 ---
 title: 'feat: Deploy frontend to Vercel via GitHub Actions'
 type: feat
-status: active
+status: completed
 date: 2026-06-21
 ---
 
