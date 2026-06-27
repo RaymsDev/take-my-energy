@@ -1,21 +1,20 @@
 [
   {
     "id": 1,
-    "title": "Soins énergétiques",
+    "audience": "Adultes - Enfants",
     "description": "Offrez-vous un moment de purification et d’harmonie grâce aux Soins Énergétiques. Ce soin unique agit en profondeur pour équilibrer vos chakras, augmenter votre taux vibratoire et libérer les blocages énergétiques. Adapté à tous, il aide à retrouver vitalité, clarté mentale et sérénité, tout en stimulant votre énergie vitale.",
-    "img": "assets/massage_energetic.webp",
     "duration": {
       "value": 45,
       "unitText": "min"
     },
-    "audience": "Adultes - Enfants",
+    "img": "assets/massage_energetic.webp",
     "price": {
       "value": 45,
       "currency": "EUR"
     },
     "prices": {
       "Saint Léger Triey": "45 €",
-      "Chenôve": "55 €"
+      "Marsannay-la-Côte": "55 €"
     },
     "products": {
       "Saint Léger Triey": {
@@ -25,25 +24,25 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132410"
       },
-      "Chenôve": {
+      "Marsannay-la-Côte": {
         "price": {
           "value": 55,
           "currency": "EUR"
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=87940"
       }
-    }
+    },
+    "title": "Soins énergétiques"
   },
   {
     "id": 2,
-    "title": "Massage Holistique",
+    "audience": "Adultes - Enfants",
     "description": "Redécouvrez l'harmonie entre le corps et l'esprit avec le Massage Holistique, une approche complète et enveloppante. Grâce à des mouvements fluides, ce massage aide à libérer les tensions, améliorer la circulation et apaiser l’esprit. Idéal pour se reconnecter à soi-même, il procure un profond sentiment de bien-être et revitalise le corps en douceur.",
-    "img": "assets/holistic.webp",
     "duration": {
       "value": 60,
       "unitText": "min"
     },
-    "audience": "Adultes - Enfants",
+    "img": "assets/holistic.webp",
     "price": {
       "value": 65,
       "currency": "EUR"
@@ -56,25 +55,25 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132411"
       },
-      "Chenôve": {
+      "Marsannay-la-Côte": {
         "price": {
           "value": 70,
           "currency": "EUR"
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=87941"
       }
-    }
+    },
+    "title": "Massage Holistique"
   },
   {
     "id": 3,
-    "title": "Massage Prénatal",
+    "audience": "Femmes enceintes",
     "description": "Prenez soin de votre corps pendant la grossesse avec le Massage Prénatal, une pratique spécialement conçue pour soulager les douleurs lombaires, améliorer la circulation et réduire le stress. Ce soin doux et adapté offre un véritable moment de relaxation pour la future maman tout en créant un lien apaisant avec son bébé.",
-    "img": "assets/pregnant2.webp",
     "duration": {
       "value": 60,
       "unitText": "min"
     },
-    "audience": "Femmes enceintes",
+    "img": "assets/pregnant2.webp",
     "price": {
       "value": 60,
       "currency": "EUR"
@@ -87,25 +86,25 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132416"
       },
-      "Chenôve": {
+      "Marsannay-la-Côte": {
         "price": {
           "value": 70,
           "currency": "EUR"
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=130897"
       }
-    }
+    },
+    "title": "Massage Prénatal"
   },
   {
     "id": 4,
-    "title": "Barrage des brûlures",
+    "audience": "Adultes - Enfants",
     "description": "Découvrez une méthode ancestrale, souvent appelée «coupeur de feu», pour apaiser instantanément les brûlures, qu'elles soient superficielles ou profondes. Ce soin aide à réduire les douleurs intenses, favoriser la cicatrisation et calmer les sensations de chaleur ou de brûlure. Une solution naturelle pour les adultes et les enfants, adaptée aux petits accidents du quotidien.",
-    "img": "assets/burn.webp",
     "duration": {
       "value": 30,
       "unitText": "min"
     },
-    "audience": "Adultes - Enfants",
+    "img": "assets/burn.webp",
     "price": {
       "value": 35,
       "currency": "EUR"
@@ -118,25 +117,25 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132414"
       },
-      "Chenôve": {
+      "Marsannay-la-Côte": {
         "price": {
           "value": 35,
           "currency": "EUR"
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=87946"
       }
-    }
+    },
+    "title": "Barrage des brûlures"
   },
   {
     "id": 5,
-    "title": "Massage Knap",
+    "audience": "Adultes",
     "description": "Soulagez efficacement les tensions musculaires grâce au Massage Knap, une technique thérapeutique ciblée. Ce soin se concentre sur 18 points stratégiques du corps pour libérer les tensions accumulées et stimuler la circulation énergétique. Recommandé pour les personnes sujettes au stress, aux douleurs chroniques ou à la fatigue musculaire, ce massage offre un véritable moment de lâcher-prise et de bien-être.",
-    "img": "assets/massage_woman.webp",
     "duration": {
       "value": 45,
       "unitText": "min"
     },
-    "audience": "Adultes",
+    "img": "assets/massage_woman.webp",
     "price": {
       "value": 45,
       "currency": "EUR"
@@ -149,25 +148,25 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132415"
       },
-      "Chenôve": {
+      "Marsannay-la-Côte": {
         "price": {
           "value": 55,
           "currency": "EUR"
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=87947"
       }
-    }
+    },
+    "title": "Massage Knap"
   },
   {
     "id": 6,
-    "title": "Bougies d'oreille Hopi",
+    "audience": "Adultes - Enfants",
     "description": "Redécouvrez une tradition ancestrale avec les bougies d'oreille Hopi. Ce soin naturel aide à éliminer les impuretés auriculaires tout en offrant une profonde relaxation. Grâce à leur action douce et calorique, ces bougies favorisent une meilleure hygiène auriculaire et procurent une sensation de calme et de bien-être. Idéal pour apaiser les tensions du quotidien.",
-    "img": "assets/ears.webp",
     "duration": {
       "value": 30,
       "unitText": "min"
     },
-    "audience": "Adultes - Enfants",
+    "img": "assets/ears.webp",
     "price": {
       "value": 40,
       "currency": "EUR"
@@ -180,25 +179,25 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132413"
       },
-      "Chenôve": {
+      "Marsannay-la-Côte": {
         "price": {
           "value": 45,
           "currency": "EUR"
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=87944"
       }
-    }
+    },
+    "title": "Bougies d'oreille Hopi"
   },
   {
     "id": 7,
-    "title": "Micro massage crânien",
+    "audience": "Adultes - Enfants",
     "description": "Profitez d'un moment de détente absolue avec le micro massage crânien. En ciblant les points d'énergie du crâne et de la nuque, ce soin aide à soulager les maux de tête, réduire le stress et libérer les tensions musculaires. Un massage idéal pour retrouver équilibre, clarté mentale et bien-être global.",
-    "img": "assets/neck_massage.webp",
     "duration": {
       "value": 45,
       "unitText": "min"
     },
-    "audience": "Adultes - Enfants",
+    "img": "assets/neck_massage.webp",
     "price": {
       "value": 45,
       "currency": "EUR"
@@ -211,25 +210,25 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=132412"
       },
-      "Chenôve": {
+      "Marsannay-la-Côte": {
         "price": {
           "value": 55,
           "currency": "EUR"
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date-v2?location=7398025&people=13548&reason=87942"
       }
-    }
+    },
+    "title": "Micro massage crânien"
   },
   {
     "id": 8,
-    "title": "Pierres chaudes",
+    "audience": "Adultes",
     "description": "Découvrez les bienfaits des pierres chaudes pour un massage profondément relaxant. Grâce à leur action thermique, ces pierres naturelles aident à détendre les muscles, stimuler la circulation sanguine et apaiser les tensions. Un soin idéal pour retrouver vitalité, équilibre et sérénité, tout en profitant d'un moment de détente absolue.",
-    "img": "assets/massage_rocks.webp",
     "duration": {
       "value": 60,
       "unitText": "min"
     },
-    "audience": "Adultes",
+    "img": "assets/massage_rocks.webp",
     "price": {
       "value": 60,
       "currency": "EUR"
@@ -242,18 +241,18 @@
         },
         "bookingUrl": "https://perfactive.fr/5-de-cour/date?location=3234180&people=13548&reason=130903"
       }
-    }
+    },
+    "title": "Pierres chaudes"
   },
   {
     "id": 9,
-    "title": "Massage en duo",
+    "audience": "Adultes - Enfants",
     "description": "Partagez un moment de complicité et de détente avec le massage en duo. Ce soin relaxant et harmonisant est idéal pour se ressourcer à deux et renforcer les liens affectifs. Grâce à des mouvements fluides et enveloppants. Ce massage offre un véritable voyage sensoriel pour retrouver équilibre, bien-être et harmonie.",
-    "img": "assets/massage_duo.webp",
     "duration": {
       "value": 60,
       "unitText": "min"
     },
-    "audience": "Adultes - Enfants",
+    "img": "assets/massage_duo.webp",
     "price": {
       "value": 130,
       "currency": "EUR"
@@ -266,18 +265,18 @@
         },
         "bookingUrl": "https://perfactive.fr/magnetiseur/saint-leger-triey/jean-luc-laffuge"
       }
-    }
+    },
+    "title": "Massage en duo"
   },
   {
     "id": 10,
-    "title": "Micro-massage crânien en entreprise",
+    "audience": "Adultes",
     "description": "Offrez un moment de détente à vos collaborateurs avec le micro-massage crânien en entreprise. Ce soin express et relaxant aide à réduire le stress, améliorer la concentration et favoriser le bien-être au travail. Idéal pour dynamiser vos équipes et renforcer la cohésion, il offre un véritable moment de détente et de lâcher-prise.",
-    "img": "assets/massage_office.webp",
     "duration": {
       "value": 15,
       "unitText": "min"
     },
-    "audience": "Adultes",
+    "img": "assets/massage_office.webp",
     "price": {
       "value": "Sur devis",
       "currency": "EUR"
@@ -287,6 +286,7 @@
         "price": "Sur devis",
         "bookingUrl": "https://perfactive.fr/magnetiseur/saint-leger-triey/jean-luc-laffuge"
       }
-    }
+    },
+    "title": "Micro-massage crânien en entreprise"
   }
 ]

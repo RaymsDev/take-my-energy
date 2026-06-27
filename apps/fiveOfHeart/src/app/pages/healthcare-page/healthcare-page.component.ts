@@ -21,7 +21,7 @@ import { ListComponent } from './components/list/list.component';
 export class HealthcarePageComponent implements OnInit {
   healthcareData: Healthcare[] = [];
   filteredHealthcareData: Healthcare[] = [];
-  selectedOffice: string = '';
+  selectedOffice = '';
 
   readonly offices = [
     {
@@ -30,9 +30,9 @@ export class HealthcarePageComponent implements OnInit {
       address: '7 rue haute, 21556 Saint-Léger-Triey',
     },
     {
-      id: 'Chenôve',
-      label: 'GKowork - Chenôve',
-      address: '39 Av. du 14 Juillet, 21300 Chenôve',
+      id: 'Marsannay-la-Côte',
+      label: 'GKowork - Marsannay-la-Côte',
+      address: '10 Rue Louis Lumière, 21160 Marsannay-la-Côte',
     },
     {
       id: 'Chez Socha',
