@@ -27,7 +27,7 @@ export class HealthcarePageComponent implements OnInit {
     {
       id: 'Saint Léger Triey',
       label: 'Cabinet de Saint Léger Triey',
-      address: '7 rue haute, 21556 Saint-Léger-Triey',
+      address: '7 rue haute, 21270 Saint-Léger-Triey',
     },
     {
       id: 'Marsannay-la-Côte',
