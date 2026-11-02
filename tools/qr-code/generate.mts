@@ -7,11 +7,9 @@ const INDEX_HTML = 'apps/fiveOfHeart/src/index.html';
 const OUT_DIR = 'tools/qr-code/out';
 const BADGE_PX = 512;
 
-// Opens the Google "write a review" form for the business. Derived from the
-// place's Google Maps identifier; Google asks for a sign-in, so check it by
-// opening it on a phone before printing.
-const GOOGLE_REVIEW_URL =
-  'https://search.google.com/local/writereview?placeid=ChIJ7wPRQ62p8kcRnxaxBcfg60g';
+// Review link from Google Business Profile ("Ask for reviews"). It opens the
+// Google "write a review" form for the business.
+const GOOGLE_REVIEW_URL = 'https://g.page/r/CZ8WsQXH4OtIEAE/review';
 
 type Target = { fileName: string; address: () => Promise<string> };
 

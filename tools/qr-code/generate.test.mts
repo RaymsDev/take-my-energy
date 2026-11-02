@@ -37,8 +37,7 @@ test('the command writes a PNG and an SVG and reports them', () => {
   assert.match(output, /https:\/\/cinqdecoeur\.fr\//);
 });
 
-const REVIEW_URL =
-  'https://search.google.com/local/writereview?placeid=ChIJ7wPRQ62p8kcRnxaxBcfg60g';
+const REVIEW_URL = 'https://g.page/r/CZ8WsQXH4OtIEAE/review';
 
 test('the review command writes its own files and encodes the review link', () => {
   const output = execFileSync(

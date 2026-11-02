@@ -114,7 +114,7 @@ The logo comes from `tools/qr-code/assets/logo-hd.jpeg`. Its checkerboard backgr
 npm run qr:review
 ```
 
-The review address is the `GOOGLE_REVIEW_URL` constant in `tools/qr-code/generate.mts`. Google asks for a sign-in on that page, so open the link on a phone before printing and replace the constant if it does not land on the review form.
+The review address is the `GOOGLE_REVIEW_URL` constant in `tools/qr-code/generate.mts`. It is the link from Google Business Profile ("Ask for reviews").
 
 To run the script's tests:
 
