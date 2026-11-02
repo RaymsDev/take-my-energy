@@ -7,6 +7,29 @@ const INDEX_HTML = 'apps/fiveOfHeart/src/index.html';
 const OUT_DIR = 'tools/qr-code/out';
 const BADGE_PX = 512;
 
+// Opens the Google "write a review" form for the business. Derived from the
+// place's Google Maps identifier; Google asks for a sign-in, so check it by
+// opening it on a phone before printing.
+const GOOGLE_REVIEW_URL =
+  'https://search.google.com/local/writereview?placeid=ChIJ7wPRQ62p8kcRnxaxBcfg60g';
+
+type Target = { fileName: string; address: () => Promise<string> };
+
+const TARGETS: Record<string, Target> = {
+  site: {
+    fileName: 'qr-code',
+    address: async () =>
+      readCanonicalUrl(
+        await readFile(new URL(INDEX_HTML, REPO_ROOT), 'utf8'),
+        INDEX_HTML,
+      ),
+  },
+  review: {
+    fileName: 'qr-code-google-review',
+    address: async () => GOOGLE_REVIEW_URL,
+  },
+};
+
 /** Returns the href of the page's `rel="canonical"` link. */
 export function readCanonicalUrl(html: string, source: string): string {
   for (const tag of html.match(/<link\b[^>]*>/gi) ?? []) {
@@ -18,9 +41,14 @@ export function readCanonicalUrl(html: string, source: string): string {
   throw new Error(`No <link rel="canonical"> with an href found in ${source}`);
 }
 
-async function main(): Promise<void> {
-  const html = await readFile(new URL(INDEX_HTML, REPO_ROOT), 'utf8');
-  const address = readCanonicalUrl(html, INDEX_HTML);
+async function main(targetName: string): Promise<void> {
+  const target = TARGETS[targetName];
+  if (!target) {
+    throw new Error(
+      `Unknown target "${targetName}". Valid targets: ${Object.keys(TARGETS).join(', ')}`,
+    );
+  }
+  const address = await target.address();
 
   const logo = await cutOutLogo(
     new URL('./assets/logo-hd.jpeg', import.meta.url),
@@ -32,8 +60,8 @@ async function main(): Promise<void> {
 
   await mkdir(new URL(`${OUT_DIR}/`, REPO_ROOT), { recursive: true });
   const files = [
-    [`${OUT_DIR}/qr-code.svg`, svg],
-    [`${OUT_DIR}/qr-code.png`, png],
+    [`${OUT_DIR}/${target.fileName}.svg`, svg],
+    [`${OUT_DIR}/${target.fileName}.png`, png],
   ] as const;
   for (const [path, content] of files) {
     await writeFile(new URL(path, REPO_ROOT), content);
@@ -44,5 +72,5 @@ async function main(): Promise<void> {
 }
 
 if (import.meta.main) {
-  await main();
+  await main(process.argv[2] ?? 'site');
 }

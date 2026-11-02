@@ -25,6 +25,7 @@
     "lint:prettier": "prettier --check .",
     "lint:ts": "tsc -p apps/api/tsconfig.app.json --noEmit && tsc -p apps/fiveOfHeart/tsconfig.app.json --noEmit && tsc -p tools/qr-code/tsconfig.json",
     "qr:generate": "node tools/qr-code/generate.mts",
+    "qr:review": "node tools/qr-code/generate.mts review",
     "qr:test": "node --test \"tools/qr-code/*.test.mts\"",
     "prepare": "husky"
   },

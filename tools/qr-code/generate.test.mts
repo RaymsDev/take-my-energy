@@ -36,3 +36,34 @@ test('the command writes a PNG and an SVG and reports them', () => {
   assert.match(output, /qr-code\.svg/);
   assert.match(output, /https:\/\/cinqdecoeur\.fr\//);
 });
+
+const REVIEW_URL =
+  'https://search.google.com/local/writereview?placeid=ChIJ7wPRQ62p8kcRnxaxBcfg60g';
+
+test('the review command writes its own files and encodes the review link', () => {
+  const output = execFileSync(
+    process.execPath,
+    [new URL('./generate.mts', import.meta.url).pathname, 'review'],
+    { encoding: 'utf8' },
+  );
+  assert.ok(
+    existsSync(new URL('./out/qr-code-google-review.png', import.meta.url)),
+  );
+  assert.ok(
+    existsSync(new URL('./out/qr-code-google-review.svg', import.meta.url)),
+  );
+  assert.ok(output.includes(REVIEW_URL));
+});
+
+test('an unknown target fails and names the valid ones', () => {
+  assert.throws(
+    () =>
+      execFileSync(
+        process.execPath,
+        [new URL('./generate.mts', import.meta.url).pathname, 'nope'],
+        { encoding: 'utf8', stdio: 'pipe' },
+      ),
+    (error: { stderr: string }) =>
+      error.stderr.includes('site') && error.stderr.includes('review'),
+  );
+});

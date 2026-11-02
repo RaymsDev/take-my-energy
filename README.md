@@ -108,7 +108,15 @@ The address comes from the `rel="canonical"` link in `apps/fiveOfHeart/src/index
 - `qr-code.png`: about 2000 px wide, for sharing on screen.
 - `qr-code.svg`: scalable, for print.
 
-The logo comes from `tools/qr-code/assets/logo-hd.jpeg`. Its checkerboard background is removed automatically, so replacing the file with another logo of the same kind works. To run the script's tests:
+The logo comes from `tools/qr-code/assets/logo-hd.jpeg`. Its checkerboard background is removed automatically, so replacing the file with another logo of the same kind works. A second command generates the same kind of code for the Google review form, with the same logo. It writes `qr-code-google-review.png` and `qr-code-google-review.svg` to the same folder:
+
+```bash
+npm run qr:review
+```
+
+The review address is the `GOOGLE_REVIEW_URL` constant in `tools/qr-code/generate.mts`. Google asks for a sign-in on that page, so open the link on a phone before printing and replace the constant if it does not land on the review form.
+
+To run the script's tests:
 
 ```bash
 npm run qr:test
