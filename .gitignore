@@ -60,3 +60,6 @@ secrets/
 requests/.env.*
 .vercel
 .env*
+
+# Generated QR codes
+/tools/qr-code/out/
