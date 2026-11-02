@@ -8,7 +8,7 @@ const CHROMA_OPAQUE_FROM = 48;
 const SOLID_BROWN_FROM = 56;
 
 // The logo takes this share of the badge's height.
-const LOGO_SHARE_OF_BADGE = 0.62;
+const LOGO_SHARE_OF_BADGE = 0.74;
 
 type Source = string | URL | Buffer;
 
