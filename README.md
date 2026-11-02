@@ -93,6 +93,31 @@ The API will be available at `http://localhost:10000/api`.
 
 ---
 
+## 📱 Generating the website QR code
+
+A local script generates a QR code that opens the website directly on a phone. It encodes the plain site address, with no redirect or tracking link, and places the logo at its centre.
+
+```bash
+nvm use            # Node 24, as pinned in .nvmrc
+npm install
+npm run qr:generate
+```
+
+The address comes from the `rel="canonical"` link in `apps/fiveOfHeart/src/index.html`, so update it there if the domain changes. The command writes two files to `tools/qr-code/out/` (git-ignored):
+
+- `qr-code.png`: about 2000 px wide, for sharing on screen.
+- `qr-code.svg`: scalable, for print.
+
+The logo comes from `tools/qr-code/assets/logo-hd.jpeg`. Its checkerboard background is removed automatically, so replacing the file with another logo of the same kind works. To run the script's tests:
+
+```bash
+npm run qr:test
+```
+
+Scan a test print with a real phone before printing in volume.
+
+---
+
 ## 🧠 Philosophy
 
 We shift from standard ad-hoc prompting to a structured, agent-driven workflow. We treat coding as a continuous loop where:
