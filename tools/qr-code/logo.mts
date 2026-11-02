@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 // The source JPEG has a grey/white checkerboard painted into its pixels in
@@ -18,7 +19,7 @@ function chroma(r: number, g: number, b: number): number {
 
 /** Returns the logo as a PNG with a transparent background, cropped to the hand. */
 export async function cutOutLogo(source: Source): Promise<Buffer> {
-  const input = source instanceof URL ? source.pathname : source;
+  const input = source instanceof URL ? fileURLToPath(source) : source;
   const { data, info } = await sharp(input)
     .removeAlpha()
     .raw()
