@@ -1,5 +1,5 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { buildBadge, cutOutLogo } from './logo.mts';
+import { buildBadge, cutOutLogo, loadGoogleLogo } from './logo.mts';
 import { renderQr } from './qr.mts';
 
 const REPO_ROOT = new URL('../../', import.meta.url);
@@ -11,7 +11,16 @@ const BADGE_PX = 512;
 // Google "write a review" form for the business.
 const GOOGLE_REVIEW_URL = 'https://g.page/r/CZ8WsQXH4OtIEAE/review';
 
-type Target = { fileName: string; address: () => Promise<string> };
+const brandLogo = () =>
+  cutOutLogo(new URL('./assets/logo-hd.jpeg', import.meta.url));
+const googleLogo = () =>
+  loadGoogleLogo(new URL('./assets/google-g.svg', import.meta.url));
+
+type Target = {
+  fileName: string;
+  address: () => Promise<string>;
+  logo: () => Promise<Buffer>;
+};
 
 const TARGETS: Record<string, Target> = {
   site: {
@@ -21,10 +30,12 @@ const TARGETS: Record<string, Target> = {
         await readFile(new URL(INDEX_HTML, REPO_ROOT), 'utf8'),
         INDEX_HTML,
       ),
+    logo: brandLogo,
   },
   review: {
     fileName: 'qr-code-google-review',
     address: async () => GOOGLE_REVIEW_URL,
+    logo: googleLogo,
   },
 };
 
@@ -48,9 +59,7 @@ async function main(targetName: string): Promise<void> {
   }
   const address = await target.address();
 
-  const logo = await cutOutLogo(
-    new URL('./assets/logo-hd.jpeg', import.meta.url),
-  );
+  const logo = await target.logo();
   const { svg, png } = await renderQr(
     address,
     await buildBadge(logo, BADGE_PX),

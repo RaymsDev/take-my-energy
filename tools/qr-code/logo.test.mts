@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import sharp from 'sharp';
-import { buildBadge, cutOutLogo } from './logo.mts';
+import { buildBadge, cutOutLogo, loadGoogleLogo } from './logo.mts';
 
 const LOGO_PATH = new URL('./assets/logo-hd.jpeg', import.meta.url);
 
@@ -75,4 +75,32 @@ test('badge is a square white disc with the logo on it', async () => {
   assert.ok(white > 0, 'badge has a white backing');
   assert.ok(brown > 0, 'badge shows the logo');
   assert.equal(checkerGrey, 0);
+});
+
+test('Google logo keeps its four brand colours on a transparent background', async () => {
+  const img = await pixels(
+    await loadGoogleLogo(new URL('./assets/google-g.svg', import.meta.url)),
+  );
+  assert.equal(at(img, 0, 0).a, 0);
+  const near = (
+    p: { r: number; g: number; b: number; a: number },
+    rgb: number[],
+  ) =>
+    p.a === 255 &&
+    Math.abs(p.r - rgb[0]) < 12 &&
+    Math.abs(p.g - rgb[1]) < 12 &&
+    Math.abs(p.b - rgb[2]) < 12;
+  const found = { blue: 0, green: 0, yellow: 0, red: 0 };
+  for (let y = 0; y < img.height; y++) {
+    for (let x = 0; x < img.width; x++) {
+      const p = at(img, x, y);
+      if (near(p, [0x42, 0x85, 0xf4])) found.blue++;
+      if (near(p, [0x34, 0xa8, 0x53])) found.green++;
+      if (near(p, [0xfb, 0xbc, 0x05])) found.yellow++;
+      if (near(p, [0xea, 0x43, 0x35])) found.red++;
+    }
+  }
+  assert.ok(
+    found.blue > 0 && found.green > 0 && found.yellow > 0 && found.red > 0,
+  );
 });

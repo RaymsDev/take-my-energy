@@ -100,3 +100,9 @@ export async function buildBadge(
     .png()
     .toBuffer();
 }
+
+/** Renders the Google "G" SVG as a PNG with a transparent background. */
+export async function loadGoogleLogo(source: Source): Promise<Buffer> {
+  const input = source instanceof URL ? fileURLToPath(source) : source;
+  return sharp(input, { density: 1200 }).png().toBuffer();
+}
